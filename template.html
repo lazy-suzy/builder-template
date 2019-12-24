@@ -94,6 +94,7 @@
             </div>
             <div id="browse" class="tab products">
               <div class="row"></div>
+              <div class="bottom-panel"></div>
             </div>
           </div>
         </div>
@@ -146,12 +147,35 @@
       {{#each products}}
       {{#with this}}
         <div class="col-sm-4">
-            <div class="product-image">
+            <div class="product-image" data-product="{{@index}}">
                 <img src="{{main_image}}"/>
             </div>
         </div>
         {{/with}}
         {{/each}}
+    </script>
+    <script type="text/template" id="bottom-panel">
+      {{#with this}}
+        <div class="product-cont">
+            <div class="image">
+                <img src="{{main_image}}"/>
+            </div>
+            <div>
+                <strong>{{name}}</strong>
+                <div class="brand">{{site}}</div>
+                <div class="price">${{is_price}}</div>
+
+                <div class="icon">
+                    <i class="fa fa-heart" aria-hidden="true"></i>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </div>
+
+            </div>
+
+        </div>
+        {{/with}}
     </script>
 
     <script src="./script.js"></script>
