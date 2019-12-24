@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css?family=Fenix");
+html,
+body {
+  font-family: "Fenix", serif;
+}
+
+.btn {
+  border: none;
+}
+.btn-primary {
+  background: #ffcc00;
+}
+
+.header {
+  padding: 10px;
+  background: #0c1c31;
+}
+
+.header-right-icons {
+  display: inline-block;
+}
+
+.header-right-icons * {
+  color: #ffcc00;
+  margin: auto 15px;
+}
+
+.logo {
+  display: inline-block;
+  max-width: 200px;
+}
+
+.logo img {
+  width: 100%;
+}
+
+.left-panel {
+  padding: 20px 10px;
+  border-right: 1px solid #333333;
+  min-height: 600px;
+}
+
+.icon {
+  background: #a35366;
+  font-size: 18px;
+  color: #fff;
+  padding: 5px;
+  display: inline-block;
+}
+
+.filter-icon {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.icon.lg {
+  padding: 10px;
+  font-size: 24px;
+  border-radius: 5px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.components {
+  margin-top: 20px;
+}
+
+.canvas {
+  width: 700px;
+  height: 500px;
+  background: #eeeeee;
+  margin: 20px auto;
+}
+
+.canvas-bottom-icons {
+  background-color: #f1f1f1;
+  max-width: 400px;
+  margin: 20px auto;
+}
