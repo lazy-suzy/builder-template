@@ -54,8 +54,16 @@
                 <i class="fa fa-filter" aria-hidden="true"></i>
               </div>
             </div>
+            <ul class="nav nav-tabs nav-fill">
+              <li class="nav-item">
+                <a class="nav-link active" href="#select">Select</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#browse">Browse</a>
+              </li>
+            </ul>
 
-            <div class="components">
+            <div id="select" class="tab active components ">
               <div class="row">
                 <div class="col-sm-4">
                   <div class="icon lg">
@@ -83,6 +91,9 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div id="browse" class="tab products">
+              <div class="row"></div>
             </div>
           </div>
         </div>
@@ -123,10 +134,21 @@
       {{#each categories}}
       {{#with this}}
         <div class="col-sm-4">
-          <div class="icon lg">
+          <div class="icon lg category-label" data-category={{value}}>
             <i class="fa fa-bed" aria-hidden="true"></i>
             {{name}}
           </div>
+        </div>
+        {{/with}}
+        {{/each}}
+    </script>
+    <script type="text/template" id="products">
+      {{#each products}}
+      {{#with this}}
+        <div class="col-sm-4">
+            <div class="product-image">
+                <img src="{{main_image}}"/>
+            </div>
         </div>
         {{/with}}
         {{/each}}

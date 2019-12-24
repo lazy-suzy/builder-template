@@ -62,8 +62,33 @@ body {
   width: 100%;
   margin-bottom: 10px;
 }
-.components {
+
+.components,
+.products {
   margin-top: 20px;
+}
+
+.nav-tabs .nav-link {
+  color: #0c1c31;
+  background-color: #efe0e4;
+}
+
+.nav-tabs .nav-link.active {
+  color: #a35366;
+  background-color: #ffffff;
+}
+
+.tab {
+  display: none;
+}
+
+.tab.active {
+  display: block;
+}
+
+.product-image img {
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .canvas {
