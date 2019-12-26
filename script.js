@@ -39,4 +39,9 @@ $(document).ready(function() {
     const product = products[$(this).attr("data-product")];
     $(".bottom-panel").html(bottomPanelTemplate(product));
   });
+
+  $(".toggle-icon").click(function() {
+    $(".toggle-icon").toggleClass("open");
+    $(".left-panel").toggleClass("open");
+  });
 });

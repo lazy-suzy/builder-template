@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Lazysuzy Piranha templates</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -16,17 +18,17 @@
   </head>
   <body>
     <div>
-      <div class="header">
+      <div class="header container-fluid">
         <div class="row">
-          <div class="col-sm-5">
+          <div class="col-sm-5 col-5">
             <div class="logo">
               <img
                 src="https://www.lazysuzy.com/images/color_logo_transparent.png"
               />
             </div>
           </div>
-          <div class="col-sm-3"></div>
-          <div class="col-sm-4 text-right">
+          <div class="col-sm-3 d-none"></div>
+          <div class="col-sm-4 col-7 text-right">
             <button class="btn btn-primary">Publish</button>
             <div class="header-right-icons">
               <i class="fa fa-upload" aria-hidden="true"></i>
@@ -35,89 +37,96 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="left-panel">
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                id="inlineFormInputGroupUsername"
-                placeholder="Search"
-              />
-              <div class="input-group-append">
-                <div class="input-group-text icon">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </div>
-              </div>
-              <div class="icon filter-icon">
-                <i class="fa fa-filter" aria-hidden="true"></i>
-              </div>
-            </div>
-            <ul class="nav nav-tabs nav-fill">
-              <li class="nav-item">
-                <a class="nav-link active" href="#select">Select</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#browse">Browse</a>
-              </li>
-            </ul>
+      <div class="main-content container-fluid">
+        <div class="row">
+          <div class="col-sm-9">
+            <div class="text-right">
+              <i class="fa fa-undo" aria-hidden="true"></i>
+              <i class="fa fa-repeat" aria-hidden="true"></i>
+              -
+              <i class="fa fa-search" aria-hidden="true"></i>
+              +
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+              <i class="fa fa-clone" aria-hidden="true"></i>
 
-            <div id="select" class="tab active components ">
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="icon lg">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="icon lg">
-                    <i class="fa fa-heart" aria-hidden="true"></i>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="icon lg">
-                    <i class="fa fa-font" aria-hidden="true"></i>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="icon lg">
-                    Styles
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="icon lg">
-                    Collections
-                  </div>
-                </div>
-              </div>
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+              <i class="fa fa-plus-circle" aria-hidden="true"></i>
             </div>
-            <div id="browse" class="tab products">
-              <div class="row"></div>
-              <div class="bottom-panel"></div>
+            <div class="canvas"></div>
+            <div class="text-center canvas-bottom-icons">
+              <i class="fa fa-clone" aria-hidden="true"></i>
+              <i class="fa fa-crop" aria-hidden="true"></i>
+              <i class="fa fa-refresh" aria-hidden="true"></i>
+              <i class="fa fa-paint-brush" aria-hidden="true"></i>
             </div>
           </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="text-right">
-            <i class="fa fa-undo" aria-hidden="true"></i>
-            <i class="fa fa-repeat" aria-hidden="true"></i>
-            -
-            <i class="fa fa-search" aria-hidden="true"></i>
-            +
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-            <i class="fa fa-clone" aria-hidden="true"></i>
+          <div class="col-sm-3 order-sm-first">
+            <div class="left-panel">
+              <div class="d-sm-none">
+                <div class="toggle-icon">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inlineFormInputGroupUsername"
+                  placeholder="Search"
+                />
+                <div class="input-group-append">
+                  <div class="input-group-text icon">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <div class="icon filter-icon">
+                  <i class="fa fa-filter" aria-hidden="true"></i>
+                </div>
+              </div>
+              <ul class="nav nav-tabs nav-fill">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#select">Select</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#browse">Browse</a>
+                </li>
+              </ul>
 
-            <i class="fa fa-trash-o" aria-hidden="true"></i>
-            <i class="fa fa-plus-circle" aria-hidden="true"></i>
-          </div>
-          <div class="canvas"></div>
-          <div class="text-center canvas-bottom-icons">
-            <i class="fa fa-clone" aria-hidden="true"></i>
-            <i class="fa fa-crop" aria-hidden="true"></i>
-            <i class="fa fa-refresh" aria-hidden="true"></i>
-            <i class="fa fa-paint-brush" aria-hidden="true"></i>
+              <div id="select" class="tab active components ">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="icon lg">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="icon lg">
+                      <i class="fa fa-heart" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="icon lg">
+                      <i class="fa fa-font" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="icon lg">
+                      Styles
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="icon lg">
+                      Collections
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="browse" class="tab products">
+                <div class="row"></div>
+                <div class="bottom-panel"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -134,7 +143,7 @@
     <script type="text/template" id="category">
       {{#each categories}}
       {{#with this}}
-        <div class="col-sm-4">
+        <div class="col-4">
           <div class="icon lg category-label" data-category={{value}}>
             <i class="fa fa-bed" aria-hidden="true"></i>
             {{name}}
@@ -146,7 +155,7 @@
     <script type="text/template" id="products">
       {{#each products}}
       {{#with this}}
-        <div class="col-sm-4">
+        <div class="col-4">
             <div class="product-image" data-product="{{@index}}">
                 <img src="{{main_image}}"/>
             </div>

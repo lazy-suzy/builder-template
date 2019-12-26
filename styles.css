@@ -12,7 +12,8 @@ body {
 }
 
 .header {
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   background: #0c1c31;
 }
 
@@ -126,4 +127,55 @@ body {
 }
 .product-cont .icon {
   float: right;
+}
+
+@media screen and (max-width: 480px) {
+  .logo {
+    max-width: 100px;
+  }
+
+  .canvas {
+    max-width: 300px;
+    height: 380px;
+  }
+  .canvas-bottom-icons {
+    max-width: 300px;
+  }
+  .left-panel {
+    overflow: hidden;
+    position: fixed;
+    bottom: -550px;
+    background: #fff;
+    border: none;
+    border-top: 2px solid;
+    transition: all 0.3s 0s ease;
+    max-height: 400px;
+    padding: 50px 20px;
+    left: 0;
+    right: 0;
+  }
+  .left-panel.open {
+    bottom: -100px;
+  }
+  .left-panel .toggle-icon {
+    padding: 4px 12px;
+    color: #ffcc00;
+    border-radius: 100%;
+    background: #0c1c31;
+    font-size: 24px;
+    bottom: 30px;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+    transition: all 0.3s 0s ease;
+  }
+  .left-panel .toggle-icon i {
+    transition: all 0.3s 0s ease;
+  }
+  .left-panel .toggle-icon.open {
+    bottom: 475px;
+  }
+  .left-panel .toggle-icon.open i {
+    transform: rotate(45deg);
+  }
 }
