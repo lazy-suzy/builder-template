@@ -1,8 +1,16 @@
 $(document).ready(function() {
+  Handlebars.registerHelper("ifEq", function(v1, v2, options) {
+    if (v1 === v2) {
+      return options.fn(this);
+    }
+    return options.inverse(this);
+  });
+
   const template = Handlebars.compile($("#category").html());
   let products = [];
   const productTemplate = Handlebars.compile($("#products").html());
   const bottomPanelTemplate = Handlebars.compile($("#bottom-panel").html());
+  const filterTemplate = Handlebars.compile($("#filter-template").html());
   $.ajax({
     url:
       "http://staging.lazysuzy.com/api/products/all?filters=brand:pier1;&sort_type=&pageno=0",
@@ -11,6 +19,12 @@ $(document).ready(function() {
     $(".components")
       .children(".row")
       .append(template({ categories: data.filterData.category }));
+    $(".filter-section").html(
+      filterTemplate({
+        filterData: data.filterData,
+        filterKeys: Object.keys(data.filterData)
+      })
+    );
   });
 
   $("body").on("click", ".category-label", function() {
@@ -43,5 +57,31 @@ $(document).ready(function() {
   $(".toggle-icon").click(function() {
     $(".toggle-icon").toggleClass("open");
     $(".left-panel").toggleClass("open");
+  });
+
+  $(".filter-icon, .js-filter-close").click(function() {
+    $(".mobile-filter").toggleClass("open");
+  });
+
+  $("body").on("click", ".tabs .nav-link", function(e) {
+    e.preventDefault();
+    $(".tab-pane").removeClass("active");
+    $(".tabs .nav-link").removeClass("active");
+
+    $(this).addClass("active");
+    $($(this).attr("href")).addClass("active");
+  });
+
+  $(".js-addProduct, .close-modal").click(function(e) {
+    e.preventDefault();
+    $(".modal").toggleClass("show");
+    $(".step").removeClass("active");
+    $("#step1").addClass("active");
+  });
+
+  $(".step .js-btn").click(function(e) {
+    e.preventDefault();
+    $(".step").removeClass("active");
+    $($(this).attr("target")).addClass("active");
   });
 });

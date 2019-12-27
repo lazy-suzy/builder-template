@@ -68,6 +68,20 @@
                   <i class="fa fa-plus" aria-hidden="true"></i>
                 </div>
               </div>
+              <div class="mobile-filter">
+                <div class="filter-header">
+                  <div class="filter-title">
+                    Filters
+                  </div>
+                  <div class="subtle clear-all-btn">
+                    Clear All
+                  </div>
+                  <div class="close-btn js-filter-close">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <div class="filter-section"></div>
+              </div>
               <div class="input-group">
                 <input
                   type="text"
@@ -96,7 +110,7 @@
               <div id="select" class="tab active components ">
                 <div class="row">
                   <div class="col-4">
-                    <div class="icon lg">
+                    <div class="icon lg js-addProduct">
                       <i class="fa fa-plus" aria-hidden="true"></i>
                     </div>
                   </div>
@@ -128,6 +142,78 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal">
+      <div class="close-modal close-icon">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </div>
+      <div id="step1" class="step active">
+        <h4>Add Image</h4>
+        <div class="row text-center">
+          <div class="col-sm-6">
+            <button class="btn red-button lg">
+              Upload an Image
+            </button>
+          </div>
+          <div class="col-sm-6">
+            <button target="#step2" class="btn red-button lg js-btn">
+              Add Image by url
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="step2" class="step">
+        <h4>Add Image</h4>
+        <input class="form-control" placeholder="Image url" />
+        <div class="subtle">Must be png or jpg</div>
+        <div class="row modal-action">
+          <div class="col-6 text-right">
+            <button target="#step1" class="btn btn-cancel js-btn">Back</button>
+          </div>
+          <div class="col-6">
+            <button target="#step3" class="btn red-button js-btn">Next</button>
+          </div>
+          <div class="col-12 subtle text-center">Step 1 of 3</div>
+        </div>
+      </div>
+      <div id="step3" class="step">
+        <h4>Add Image</h4>
+        <input class="form-control" placeholder="Add Product Title" />
+        <input class="form-control" placeholder="Add Price" />
+        <input class="form-control" placeholder="Add Additional Tags" />
+        <div class="subtle">Separate by comma</div>
+        <div class="row modal-action">
+          <div class="col-6 text-right">
+            <button target="#step2" class="btn btn-cancel js-btn">Back</button>
+          </div>
+          <div class="col-6">
+            <button target="#step4" class="btn red-button js-btn">Next</button>
+          </div>
+          <div class="col-12 subtle text-center">Step 2 of 3</div>
+        </div>
+      </div>
+      <div id="step4" class="step">
+        <h4>Add Image</h4>
+        <div class="remove-background text-center">
+          <i class="fa fa-magic" aria-hidden="true"></i>
+          Remove Background
+        </div>
+        <div>
+          <img
+            class="img-modal"
+            src="https://www.lazysuzy.com/Pier-1/pier1_images/2874448_main.jpg"
+          />
+        </div>
+        <div class="row modal-action">
+          <div class="col-6 text-right">
+            <button target="#step3" class="btn btn-cancel js-btn">Back</button>
+          </div>
+          <div class="col-6">
+            <button class="btn red-button js-btn">Add</button>
+          </div>
+          <div class="col-12 subtle text-center">Step 3 of 3</div>
         </div>
       </div>
     </div>
@@ -185,6 +271,35 @@
 
         </div>
         {{/with}}
+    </script>
+    <script id="filter-template" type="text/x-handlebars-template">
+      <div class="tabs">
+          <ul class="nav flex-column">
+          {{#each filterKeys}}
+            <li class="nav-item ">
+              <a class="nav-link {{#ifEq @index 0}}active{{/ifEq}}" href="#{{this}}">{{this}}</a>
+            </li>
+           {{/each}}
+          </ul>
+        </div>
+        {{#each filterData}}
+        <div id="{{@key}}" class="tab-pane filter {{#ifEq @key 'brand'}}active{{/ifEq}}" data-filter="{{@key}}">
+          <ul class="item-list">
+              {{#ifEq @key price}}
+                  <li class="filter-item"  href="#"><input class="price-range-slider" id="priceRangeSlider" name="price_range" value="" tabindex="-1" readonly=""></li>
+              {{else}}
+                  {{#each this}}
+                  {{#with this}}
+                  {{#if enabled}}
+                      <li class="filter-item" href="#"><label class="filter-label"><input type="checkbox" @{{#if checked}}checked@{{/if}} value="@{{value}}" belongsto="@{{name}}"><span class="checkmark"></span><span class="text">{{name}}</span></label></li>
+                  {{/if}}
+                  {{/with}}
+                  {{/each}}
+              {{/ifEq}}
+          </ul>
+          <label for="{{@key}}" class="subtle clear-filter float-right">Clear</label>
+        </div>
+       {{/each}}
     </script>
 
     <script src="./script.js"></script>
