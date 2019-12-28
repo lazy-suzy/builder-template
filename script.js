@@ -28,7 +28,9 @@ $(document).ready(function() {
   });
 
   $("body").on("click", ".category-label", function() {
+    $(".custom-products").removeClass("show");
     const category = $(this).attr("data-category");
+    $(".nav-link[href='#browse']").click();
     $.ajax({
       url: `http://staging.lazysuzy.com/api/products/all?filters=brand:pier1;category:${category}&sort_type=&pageno=0`,
       context: document.body
@@ -92,5 +94,9 @@ $(document).ready(function() {
 
   $(".toggle-catalog").click(function() {
     $(".catalog-panel").toggleClass("open");
+  });
+
+  $(".js-open-custom").click(function() {
+    $(".custom-products").addClass("show");
   });
 });

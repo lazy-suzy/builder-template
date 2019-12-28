@@ -28,6 +28,10 @@ body {
   padding: 20px;
   margin-bottom: 20px;
 }
+
+.nav-tabs {
+  margin-bottom: 20px;
+}
 .subtle {
   color: #999999;
 }
@@ -137,17 +141,25 @@ body {
 
 .canvas-bottom-icons {
   background-color: #f1f1f1;
-  max-width: 400px;
+  max-width: 650px;
   margin: 20px 0;
   letter-spacing: 10px;
 }
 
+.left-panel .tab {
+  max-height: 70vh;
+  overflow: auto;
+}
+.left-panel .products {
+  padding-bottom: 100px;
+}
 .bottom-panel {
   position: absolute;
   bottom: 0;
   left: 15px;
   right: 15px;
   border: 1px solid #b76e79;
+  background: #ffffff;
 }
 
 .product-cont {
@@ -422,7 +434,12 @@ body {
   border-radius: 2px;
   margin-right: 5px;
 }
-
+.custom-products {
+  display: none;
+}
+.custom-products.show {
+  display: block;
+}
 @media screen and (max-width: 480px) {
   .logo {
     max-width: 100px;
@@ -478,6 +495,18 @@ body {
   }
   .left-panel .toggle-icon.open i {
     transform: rotate(45deg);
+  }
+  .left-panel .tab {
+    max-height: 350px;
+    overflow: auto;
+  }
+  .left-panel .products {
+    padding-bottom: 100px;
+  }
+
+  .left-panel .bottom-panel {
+    bottom: 100px;
+    background: #ffffff;
   }
 
   .modal.add-product-modal {
