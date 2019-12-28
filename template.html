@@ -40,12 +40,13 @@
       <div class="main-content container-fluid">
         <div class="row">
           <div class="col-sm-9">
-            <div class="text-right">
+            <div class="top-panel">
               <i class="fa fa-undo" aria-hidden="true"></i>
               <i class="fa fa-repeat" aria-hidden="true"></i>
-              -
+              <span>-</span>
               <i class="fa fa-search" aria-hidden="true"></i>
-              +
+              <span class="suffix">+</span>
+
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
               <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
               <i class="fa fa-clone" aria-hidden="true"></i>
@@ -58,7 +59,33 @@
               <i class="fa fa-clone" aria-hidden="true"></i>
               <i class="fa fa-crop" aria-hidden="true"></i>
               <i class="fa fa-refresh" aria-hidden="true"></i>
+              <i class="fa fa-window-restore" aria-hidden="true"></i>
+              <i class="fa fa-window-restore" aria-hidden="true"></i>
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
               <i class="fa fa-paint-brush" aria-hidden="true"></i>
+            </div>
+            <div class="catalog-panel">
+              <div class="toggle-catalog">
+                <i class="fa fa-info" aria-hidden="true"></i>
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </div>
+              <div class="catalog-content">
+                <h4>Catalog</h4>
+                <div class="catalog-item">
+                  <div class="product-tag icon">1</div>
+                  <div>
+                    <h5>A very long product name</h5>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="subtle">Brand</div>
+                      </div>
+                      <div class="col-6 text-right">
+                        <div class="price">$250</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-sm-3 order-sm-first">
@@ -110,7 +137,7 @@
               <div id="select" class="tab active components ">
                 <div class="row">
                   <div class="col-4">
-                    <div class="icon lg js-addProduct">
+                    <div class="icon lg ">
                       <i class="fa fa-plus" aria-hidden="true"></i>
                     </div>
                   </div>
@@ -136,8 +163,27 @@
                   </div>
                 </div>
               </div>
-              <div id="browse" class="tab products">
-                <div class="row"></div>
+              <div id="browse" class="tab">
+                <div class="products"><div class="row"></div></div>
+                <div class="custom-products">
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="icon lg">
+                        My Items
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="icon lg">
+                        All Items
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="icon lg js-addProduct">
+                        Add New
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="bottom-panel"></div>
               </div>
             </div>
@@ -145,7 +191,7 @@
         </div>
       </div>
     </div>
-    <div class="modal">
+    <div class="modal add-product-modal">
       <div class="close-modal close-icon">
         <i class="fa fa-times" aria-hidden="true"></i>
       </div>
@@ -214,6 +260,21 @@
             <button class="btn red-button js-btn">Add</button>
           </div>
           <div class="col-12 subtle text-center">Step 3 of 3</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal confirmation-modal">
+      <div>
+        Are you sure? This can't be undone.
+      </div>
+      <div class="row modal-action">
+        <div class="col-6 text-right">
+          <button class="btn btn-cancel">DELETE</button>
+        </div>
+        <div class="col-6">
+          <button class="js-close-confirmation-modal btn red-button">
+            CANCEL
+          </button>
         </div>
       </div>
     </div>

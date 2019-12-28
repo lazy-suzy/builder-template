@@ -74,14 +74,23 @@ $(document).ready(function() {
 
   $(".js-addProduct, .close-modal").click(function(e) {
     e.preventDefault();
-    $(".modal").toggleClass("show");
+    $(".add-product-modal").toggleClass("show");
     $(".step").removeClass("active");
     $("#step1").addClass("active");
+  });
+
+  $(".js-confirmation-modal, .js-close-confirmation-modal").click(function(e) {
+    e.preventDefault();
+    $(".confirmation-modal").toggleClass("show");
   });
 
   $(".step .js-btn").click(function(e) {
     e.preventDefault();
     $(".step").removeClass("active");
     $($(this).attr("target")).addClass("active");
+  });
+
+  $(".toggle-catalog").click(function() {
+    $(".catalog-panel").toggleClass("open");
   });
 });
