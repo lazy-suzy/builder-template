@@ -38,16 +38,72 @@
         </div>
       </div>
       <div class="main-content container-fluid">
+        <div class="row d-sm-none">
+          <div class="col-12">
+            <h2>CREATE NEW BOARD</h2>
+            <h4>SELECT LAYOUT STYLE</h4>
+          </div>
+          <div class="col-6 ">
+            <div class="canvas-style" target="#board-options">
+              <div class="canvas-layout"></div>
+              <h4>BOARD</h4>
+            </div>
+          </div>
+          <div class="col-6 text-center">
+            <div class="canvas-style" target="#room-options">
+              <div class="canvas-layout"></div>
+              <h4>ROOM</h4>
+            </div>
+          </div>
+          <div class="col-12 d-none canvas-options" id="board-options">
+            <h4>CANVAS COLOR</h4>
+          </div>
+          <div class="col-12 d-none canvas-options" id="room-options">
+            <h4>WALL COLOR</h4>
+            <h4>FLOORING OPTIONS</h4>
+          </div>
+        </div>
+        <div class="row modal-action d-sm-none">
+          <div class="col-6 text-right">
+            <button class="btn btn-cancel">Cancel</button>
+          </div>
+          <div class="col-6">
+            <button class="btn red-button js-btn-go">Go</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal canvas-config">
         <div class="row">
           <div class="col-12">
             <h2>CREATE NEW BOARD</h2>
             <h4>SELECT LAYOUT STYLE</h4>
           </div>
-          <div class="col-6">
-            <h4>BOARD</h4>
+          <div class="col-6 ">
+            <div class="canvas-style" target="#board-options-modal">
+              <div class="canvas-layout"></div>
+              <h4>BOARD</h4>
+            </div>
+          </div>
+          <div class="col-6 text-center">
+            <div class="canvas-style" target="#room-options-modal">
+              <div class="canvas-layout"></div>
+              <h4>ROOM</h4>
+            </div>
+          </div>
+          <div class="col-12 d-none canvas-options" id="board-options-modal">
+            <h4>CANVAS COLOR</h4>
+          </div>
+          <div class="col-12 d-none canvas-options" id="room-options-modal">
+            <h4>WALL COLOR</h4>
+            <h4>FLOORING OPTIONS</h4>
+          </div>
+        </div>
+        <div class="row modal-action">
+          <div class="col-6 text-right">
+            <button class="btn btn-cancel">Cancel</button>
           </div>
           <div class="col-6">
-            <h4>ROOM</h4>
+            <button class="btn red-button js-btn-go">Go</button>
           </div>
         </div>
       </div>

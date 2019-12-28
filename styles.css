@@ -6,6 +6,7 @@ body {
 
 .btn {
   border: none;
+  min-width: 80px;
 }
 .btn-primary {
   background: #ffcc00;
@@ -58,6 +59,23 @@ body {
 
 .logo img {
   width: 100%;
+}
+.canvas-style {
+  text-align: center;
+  margin: 20px 0;
+  padding: 20px 10px;
+}
+
+.canvas-style.selected {
+  background: #eee;
+  border: 2px solid #ffcc00;
+}
+
+.canvas-layout {
+  height: 150px;
+  width: 100%;
+  border: 1px solid;
+  background: white;
 }
 
 .left-panel {
@@ -319,6 +337,13 @@ body {
   transform: rotate(45deg);
 }
 
+.modal {
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  top: 50%;
+  box-shadow: 0 0 1px 1px #ccc;
+}
+
 .modal.show {
   display: block;
 }
@@ -326,11 +351,7 @@ body {
 .modal.add-product-modal {
   padding: 30px;
   background: #fff;
-  box-shadow: 0 0 1px 1px #ccc;
   max-width: 500px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  top: 50%;
   max-height: 500px;
 }
 
@@ -338,12 +359,16 @@ body {
   padding: 10px;
   background: #b76e79;
   color: #ffffff;
-  box-shadow: 0 0 1px 1px #ccc;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  top: 50%;
   width: 280px;
   height: 100px;
+  border-radius: 10px;
+}
+
+.modal.canvas-config {
+  padding: 10px;
+  background: #fff;
+  max-width: 500px;
+  max-height: 500px;
   border-radius: 10px;
 }
 
