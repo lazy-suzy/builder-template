@@ -259,12 +259,15 @@ body {
 
 .filter-section {
   display: flex;
+  min-height: 500px;
 }
-
+.filter-section .tabs {
+  border-right: 1px solid #ffffff;
+}
 .filter-section .nav-link {
   text-transform: capitalize;
   color: #b76e79;
-  border: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
 }
 
 .filter-section .nav-link.active {
@@ -278,7 +281,7 @@ body {
   white-space: normal;
   text-align: left;
   margin-right: 0;
-  max-height: 290px;
+  max-height: 350px;
   overflow: auto;
 }
 .filter-section .item-list .filter-item {
@@ -543,6 +546,9 @@ body {
   .left-panel .bottom-panel {
     bottom: 100px;
     background: #ffffff;
+  }
+  .mobile-filter {
+    top: 90px;
   }
 
   .modal.add-product-modal {
