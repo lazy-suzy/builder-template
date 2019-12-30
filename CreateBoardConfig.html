@@ -12,7 +12,7 @@
     />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      href="http://cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css"
     />
     <link href="./styles.css" rel="stylesheet" />
   </head>
@@ -27,21 +27,13 @@
               />
             </div>
           </div>
-          <div class="col-sm-3 d-none"></div>
-          <div class="col-sm-4 col-7 text-right">
-            <button class="btn btn-primary">Publish</button>
-            <div class="header-right-icons">
-              <i class="fa fa-upload" aria-hidden="true"></i>
-              <i class="fa fa-user-circle" aria-hidden="true"></i>
-            </div>
-          </div>
         </div>
       </div>
       <div class="main-content container-fluid">
         <div class="row d-sm-none">
           <div class="col-12">
             <h2>CREATE NEW BOARD</h2>
-            <h4>SELECT LAYOUT STYLE</h4>
+            <h4>Select Layout Style</h4>
           </div>
           <div class="col-6 ">
             <div class="canvas-style" target="#board-options">
@@ -72,41 +64,6 @@
           </div>
         </div>
       </div>
-      <div class="modal canvas-config">
-        <div class="row">
-          <div class="col-12">
-            <h2>CREATE NEW BOARD</h2>
-            <h4>SELECT LAYOUT STYLE</h4>
-          </div>
-          <div class="col-6 ">
-            <div class="canvas-style" target="#board-options-modal">
-              <div class="canvas-layout"></div>
-              <h4>BOARD</h4>
-            </div>
-          </div>
-          <div class="col-6 text-center">
-            <div class="canvas-style" target="#room-options-modal">
-              <div class="canvas-layout"></div>
-              <h4>ROOM</h4>
-            </div>
-          </div>
-          <div class="col-12 d-none canvas-options" id="board-options-modal">
-            <h4>CANVAS COLOR</h4>
-          </div>
-          <div class="col-12 d-none canvas-options" id="room-options-modal">
-            <h4>WALL COLOR</h4>
-            <h4>FLOORING OPTIONS</h4>
-          </div>
-        </div>
-        <div class="row modal-action">
-          <div class="col-6 text-right">
-            <button class="btn btn-cancel">Cancel</button>
-          </div>
-          <div class="col-6">
-            <button class="btn red-button js-btn-go">Go</button>
-          </div>
-        </div>
-      </div>
     </div>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -114,6 +71,6 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="./creatBorad.js"></script>
+    <script src="./createBoardScript.js"></script>
   </body>
 </html>

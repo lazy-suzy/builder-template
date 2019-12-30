@@ -12,7 +12,7 @@
     />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      href="http://cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css"
     />
     <link href="./styles.css" rel="stylesheet" />
   </head>
@@ -20,19 +20,18 @@
     <div>
       <div class="header container-fluid">
         <div class="row">
-          <div class="col-sm-5 col-5">
+          <div class="col-4">
             <div class="logo">
               <img
                 src="https://www.lazysuzy.com/images/color_logo_transparent.png"
               />
             </div>
           </div>
-          <div class="col-sm-3 d-none"></div>
-          <div class="col-sm-4 col-7 text-right">
+          <div class="col-8 text-right">
             <button class="btn btn-primary">Publish</button>
             <div class="header-right-icons">
-              <i class="fa fa-upload" aria-hidden="true"></i>
-              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              <i class="mdi mdi-upload" aria-hidden="true"></i>
+              <i class="mdi mdi-account-circle" aria-hidden="true"></i>
             </div>
           </div>
         </div>
@@ -41,58 +40,67 @@
         <div class="row">
           <div class="col-sm-9">
             <div class="top-panel">
-              <i class="fa fa-undo" aria-hidden="true"></i>
-              <i class="fa fa-repeat" aria-hidden="true"></i>
-              <span>-</span>
-              <i class="fa fa-search" aria-hidden="true"></i>
-              <span class="suffix">+</span>
-
-              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-              <i class="fa fa-clone" aria-hidden="true"></i>
-
-              <i class="fa fa-trash-o" aria-hidden="true"></i>
-              <i class="fa fa-plus-circle" aria-hidden="true"></i>
-            </div>
-            <div class="canvas"></div>
-            <div class="text-center canvas-bottom-icons">
-              <i class="fa fa-clone" aria-hidden="true"></i>
-              <i class="fa fa-crop" aria-hidden="true"></i>
-              <i class="fa fa-refresh" aria-hidden="true"></i>
-              <i class="fa fa-window-restore" aria-hidden="true"></i>
-              <i class="fa fa-window-restore" aria-hidden="true"></i>
-              <i class="fa fa-trash-o" aria-hidden="true"></i>
-              <i class="fa fa-paint-brush" aria-hidden="true"></i>
-            </div>
-            <div class="catalog-panel">
-              <div class="toggle-catalog">
-                <i class="fa fa-info" aria-hidden="true"></i>
-                <i class="fa fa-times" aria-hidden="true"></i>
+              <div class="row">
+                <div class="col-sm-4 col-5">
+                  <span>-</span>
+                  <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                  <span class="suffix">+</span>
+                  <i class="mdi mdi-undo" aria-hidden="true"></i>
+                  <i class="mdi mdi-redo" aria-hidden="true"></i>
+                </div>
+                <div class="col-sm-8 col-7 text-right">
+                  <i class="mdi mdi-content-copy" aria-hidden="true"></i>
+                  <i class="mdi mdi-crop" aria-hidden="true"></i>
+                  <i class="mdi mdi-autorenew" aria-hidden="true"></i>
+                  <i
+                    class="mdi mdi-arrange-send-backward"
+                    aria-hidden="true"
+                  ></i>
+                  <i
+                    class="mdi mdi-arrange-bring-forward"
+                    aria-hidden="true"
+                  ></i>
+                  <i class="mdi mdi-delete " aria-hidden="true"></i>
+                </div>
               </div>
-              <div class="catalog-content">
-                <h4>Catalog</h4>
-                <div class="catalog-item">
-                  <div class="product-tag icon">1</div>
-                  <div>
-                    <h5>A very long product name</h5>
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="subtle">Brand</div>
-                      </div>
-                      <div class="col-6 text-right">
-                        <div class="price">$250</div>
-                      </div>
-                    </div>
+            </div>
+            <div class="canvas-content">
+              <div class="row">
+                <div class="col-sm-6">
+                  <input class="form-control" placeholder="Board title" />
+                </div>
+                <div class="col-sm-6">
+                  <div class="canvas-icons">
+                    <i
+                      class="mdi mdi-square-edit-outline"
+                      aria-hidden="true"
+                    ></i>
+                    <i
+                      class="mdi mdi-exclamation-circle"
+                      aria-hidden="true"
+                    ></i>
+                    <i class="mdi mdi-content-copy" aria-hidden="true"></i>
+
+                    <i
+                      class="mdi mdi-delete js-confirmation-modal"
+                      aria-hidden="true"
+                    ></i>
+                    <i
+                      class="mdi mdi-plus-circle js-open-config"
+                      aria-hidden="true"
+                    ></i>
                   </div>
                 </div>
               </div>
+
+              <div class="canvas"></div>
             </div>
           </div>
           <div class="col-sm-3 order-sm-first">
             <div class="left-panel">
               <div class="d-sm-none">
                 <div class="toggle-icon">
-                  <i class="fa fa-plus" aria-hidden="true"></i>
+                  <i class="mdi mdi-plus" aria-hidden="true"></i>
                 </div>
               </div>
               <div class="mobile-filter">
@@ -104,7 +112,7 @@
                     Clear All
                   </div>
                   <div class="close-btn js-filter-close">
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i class="mdi mdi-close" aria-hidden="true"></i>
                   </div>
                 </div>
                 <div class="filter-section"></div>
@@ -118,11 +126,11 @@
                 />
                 <div class="input-group-append">
                   <div class="input-group-text icon">
-                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
                   </div>
                 </div>
                 <div class="icon filter-icon">
-                  <i class="fa fa-filter" aria-hidden="true"></i>
+                  <i class="mdi mdi-filter" aria-hidden="true"></i>
                 </div>
               </div>
               <ul class="nav nav-tabs nav-fill">
@@ -132,23 +140,26 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#browse">Browse</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#board">Board</a>
+                </li>
               </ul>
 
-              <div id="select" class="tab active components ">
+              <div id="select" class="tab active components container ">
                 <div class="row">
                   <div class="col-4">
                     <div class="icon lg js-open-custom">
-                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      <i class="mdi mdi-plus" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="icon lg">
-                      <i class="fa fa-heart" aria-hidden="true"></i>
+                      <i class="mdi mdi-heart" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="icon lg">
-                      <i class="fa fa-font" aria-hidden="true"></i>
+                      <i class="mdi mdi-format-title" aria-hidden="true"></i>
                     </div>
                   </div>
                   <div class="col-6">
@@ -164,7 +175,7 @@
                 </div>
               </div>
               <div id="browse" class="tab">
-                <div class="custom-products">
+                <div class="custom-products container">
                   <div class="row">
                     <div class="col-4">
                       <div class="icon lg">
@@ -187,34 +198,61 @@
 
                 <div class="bottom-panel"></div>
               </div>
+              <div id="board" class="tab">
+                <div class="catalog-content">
+                  <h4>Catalog</h4>
+                  <div class="catalog-item">
+                    <div class="product-tag icon">1</div>
+                    <div>
+                      <h5>A very long product name</h5>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="subtle">Brand</div>
+                        </div>
+                        <div class="col-6 text-right">
+                          <div class="price">$250</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="backdrop"></div>
     <div class="modal add-product-modal">
       <div class="close-modal close-icon">
-        <i class="fa fa-times" aria-hidden="true"></i>
+        <i class="mdi mdi-close" aria-hidden="true"></i>
       </div>
       <div id="step1" class="step active">
         <h4>Add Image</h4>
-        <div class="row text-center">
-          <div class="col-sm-6">
-            <button class="btn red-button lg">
-              Upload an Image
-            </button>
-          </div>
-          <div class="col-sm-6">
-            <button target="#step2" class="btn red-button lg js-btn">
-              Add Image by url
-            </button>
+        <div class="content">
+          <div class="row text-center">
+            <div class="col-sm-6">
+              <button class="btn red-button lg">
+                Upload an Image
+              </button>
+            </div>
+            <div class="col-sm-6">
+              <button target="#step2" class="btn red-button lg js-btn">
+                Add Image by url
+              </button>
+            </div>
           </div>
         </div>
       </div>
       <div id="step2" class="step">
         <h4>Add Image</h4>
-        <input class="form-control" placeholder="Image url" />
-        <div class="subtle">Must be png or jpg</div>
+        <div class="content">
+          <div>
+            <input class="form-control" placeholder="Image url" />
+            <div class="subtle">Must be .png or .jpg</div>
+          </div>
+        </div>
+
         <div class="row modal-action">
           <div class="col-6 text-right">
             <button target="#step1" class="btn btn-cancel js-btn">Back</button>
@@ -222,15 +260,20 @@
           <div class="col-6">
             <button target="#step3" class="btn red-button js-btn">Next</button>
           </div>
-          <div class="col-12 subtle text-center">Step 1 of 3</div>
+          <div class="col-12 step-count subtle text-center">Step 1 of 3</div>
         </div>
       </div>
       <div id="step3" class="step">
         <h4>Add Image</h4>
-        <input class="form-control" placeholder="Add Product Title" />
-        <input class="form-control" placeholder="Add Price" />
-        <input class="form-control" placeholder="Add Additional Tags" />
-        <div class="subtle">Separate by comma</div>
+        <div class="content">
+          <input class="form-control" placeholder="Add Product Title" />
+          <input class="form-control" placeholder="Add Price" />
+          <div>
+            <input class="form-control" placeholder="Add Additional Tags" />
+            <div class="subtle">Separate by comma</div>
+          </div>
+        </div>
+
         <div class="row modal-action">
           <div class="col-6 text-right">
             <button target="#step2" class="btn btn-cancel js-btn">Back</button>
@@ -238,13 +281,13 @@
           <div class="col-6">
             <button target="#step4" class="btn red-button js-btn">Next</button>
           </div>
-          <div class="col-12 subtle text-center">Step 2 of 3</div>
+          <div class="col-12 step-count subtle text-center">Step 2 of 3</div>
         </div>
       </div>
       <div id="step4" class="step">
         <h4>Add Image</h4>
         <div class="remove-background text-center">
-          <i class="fa fa-magic" aria-hidden="true"></i>
+          <i class="mdi mdi-magic" aria-hidden="true"></i>
           Remove Background
         </div>
         <div>
@@ -260,7 +303,7 @@
           <div class="col-6">
             <button class="btn red-button js-btn">Add</button>
           </div>
-          <div class="col-12 subtle text-center">Step 3 of 3</div>
+          <div class="col-12 step-count subtle text-center">Step 3 of 3</div>
         </div>
       </div>
     </div>
@@ -279,6 +322,41 @@
         </div>
       </div>
     </div>
+    <div class="modal canvas-config">
+      <div class="row">
+        <div class="col-12">
+          <h2>CREATE NEW BOARD</h2>
+          <h4>Select Layout Style</h4>
+        </div>
+        <div class="col-6 ">
+          <div class="canvas-style" target="#board-options-modal">
+            <div class="canvas-layout"></div>
+            <h4>BOARD</h4>
+          </div>
+        </div>
+        <div class="col-6 text-center">
+          <div class="canvas-style" target="#room-options-modal">
+            <div class="canvas-layout"></div>
+            <h4>ROOM</h4>
+          </div>
+        </div>
+        <div class="col-12 d-none canvas-options" id="board-options-modal">
+          <h4>CANVAS COLOR</h4>
+        </div>
+        <div class="col-12 d-none canvas-options" id="room-options-modal">
+          <h4>WALL COLOR</h4>
+          <h4>FLOORING OPTIONS</h4>
+        </div>
+      </div>
+      <div class="row modal-action">
+        <div class="col-6 text-right">
+          <button class="btn btn-cancel js-close-config-modal">Cancel</button>
+        </div>
+        <div class="col-6">
+          <button class="btn red-button js-btn-go">Go</button>
+        </div>
+      </div>
+    </div>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -293,7 +371,7 @@
       {{#with this}}
         <div class="col-4">
           <div class="icon lg category-label" data-category={{value}}>
-            <i class="fa fa-bed" aria-hidden="true"></i>
+            <i class="mdi mdi-bed" aria-hidden="true"></i>
             {{name}}
           </div>
         </div>
@@ -323,10 +401,10 @@
                 <div class="price">${{is_price}}</div>
 
                 <div class="icon">
-                    <i class="fa fa-heart" aria-hidden="true"></i>
+                    <i class="mdi mdi-heart" aria-hidden="true"></i>
                 </div>
                 <div class="icon">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    <i class="mdi mdi-plus" aria-hidden="true"></i>
                 </div>
 
             </div>
