@@ -16,7 +16,7 @@
     />
     <link href="./styles.css" rel="stylesheet" />
   </head>
-  <body>
+  <body class="gray-bg">
     <div>
       <div class="header container-fluid">
         <div class="row">
@@ -38,7 +38,7 @@
       </div>
       <div class="main-content container-fluid">
         <div class="row">
-          <div class="col-sm-9 gray-bg">
+          <div class="col-sm-8">
             <div class="top-panel row">
               <div class="col-sm-4 col-5 state-icons">
                 <span>-</span>
@@ -111,7 +111,7 @@
               <div class="canvas"></div>
             </div>
           </div>
-          <div class="col-sm-3 order-sm-first">
+          <div class="col-sm-4 order-sm-first">
             <div class="left-panel">
               <div class="d-sm-none">
                 <div class="toggle-icon">
@@ -132,107 +132,105 @@
                 </div>
                 <div class="filter-section"></div>
               </div>
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inlineFormInputGroupUsername"
-                  placeholder="Search"
-                />
-                <div class="input-group-append">
-                  <div class="input-group-text icon">
-                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                <div class="left-tabs">
+                  <ul class="nav nav-tabs flex-column">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#select">Select</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#browse">Browse</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#myItems">My items</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#favorites">Favorites</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#text">Text</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#board">Board</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="left-tab-pane">
+                  <div id="select" class="tab active components ">
+                    <div class="flex-grid">
+                      <div class="flex-grid-item col6">
+                        <div class="icon lg">
+                          Styles
+                        </div>
+                      </div>
+                      <div class="flex-grid-item col6">
+                        <div class="icon lg">
+                          Collections
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="icon filter-icon">
-                  <i class="mdi mdi-filter" aria-hidden="true"></i>
-                </div>
-              </div>
-              <ul class="nav nav-tabs nav-fill">
-                <li class="nav-item">
-                  <a class="nav-link active" href="#select">Select</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#browse">Browse</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#board">Board</a>
-                </li>
-              </ul>
+                  <div id="browse" class="tab">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inlineFormInputGroupUsername"
+                        placeholder="Search"
+                      />
+                      <div class="input-group-append">
+                        <div class="input-group-text icon">
+                          <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                      <div class="icon filter-icon">
+                        <i class="mdi mdi-filter" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <div class="products"><div class="flex-grid"></div></div>
 
-              <div id="select" class="tab active components ">
-                <div class="flex-grid">
-                  <div class="flex-grid-item">
-                    <div class="icon lg js-open-custom">
-                      <i class="mdi mdi-plus" aria-hidden="true"></i>
-                    </div>
+                    <div class="bottom-panel"></div>
                   </div>
-                  <div class="flex-grid-item">
-                    <div class="icon lg">
-                      <i class="mdi mdi-heart" aria-hidden="true"></i>
-                    </div>
-                  </div>
-                  <div class="flex-grid-item">
-                    <div class="icon lg">
-                      <i class="mdi mdi-format-title" aria-hidden="true"></i>
-                    </div>
-                  </div>
-                  <div class="flex-grid-item col6">
-                    <div class="icon lg">
-                      Styles
-                    </div>
-                  </div>
-                  <div class="flex-grid-item col6">
-                    <div class="icon lg">
-                      Collections
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="browse" class="tab">
-                <div class="custom-products container">
-                  <div class="flex-grid">
-                    <div class="flex-grid-item">
-                      <div class="icon lg">
-                        My Items
+                  <div id="board" class="tab">
+                    <div class="catalog-content">
+                      <h4>Catalog</h4>
+                      <div class="catalog-item">
+                        <div class="product-tag icon">1</div>
+                        <div>
+                          <h5>A very long product name</h5>
+                          <div class="row">
+                            <div class="col-6">
+                              <div class="subtle">Brand</div>
+                            </div>
+                            <div class="col-6 text-right">
+                              <div class="price">$250</div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div class="flex-grid-item">
-                      <div class="icon lg">
-                        All Items
-                      </div>
+                  </div>
+                  <div id="text" class="tab">
+                    <div >
+                      <h4>Text</h4>
+                      
                     </div>
-                    <div class="flex-grid-item">
+                  </div>
+                  <div id="favorites" class="tab">
+                    <div >
+                      <h4>Favorites</h4>
+                      
+                    </div>
+                  </div>
+                  <div id="myItems" class="tab">
+                    <div class="catalog-content">
+                      <h4>My Items</h4>
                       <div class="icon lg js-addProduct">
                         Add New
                       </div>
+                      
                     </div>
                   </div>
                 </div>
-                <div class="products"><div class="flex-grid"></div></div>
-
-                <div class="bottom-panel"></div>
-              </div>
-              <div id="board" class="tab">
-                <div class="catalog-content">
-                  <h4>Catalog</h4>
-                  <div class="catalog-item">
-                    <div class="product-tag icon">1</div>
-                    <div>
-                      <h5>A very long product name</h5>
-                      <div class="row">
-                        <div class="col-6">
-                          <div class="subtle">Brand</div>
-                        </div>
-                        <div class="col-6 text-right">
-                          <div class="price">$250</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

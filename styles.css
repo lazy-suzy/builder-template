@@ -6,6 +6,7 @@ body {
 [data-title] {
   position: relative;
   cursor: pointer;
+  font-size: 18px;
 }
 [data-title]:hover::before {
   content: attr(data-title);
@@ -62,9 +63,6 @@ body {
   margin-bottom: 20px;
 }
 
-.nav-tabs {
-  margin-bottom: 20px;
-}
 .subtle {
   color: #999999;
 }
@@ -77,6 +75,7 @@ body {
   width: 33.333%;
   padding: 0 2px;
 }
+
 .flex-grid-item.col6 {
   width: 50%;
 }
@@ -125,9 +124,12 @@ body {
 }
 
 .left-panel {
-  padding: 20px 0;
-  min-height: 600px;
+  height: 92vh;
   position: relative;
+  margin-left: -15px;
+  margin-right: -10px;
+  overflow: auto;
+  background: #fff;
 }
 
 .icon {
@@ -147,7 +149,7 @@ body {
 
 .icon.lg {
   padding: 10px;
-  font-size: 20px;
+  font-size: 18px;
   border-radius: 5px;
   text-align: center;
   width: 100%;
@@ -158,10 +160,20 @@ body {
 .products {
   margin-top: 20px;
 }
-
+.nav-tabs {
+  height: 100%;
+  background: #b76e79;
+  margin-bottom: 20px;
+  padding-top: 50px;
+}
 .nav-tabs .nav-link {
-  color: #0c1c31;
-  background-color: #efe0e4;
+  color: #fff;
+  background: #b76e79;
+  padding: 15px 2px;
+  border: none;
+  border-radius: 0;
+  text-align: center;
+  transition: all 0.3s 0s ease;
 }
 
 .nav-tabs .nav-link.active {
@@ -215,7 +227,7 @@ body {
 }
 .canvas-content {
   margin-top: 10px;
-  padding: 10px;
+  padding: 0;
 }
 
 .canvas-icons {
@@ -230,9 +242,17 @@ body {
 .canvas-icons i {
   margin-right: 10px;
 }
+.left-panel .left-tabs {
+  height: 100%;
+  position: fixed;
+  top: 58px;
+}
+.left-panel .left-tab-pane {
+  margin-left: 72px;
+}
 
 .left-panel .tab {
-  max-height: 60vh;
+  padding: 20px 0;
   overflow: auto;
 }
 .left-panel .products {
@@ -250,7 +270,8 @@ body {
 .bottom-panel {
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 65px;
+
   right: 0;
   border: 1px solid #b76e79;
   background: #ffffff;
@@ -546,32 +567,28 @@ body {
   }
 
   .canvas {
-    max-width: 340px;
-    height: 380px;
+    max-width: 350px;
+    height: 500px;
   }
-  .canvas-bottom-icons {
-    max-width: 340px;
-    margin: 10px auto;
-  }
+
   .left-panel {
     overflow: hidden;
     position: fixed;
-    bottom: -550px;
-    background: #fff;
+    bottom: -645px;
+
     border: none;
     border-top: 2px solid;
     transition: all 0.3s 0s ease;
-    max-height: 400px;
-    padding: 50px 20px;
+    height: 700px;
+    padding: 35px 20px;
     left: 0;
     right: 0;
   }
   .left-panel.open {
-    bottom: 0px;
-    overflow: scroll;
+    bottom: -100px;
   }
   .left-panel.open.board {
-    bottom: -200px;
+    bottom: -300px;
   }
   .left-panel .toggle-icon {
     padding: 4px 12px;
@@ -600,16 +617,24 @@ body {
     transform: rotate(45deg);
   }
 
-  .left-panel .tab {
-    max-height: 350px;
-    overflow: auto;
+  .left-panel .left-tabs {
+    position: absolute;
+    top: 60px;
+    left: 15px;
   }
-  .left-panel .products {
-    padding-bottom: 100px;
+
+  .left-panel.open .left-tabs {
+    top: 0;
+  }
+  .left-panel .left-tab-pane {
+    height: 700px;
+    overflow: auto;
+    padding: 0 0 150px;
   }
 
   .left-panel .bottom-panel {
-    background: #ffffff;
+    bottom: 100px;
+    left: 80px;
   }
   .mobile-filter {
     top: 90px;
