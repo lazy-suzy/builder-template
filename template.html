@@ -39,59 +39,56 @@
       <div class="main-content container-fluid">
         <div class="row">
           <div class="col-sm-9 gray-bg">
-            <div class="top-panel">
-              <div class="row">
-                <div class="col-sm-4 col-5">
-                  <span>-</span>
-                  <i class="mdi mdi-magnify" aria-hidden="true"></i>
-                  <span class="suffix">+</span>
-                  <i class="mdi mdi-undo" aria-hidden="true"></i>
-                  <i class="mdi mdi-redo" aria-hidden="true"></i>
-                </div>
-                <div class="col-sm-8 col-7 text-right">
-                  <span data-title="Duplicate"
-                    ><i class="mdi mdi-content-copy" aria-hidden="true"></i
-                  ></span>
-                  <span data-title="Crop"
-                    ><i class="mdi mdi-crop" aria-hidden="true"></i
-                  ></span>
-                  <span data-title="Flip">
-                    <i class="mdi mdi-autorenew" aria-hidden="true"></i>
-                  </span>
-                  <span data-title="Send Backward">
-                    <i
-                      class="mdi mdi-arrange-send-backward"
-                      aria-hidden="true"
-                    ></i>
-                  </span>
-                  <span data-title="Bring Forward">
-                    <i
-                      class="mdi mdi-arrange-bring-forward"
-                      aria-hidden="true"
-                    ></i>
-                  </span>
-                  <span data-title="Delete">
-                    <i class="mdi mdi-delete" aria-hidden="true"></i>
-                  </span>
-                </div>
+            <div class="top-panel row">
+              <div class="col-sm-4 col-5 state-icons">
+                <span>-</span>
+                <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                <span class="suffix">+</span>
+                <i class="mdi mdi-undo" aria-hidden="true"></i>
+                <i class="mdi mdi-redo" aria-hidden="true"></i>
+              </div>
+              <div class="col-sm-8 col-7 text-right">
+                <span data-title="Duplicate"
+                  ><i class="mdi mdi-content-copy" aria-hidden="true"></i
+                ></span>
+                <span data-title="Crop"
+                  ><i class="mdi mdi-crop" aria-hidden="true"></i
+                ></span>
+                <span data-title="Flip">
+                  <i class="mdi mdi-autorenew" aria-hidden="true"></i>
+                </span>
+                <span data-title="Send Backward">
+                  <i
+                    class="mdi mdi-arrange-send-backward"
+                    aria-hidden="true"
+                  ></i>
+                </span>
+                <span data-title="Bring Forward">
+                  <i
+                    class="mdi mdi-arrange-bring-forward"
+                    aria-hidden="true"
+                  ></i>
+                </span>
+                <span data-title="Delete">
+                  <i class="mdi mdi-delete" aria-hidden="true"></i>
+                </span>
               </div>
             </div>
             <div class="canvas-content">
               <div class="row">
-                <div class="col-sm-6">
-                  <input class="form-control" placeholder="Board title" />
+                <div class="col-7">
+                  <input
+                    class="form-control board-title"
+                    placeholder="Board title"
+                  />
                 </div>
-                <div class="col-sm-6">
+                <div class="col-5">
                   <div class="canvas-icons">
                     <span data-title="Edit Board Settings">
                       <i class="mdi mdi-square-edit-outline" aria-hidden="true">
                       </i>
                     </span>
 
-                    <i
-                      class="mdi mdi-exclamation-circle"
-                      aria-hidden="true"
-                    ></i>
                     <span data-title="Duplicate Board"
                       ><i class="mdi mdi-content-copy" aria-hidden="true"></i>
                     </span>
@@ -101,12 +98,12 @@
                         aria-hidden="true"
                       ></i>
                     </span>
-                    <span data-title="New Board">
+                    <a href="./CreateBoardConfig.html" data-title="New Board">
                       <i
                         class="mdi mdi-plus-circle js-open-config"
                         aria-hidden="true"
                       ></i>
-                    </span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -163,29 +160,29 @@
                 </li>
               </ul>
 
-              <div id="select" class="tab active components container ">
-                <div class="row">
-                  <div class="col-4">
+              <div id="select" class="tab active components ">
+                <div class="flex-grid">
+                  <div class="flex-grid-item">
                     <div class="icon lg js-open-custom">
                       <i class="mdi mdi-plus" aria-hidden="true"></i>
                     </div>
                   </div>
-                  <div class="col-4">
+                  <div class="flex-grid-item">
                     <div class="icon lg">
                       <i class="mdi mdi-heart" aria-hidden="true"></i>
                     </div>
                   </div>
-                  <div class="col-4">
+                  <div class="flex-grid-item">
                     <div class="icon lg">
                       <i class="mdi mdi-format-title" aria-hidden="true"></i>
                     </div>
                   </div>
-                  <div class="col-6">
+                  <div class="flex-grid-item col6">
                     <div class="icon lg">
                       Styles
                     </div>
                   </div>
-                  <div class="col-6">
+                  <div class="flex-grid-item col6">
                     <div class="icon lg">
                       Collections
                     </div>
@@ -194,25 +191,25 @@
               </div>
               <div id="browse" class="tab">
                 <div class="custom-products container">
-                  <div class="row">
-                    <div class="col-4">
+                  <div class="flex-grid">
+                    <div class="flex-grid-item">
                       <div class="icon lg">
                         My Items
                       </div>
                     </div>
-                    <div class="col-4">
+                    <div class="flex-grid-item">
                       <div class="icon lg">
                         All Items
                       </div>
                     </div>
-                    <div class="col-4">
+                    <div class="flex-grid-item">
                       <div class="icon lg js-addProduct">
                         Add New
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="products"><div class="row"></div></div>
+                <div class="products"><div class="flex-grid"></div></div>
 
                 <div class="bottom-panel"></div>
               </div>
@@ -325,7 +322,7 @@
         </div>
       </div>
     </div>
-    <div class="modal confirmation-modal">
+    <div class="modal confirmation-modal text-center">
       <div>
         Are you sure? This can't be undone.
       </div>
@@ -387,9 +384,9 @@
     <script type="text/template" id="category">
       {{#each categories}}
       {{#with this}}
-        <div class="col-4">
+        <div class="flex-grid-item">
           <div class="icon lg category-label" data-category={{value}}>
-            <i class="mdi mdi-bed" aria-hidden="true"></i>
+            <i class="mdi mdi-hotel" aria-hidden="true"></i>
             {{name}}
           </div>
         </div>
@@ -399,7 +396,7 @@
     <script type="text/template" id="products">
       {{#each products}}
       {{#with this}}
-        <div class="col-4">
+        <div class="flex-grid-item">
             <div class="product-image" data-product="{{@index}}">
                 <img src="{{main_image}}"/>
             </div>
