@@ -164,7 +164,9 @@ body {
   width: 100%;
   margin-bottom: 10px;
 }
-
+.gray-bg {
+  background: #f2f3f4;
+}
 .top-panel {
   padding: 10px;
   background: #d6d6d6;
@@ -181,7 +183,7 @@ body {
 .canvas {
   width: 100%;
   height: 75vh;
-  background: #eeeeee;
+  background: #ffffff;
   margin: 5px 0;
 }
 .canvas-content {
