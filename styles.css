@@ -248,7 +248,8 @@ body {
   top: 58px;
 }
 .left-panel .left-tab-pane {
-  margin-left: 72px;
+  margin-left: 75px;
+  margin-right: 5px;
 }
 
 .left-panel .tab {
@@ -296,7 +297,7 @@ body {
 
 .mobile-filter {
   position: absolute;
-  left: 480px;
+  left: 600px;
   right: 0;
   top: 60px;
   bottom: 0;
@@ -564,6 +565,9 @@ body {
 
   .top-panel {
     text-align: center;
+  }
+  .top-panel i {
+    margin-right: 8px;
   }
 
   .canvas {
