@@ -143,4 +143,9 @@ $(document).ready(function() {
       $('.canvas-config').toggleClass('show');
     }
   });
+  $('.js-open-background, .js-close-background-modal').click(function() {
+    $('.backdrop').toggleClass('show');
+    $('.background-modal').toggleClass('show');
+  });
+  $('#font').fontselect();
 });
