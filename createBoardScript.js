@@ -8,4 +8,14 @@ $(document).ready(function() {
     $('.canvas-options').addClass('d-none');
     $($(this).attr('target')).removeClass('d-none');
   });
+
+  $('.canvas-pallete-color').click(function() {
+    $('.canvas-pallete-color').removeClass('selected');
+    $(this).addClass('selected');
+  })
+
+  $('.canvas-pallete-floor-patterns').click(function() {
+    $('.canvas-pallete-floor-patterns').removeClass('selected');
+    $(this).addClass('selected');
+  })
 });
