@@ -2,6 +2,7 @@ $(document).ready(function() {
   $('.js-btn-go').hide();
 
   $('.canvas-style').click(function() {
+    $('.modal-action').addClass('selected');
     $('.canvas-style').removeClass('selected');
     $(this).addClass('selected');
     $('.js-btn-go').show();
@@ -10,12 +11,12 @@ $(document).ready(function() {
   });
 
   $('.canvas-pallete-color').click(function() {
-    $('.canvas-pallete-color').removeClass('selected');
+    $('.canvas-pallete-color.selected').removeClass('selected');
     $(this).addClass('selected');
   })
 
   $('.canvas-pallete-floor-patterns').click(function() {
-    $('.canvas-pallete-floor-patterns').removeClass('selected');
+    $('.canvas-pallete-floor-patterns.selected').removeClass('selected');
     $(this).addClass('selected');
   })
 });

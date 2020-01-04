@@ -147,5 +147,27 @@ $(document).ready(function() {
     $('.backdrop').toggleClass('show');
     $('.background-modal').toggleClass('show');
   });
-  $('#font').fontselect();
+  $('.js-font-select').fontselect();
+  
+  $('.carousel-control-prev').addClass('d-none');
+	var carouselLength = 1;
+  // If there is more than one item
+  if (carouselLength) {
+      $('.carousel-control-next').removeClass('d-none');
+  }
+
+  $('.carousel').carousel({
+      interval: false,
+      wrap: false
+  }).on('slide.bs.carousel', function (e) {
+      // First one
+      if (e.to == 0) {
+          $('.carousel-control-prev').addClass('d-none');
+          $('.carousel-control-next').removeClass('d-none');
+      } // Last one
+      else if (e.to == carouselLength) {
+          $('.carousel-control-prev').removeClass('d-none');
+          $('.carousel-control-next').addClass('d-none');
+      } 
+  });
 });
