@@ -345,17 +345,23 @@ body {
 }
 .product-cont .product-info {
   flex: 1;
+  line-height: 1.2;
 }
 .product-cont .brand {
   color: #999999;
+  margin: 5px 0;
 }
 .price {
   color: #b76e79;
 }
-.product-cont .icon {
-  float: right;
+.product-cont .icons {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
 }
-
+.product-cont .icons .icon {
+  border-radius: 5px;
+}
 .mobile-filter {
   position: absolute;
   left: 800px;
