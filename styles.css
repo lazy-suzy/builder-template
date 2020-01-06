@@ -260,11 +260,12 @@ body {
   background: #f2f3f4;
   border: none;
   padding: 0;
+  margin-bottom: 3px;
 }
 .form-control.board-title:hover,
 .form-control.board-title:focus {
-  background: #ffffff;
-  border: 1 solid #ccc;
+  background: transparent;
+  box-shadow: 0 0 2px 0 #ccc;
 }
 .canvas {
   width: 100%;
@@ -702,14 +703,14 @@ body {
 .carousel {
   margin-bottom: 2%;
 }
-.board-header{
+.board-header {
   color: #0c1c31;
 }
-.flooring-options{
+.flooring-options {
   color: #0c1c31;
 }
-.selected-right-scroll{
-  opacity: 1!important;
+.selected-right-scroll {
+  opacity: 1 !important;
 }
 .canvas-pallete-wrapper {
   position: relative;
@@ -743,9 +744,9 @@ body {
 
 .canvas-pallete-scroll-contents {
   float: left;
-  transition: -webkit-transform .2s ease-in-out;
-  transition: transform .2s ease-in-out;
-  transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  transition: -webkit-transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
   position: relative;
 }
 
@@ -756,8 +757,8 @@ body {
 .canvas-scroll {
   /* Reset the button */
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   background: transparent;
   padding: 0;
   border: 0;
@@ -767,7 +768,7 @@ body {
   bottom: 0;
   /* Set the buttons invisible by default */
   opacity: 1;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 .canvas-scroll:focus {
   outline: 0;
@@ -778,17 +779,19 @@ body {
 
 .canvas-scroll-left {
   left: 0;
-  margin-left: -0.5rem
+  margin-left: -0.5rem;
 }
-[data-overflowing="both"] ~ .canvas-scroll-left, [data-overflowing="left"] ~ .canvas-scroll-left {
+[data-overflowing='both'] ~ .canvas-scroll-left,
+[data-overflowing='left'] ~ .canvas-scroll-left {
   opacity: 1;
 }
 
 .canvas-scroll-right {
   right: 0;
-  margin-right: -0.5rem
+  margin-right: -0.5rem;
 }
-[data-overflowing="both"] ~ .canvas-scroll-right, [data-overflowing="right"] ~ .canvas-scroll-right {
+[data-overflowing='both'] ~ .canvas-scroll-right,
+[data-overflowing='right'] ~ .canvas-scroll-right {
   opacity: 1;
 }
 
@@ -806,10 +809,12 @@ body {
   width: 100px;
   background-color: transparent;
   -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
-  transition: background-color .2s ease-in-out, -webkit-transform .2s ease-in-out;
-  transition: transform .2s ease-in-out, background-color .2s ease-in-out;
-  transition: transform .2s ease-in-out, background-color .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  transform-origin: 0 0;
+  transition: background-color 0.2s ease-in-out,
+    -webkit-transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out,
+    -webkit-transform 0.2s ease-in-out;
 }
 .canvas-container {
   width: 100%;
@@ -821,6 +826,10 @@ body {
 @media screen and (max-width: 767px) {
   .logo {
     max-width: 100px;
+    vertical-align: sub;
+  }
+  .header-right-icons * {
+    margin: auto 2px;
   }
   .main-content {
     padding-left: 15px;
@@ -995,14 +1004,14 @@ body {
     left: 0;
     transform: translateX(0%);
   }
-  .board-header{
-    margin: 1rem 0 0 -.5rem;
+  .board-header {
+    margin: 1rem 0 0 -0.5rem;
   }
-  .canvas-options-container{
+  .canvas-options-container {
     min-height: 300px;
     width: 100%;
   }
-  .canvas-pallete-scroll{
+  .canvas-pallete-scroll {
     width: 340px;
     margin: auto;
   }
@@ -1010,7 +1019,7 @@ body {
     width: 100%;
     max-width: 340px;
     overflow-x: scroll;
-    overflow:hidden
+    overflow: hidden;
   }
 
   .canvas-content {
