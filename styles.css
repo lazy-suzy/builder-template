@@ -545,7 +545,7 @@ body {
 }
 
 .modal.canvas-config {
-  max-width: 500px;
+  max-width: 400px;
   max-height: 630px;
 }
 
@@ -720,7 +720,7 @@ body {
 
 .canvas-pallete-scroll {
   /* Make this scrollable when needed */
-  overflow-x: auto;
+  overflow-x: hidden;
   /* We don't want vertical scrolling */
   overflow-y: hidden;
   /* For WebKit implementations, provide inertia scrolling */
@@ -811,7 +811,13 @@ body {
   transition: transform .2s ease-in-out, background-color .2s ease-in-out;
   transition: transform .2s ease-in-out, background-color .2s ease-in-out, -webkit-transform .2s ease-in-out;
 }
-
+.canvas-container {
+  width: 100%;
+  max-width: 360px;
+  overflow-x: scroll;
+  overflow: hidden;
+  margin: auto;
+}
 @media screen and (max-width: 767px) {
   .logo {
     max-width: 100px;
@@ -986,7 +992,6 @@ body {
   .modal-action.selected {
     position: relative;
     margin: 2%;
-    bottom: 0;
     left: 0;
     transform: translateX(0%);
   }
@@ -994,7 +999,7 @@ body {
     margin: 1rem 0 0 -.5rem;
   }
   .canvas-options-container{
-    min-height: 350px;
+    min-height: 300px;
     width: 100%;
   }
   .canvas-pallete-scroll{
