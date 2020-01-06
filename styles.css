@@ -655,7 +655,19 @@ body {
 .color-green {
   background-color: #008000;
 }
+.canvas-pallete-carpet-patterns {
+  height: 35px;
+  width: 35px;
+  display: inline-block;
+  margin: 0.5rem;
+}
 .canvas-pallete-floor-patterns {
+  height: 35px;
+  width: 35px;
+  display: inline-block;
+  margin: 0.5rem;
+}
+.canvas-pallete-wood-patterns {
   height: 35px;
   width: 35px;
   display: inline-block;
@@ -672,7 +684,12 @@ body {
   -moz-box-shadow: 0px 0px 2px 2px #ffc107;
   box-shadow: 0px 0px 2px 2px #ffc107;
 }
-.canvas-pallete-floor-patterns.selected {
+.canvas-pallete-carpet-patterns.selected {
+  -webkit-box-shadow: 0px 0px 2px 2px #ffc107;
+  -moz-box-shadow: 0px 0px 2px 2px #ffc107;
+  box-shadow: 0px 0px 2px 2px #ffc107;
+}
+.canvas-pallete-wood-patterns.selected {
   -webkit-box-shadow: 0px 0px 2px 2px #ffc107;
   -moz-box-shadow: 0px 0px 2px 2px #ffc107;
   box-shadow: 0px 0px 2px 2px #ffc107;
@@ -680,11 +697,121 @@ body {
 .carousel-control-next,
 .carousel-control-prev {
   width: 5%;
-  margin: -1%;
+  margin: -1rem;
 }
 .carousel {
   margin-bottom: 2%;
 }
+.board-header{
+  color: #0c1c31;
+}
+.flooring-options{
+  color: #0c1c31;
+}
+.selected-right-scroll{
+  opacity: 1!important;
+}
+.canvas-pallete-wrapper {
+  position: relative;
+  /* padding: 0 11px; */
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.canvas-pallete-scroll {
+  /* Make this scrollable when needed */
+  overflow-x: auto;
+  /* We don't want vertical scrolling */
+  overflow-y: hidden;
+  /* For WebKit implementations, provide inertia scrolling */
+  -webkit-overflow-scrolling: touch;
+  /* We don't want internal inline elements to wrap */
+  white-space: nowrap;
+  /* If JS present, let's hide the default scrollbar */
+  /* positioning context for advancers */
+  position: relative;
+  font-size: 0;
+}
+.js .canvas-pallete-scroll {
+  /* Make an auto-hiding scroller for the 3 people using a IE */
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  /* Remove the default scrollbar for WebKit implementations */
+}
+.js .canvas-pallete-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.canvas-pallete-scroll-contents {
+  float: left;
+  transition: -webkit-transform .2s ease-in-out;
+  transition: transform .2s ease-in-out;
+  transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  position: relative;
+}
+
+.canvas-pallete-scroll-contents-no-transition {
+  transition: none;
+}
+
+.canvas-scroll {
+  /* Reset the button */
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: transparent;
+  padding: 0;
+  border: 0;
+  /* Now style it as needed */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* Set the buttons invisible by default */
+  opacity: 1;
+  transition: opacity .3s;
+}
+.canvas-scroll:focus {
+  outline: 0;
+}
+.canvas-scroll:hover {
+  cursor: pointer;
+}
+
+.canvas-scroll-left {
+  left: 0;
+  margin-left: -0.5rem
+}
+[data-overflowing="both"] ~ .canvas-scroll-left, [data-overflowing="left"] ~ .canvas-scroll-left {
+  opacity: 1;
+}
+
+.canvas-scroll-right {
+  right: 0;
+  margin-right: -0.5rem
+}
+[data-overflowing="both"] ~ .canvas-scroll-right, [data-overflowing="right"] ~ .canvas-scroll-right {
+  opacity: 1;
+}
+
+.canvas-scroll-icon {
+  width: 15px;
+  height: 20px;
+  fill: #bbb;
+}
+
+.canvas-pallete-scroll_Indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100px;
+  background-color: transparent;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  transition: background-color .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  transition: transform .2s ease-in-out, background-color .2s ease-in-out;
+  transition: transform .2s ease-in-out, background-color .2s ease-in-out, -webkit-transform .2s ease-in-out;
+}
+
 @media screen and (max-width: 767px) {
   .logo {
     max-width: 100px;
@@ -830,9 +957,15 @@ body {
     left: 50%;
     transform: translateX(-50%);
   }
-  .canvas-pallete-floor-patterns {
-    height: 2rem;
-    width: 2rem;
+  .canvas-pallete-carpet-patterns {
+    height: 2.5rem;
+    width: 2.5rem;
+    display: inline-block;
+    margin: 0.5rem;
+  }
+  .canvas-pallete-wood-patterns {
+    height: 2.5rem;
+    width: 2.5rem;
     display: inline-block;
     margin: 0.5rem;
   }
@@ -856,5 +989,26 @@ body {
     bottom: 0;
     left: 0;
     transform: translateX(0%);
+  }
+  .board-header{
+    margin: 1rem 0 0 -.5rem;
+  }
+  .canvas-options-container{
+    min-height: 350px;
+    width: 100%;
+  }
+  .canvas-pallete-scroll{
+    width: 340px;
+    margin: auto;
+  }
+  .canvas-container {
+    width: 100%;
+    max-width: 340px;
+    overflow-x: scroll;
+    overflow:hidden
+  }
+
+  .canvas-content {
+    width: 550px;
   }
 }

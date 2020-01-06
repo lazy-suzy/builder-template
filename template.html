@@ -268,7 +268,7 @@
             </div>
             <div class="top-panel carousel slide row  d-sm-none" id="topPanelCarousel" data-interval="false">
               <div class="carousel-inner">
-                <div class="col-sm-6 order-last order-sm-2 carousel-item active editor-icons ">
+                <div class="col-sm-6 order-last order-sm-2 carousel-item active editor-icons ml-2">
                   <input class="js-font-select" type="text">
   
                   <select>
@@ -324,14 +324,7 @@
                   </span>
                 </div>
               </div>
-              <a class="carousel-control-prev m-1" href="#topPanelCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="carousel-control-next m-1" href="#topPanelCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
-                <span class="sr-only">Next</span>
-              </a>
+              
             </div>
             <div class="canvas-content">
               <div class="row">
@@ -484,8 +477,8 @@
     <div class="modal canvas-config">
       <div class="row">
         <div class="col-12">
-          <h3 class="title">CREATE NEW BOARD</h3>
-          <h5 class="title">Select Layout Style</h5>
+          <h4 class="board-header">CREATE NEW BOARD</h4>
+          <h5 class="title ml-2">Select Layout Style</h5>
         </div>
         <div class="col-6 ">
           <div class="canvas-style" target="#board-options-modal">
@@ -500,7 +493,7 @@
           </div>
         </div>
         <div class="col-12 d-none canvas-options" id="board-options-modal">
-          <h6 class="title">Canvas Color</h6>
+          <h5 class="title ml-2">Select Canvas Color</h5>
           <div class="canvas-pallete">
             <div class="canvas-pallete-color color-white"></div>
             <div class="canvas-pallete-color color-red"></div>
@@ -519,7 +512,7 @@
           </div>
         </div>
         <div class="col-12 d-none canvas-options" id="room-options-modal">
-          <h6 class="title">Wall Color</h6>
+          <h5 class="title ml-2">Select Wall Color</h5>
           <div class="canvas-pallete">
             <div class="canvas-pallete-color color-white"></div>
             <div class="canvas-pallete-color color-red"></div>
@@ -536,7 +529,7 @@
             <div class="canvas-pallete-color color-blue"></div>
             <div class="canvas-pallete-color color-green"></div>
           </div>
-          <h6 class="title">Flooring Options</h6>
+          <h5 class="title ml-2">Select Flooring</h5>
           <div class="canvas-pallete carousel slide" id="floorPatternCarousel" data-wrap="false">
             <div class="carousel-inner">
               <div class="carousel-item active">
@@ -650,22 +643,20 @@
                 <img src="{{main_image}}"/>
             </div>
             <div class="product-info">
-                <strong>{{name}}</strong>
-                <div class="brand">{{site}}</div>
-                <div class="price">${{is_price}}</div>
-                <div class="icons">
-                  <div class="icon">
-                    <i class="mdi mdi-plus" aria-hidden="true"></i>
-                  </div>
-                  <div class="icon">
-                      <i class="mdi mdi-heart-outline" aria-hidden="true"></i>
-                  </div>
-                  <div class="icon">
-                    <i class="mdi mdi-dots-horizontal" aria-hidden="true"></i>
+              <strong>{{name}}</strong>
+              <div class="brand">{{site}}</div>
+              <div class="price">${{is_price}}</div>
+              <div class="icons">
+                <div class="icon">
+                  <i class="mdi mdi-plus" aria-hidden="true"></i>
                 </div>
-                  
+                <div class="icon">
+                    <i class="mdi mdi-heart-outline" aria-hidden="true"></i>
                 </div>
-
+                <div class="icon">
+                  <i class="mdi mdi-dots-horizontal" aria-hidden="true"></i>
+                </div>
+!                </div>
             </div>
 
         </div>
