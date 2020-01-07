@@ -147,7 +147,7 @@ $(document).ready(function() {
     $('.backdrop').toggleClass('show');
     $('.background-modal').toggleClass('show');
   });
-  $('.js-font-select').fontselect();
+  $('#font-select').fontselect();
   
 });
 
