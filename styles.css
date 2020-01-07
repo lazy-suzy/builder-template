@@ -158,6 +158,9 @@ body {
   position: fixed;
   width: 380px;
 }
+.left-panel::-webkit-scrollbar {
+  width: 0px;
+}
 
 .icon {
   background: #b76e79;
@@ -242,6 +245,9 @@ body {
 .top-panel .state-icons i {
   margin-right: 5px;
 }
+.state-icons {
+  top: 5px;
+}
 .editor-icons select,
 .editor-icons .font-select > a {
   background: #d6d6d6;
@@ -252,9 +258,11 @@ body {
   width: auto;
   max-width: 165px;
   vertical-align: middle;
+  position: static;
 }
 .top-panel .item-action-icons {
   text-align: right;
+  top: 5px;
 }
 .form-control.board-title {
   background: #f2f3f4;
@@ -438,8 +446,15 @@ body {
   white-space: normal;
   text-align: left;
   margin-right: 0;
-  max-height: 350px;
+  max-height: 460px;
   overflow: auto;
+}
+.filter-section ::-webkit-scrollbar {
+  width: 5px;
+}
+.filter-section ::-webkit-scrollbar-thumb {
+  background: #b76e79; 
+  border-radius: 5px;
 }
 .filter-section .item-list .filter-item {
   color: #b76e79;
@@ -723,7 +738,13 @@ body {
   box-sizing: border-box;
   text-align: center;
 }
-
+.top-panel-container{
+  overflow-x: auto;
+  overflow-y: visible;
+}
+.top-panel-scroll-contents{
+  white-space: nowrap;
+}
 .canvas-pallete-scroll {
   /* Make this scrollable when needed */
   overflow-x: hidden;
@@ -758,16 +779,7 @@ body {
 .canvas-pallete-scroll-contents-no-transition {
   transition: none;
 }
-.top-panel-scroll-contents {
-  float: left;
-  transition: -webkit-transform 0.2s ease-in-out;
-  transition: transform 0.2s ease-in-out;
-  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
-  position: relative;
-}
-.top-panel-scroll-contents-no-transition {
-  transition: none;
-}
+
 .canvas-scroll {
   /* Reset the button */
   -webkit-appearance: none;
@@ -867,6 +879,7 @@ body {
   }
   .editor-icons .font-select {
     width: 120px;
+    position: static;
   }
   .canvas-content {
     max-width: 340px;
@@ -878,6 +891,9 @@ body {
     margin-top: 5px;
   }
   .top-panel-hide {
+    display: none;
+  }
+  .state-icons-hide {
     display: none;
   }
   .left-panel {
@@ -1040,8 +1056,17 @@ body {
     width: 100%;
     max-width: 420px;
     overflow-x: auto;
+    overflow-y: visible;
   }
   .top-panel-container.selected {
     overflow: visible;
+  }
+  .filter-section .item-list {
+    max-height: 420px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .top-panel-hide {
+    display: none;
   }
 }
