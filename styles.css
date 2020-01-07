@@ -293,7 +293,7 @@ body {
   text-align: right;
   color: #666;
   position: relative;
-  top: 7px;
+  top: 12px;
   display: inline-flex;
 }
 .canvas-icons a {
@@ -453,7 +453,7 @@ body {
   width: 5px;
 }
 .filter-section ::-webkit-scrollbar-thumb {
-  background: #b76e79; 
+  background: #b76e79;
   border-radius: 5px;
 }
 .filter-section .item-list .filter-item {
@@ -739,11 +739,11 @@ body {
   box-sizing: border-box;
   text-align: center;
 }
-.top-panel-container{
+.top-panel-container {
   overflow-x: auto;
   overflow-y: visible;
 }
-.top-panel-scroll-contents{
+.top-panel-scroll-contents {
   white-space: nowrap;
 }
 .canvas-pallete-scroll {
