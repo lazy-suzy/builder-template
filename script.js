@@ -59,6 +59,10 @@ $(document).ready(function() {
     });
   });
 
+  $('body').on('click', '.js-bottom-panel-close', function() {
+    $('.bottom-panel').html('');
+  });
+
   $('.nav-link').click(function(event) {
     event.preventDefault();
     $('.nav-link').removeClass('active');
