@@ -18,6 +18,10 @@
       rel="stylesheet"
       href="./fontselect-default.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"
+      />
     <link href="./styles.css" rel="stylesheet" />
   </head>
   <body class="gray-bg">
@@ -69,7 +73,7 @@
               <a class="nav-link" href="#browse">Browse</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#myItems">My items</a>
+              <a class="nav-link" href="#add">Add</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#favorites">Favorites</a>
@@ -83,9 +87,31 @@
           </ul>
         </div>
         <div class="left-tab-pane">
+          
           <div id="select" class="tab active components ">
             <div class="flex-grid">
-              
+              <div class="left-tab-pane-header">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inlineFormInputGroupUsername"
+                    placeholder="Search"
+                  />
+                  <div class="input-group-append">
+                    <div class="input-group-text icon">
+                      <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div class="icon filter-icon">
+                    <i class="mdi mdi-filter" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <div class="text-left">
+                  <h5 class="title ml-2">Select New Category</h5>
+                </div>
+              </div>
+              <!-- <img src="./Spinner-1s-100px.gif" class="spinner-loader"> -->
             </div>
           </div>
           <div id="browse" class="tab">
@@ -105,8 +131,20 @@
                 <i class="mdi mdi-filter" aria-hidden="true"></i>
               </div>
             </div>
-            <h4 class="title">Sofa</h4>
-            <div class="products"><div class="flex-grid"></div></div>
+            <div class="d-flex">
+              <i class="mdi mdi-arrow-left ml-2" aria-hidden="true"></i>
+              <h5 class="title ml-2">Sofa</h5>
+            </div>
+            <div class="browse-filter">
+              <div class="browse-filter-item">New</div>
+              <div class="browse-filter-item">Sale</div>
+              <div class="browse-filter-item">Best Sellers</div>
+            </div>
+            <div class="products">
+              <div class="flex-grid">
+                <img src="./Spinner-1s-100px.gif" class="spinner-loader">
+              </div>
+            </div>
 
             <div class="bottom-panel"></div>
           </div>
@@ -131,8 +169,14 @@
           </div>
           <div id="text" class="tab">
             <div >
-              <h4 class="title">Text</h4>
-              
+              <h5 class="title ml-2">Insert Text</h5>
+              <div>
+                <div class="text-items"><span class="helvetica ml-2">Helvetica</span></div>
+                <div class="text-items"><span class="times-new-roman ml-2">Times New Roman</span></div>
+                <div class="text-items"><span class="courier-new ml-2">Courier New</span></div>
+                <div class="text-items"><span class="georgia ml-2">Georgia</span></div>
+                <div class="text-items"><span class="arial ml-2">Arial</span></div>
+              </div>
             </div>
           </div>
           <div id="favorites" class="tab">
@@ -147,32 +191,44 @@
               <div class="flex-grid">
                 <div class="flex-grid-item">
                     <div class="product-image" data-product="0">
+                        <i class="mdi mdi-cards-heart" aria-hidden="true"></i>
                         <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3185438_main.jpg">
                     </div>
                 </div>
                 <div class="flex-grid-item">
                     <div class="product-image" data-product="1">
+                        <i class="mdi mdi-cards-heart" aria-hidden="true"></i>
                         <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937287_main.jpg">
                     </div>
                 </div>
                 <div class="flex-grid-item">
                     <div class="product-image" data-product="2">
+                        <i class="mdi mdi-cards-heart" aria-hidden="true"></i>
                         <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937311_main.jpg">
                     </div>
                 </div>
                 <div class="flex-grid-item">
                     <div class="product-image" data-product="3">
+                        <i class="mdi mdi-cards-heart" aria-hidden="true"></i>
                         <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937352_main.jpg">
                     </div>
                 </div>
               </div>
             </div>
           </div>
-          <div id="myItems" class="tab">
+          <div id="add" class="tab">
             <div class="catalog-content">
               <h4 class="title">My Items</h4>
-              <div class="icon lg add-new js-addProduct" style="max-width:100px">
-                Add New
+              <div class="icon lg add-new js-addProduct">
+                Click to Upload or Drag & Drop Here
+              </div>
+              <div class="mb-3">
+                <span class="add-new-url js-addProduct">Or add via URL</span>
+                <span class="add-new-url-msg"><i class="mdi mdi-information" aria-hidden="true"></i> Must be .jpg or .png file</span>
+              </div>
+              <div class="d-flex mb-3">
+                <div class="add-new-title">My Items</div>
+                <div class="add-new-title">All Uploads</div>
               </div>
               <div class="flex-grid">
                 <div class="flex-grid-item">
@@ -419,12 +475,27 @@
       </div>
       <div id="step3" class="step">
         <h4>Add Image</h4>
-        <div class="content">
-          <input class="form-control" placeholder="Add Product Title" />
-          <input class="form-control" placeholder="Add Price" />
-          <div>
-            <input class="form-control" placeholder="Add Additional Tags" />
+        <div class="add-image-form d-grid">
+          <div class="add-image-input">
+            <input class="form-control" placeholder="Product Title" />
+          </div>
+          <div class="add-image-input">
+            <input class="form-control" placeholder="Price" />
+          </div>
+          <div class="add-image-input">
+            <input class="form-control" placeholder="URL" />
+          </div>
+          <div class="add-image-input">
+            <input class="form-control" placeholder="Additional Tags" />
             <div class="subtle">Separate by comma</div>
+          </div>
+          <div class="add-image-input-checkbox">
+            <div class="checkbox-margin">
+              <input type="checkbox">
+            </div>
+            <div class="ml-1">
+              <span>Keep Private</span>
+            </div>
           </div>
         </div>
 
@@ -537,7 +608,7 @@
             <button id="slideBack" class="canvas-scroll js-left-scroll canvas-scroll-left" type="button">
               <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
             </button>
-            <button id="slide" class="canvas-scroll selected-right-scroll canvas-scroll-right" type="button">
+            <button id="slide" class="canvas-scroll js-right-scroll canvas-scroll-right" type="button">
               <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
             </button>
           </div>
@@ -562,7 +633,7 @@
                 <button id="slideBack2" class="canvas-scroll js-left-scroll canvas-scroll-left" type="button">
                   <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
                 </button>
-                <button id="slide2" class="canvas-scroll selected-right-scroll canvas-scroll-right" type="button">
+                <button id="slide2" class="canvas-scroll js-right-scroll canvas-scroll-right" type="button">
                   <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
                 </button>
               </div>
@@ -586,7 +657,7 @@
                 <button id="slideBack3" class="canvas-scroll js-left-scroll canvas-scroll-left" type="button">
                   <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
                 </button>
-                <button id="slide3" class="canvas-scroll selected-right-scroll canvas-scroll-right" type="button">
+                <button id="slide3" class="canvas-scroll js-right-scroll canvas-scroll-right" type="button">
                   <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
                 </button>
               </div>
@@ -654,7 +725,7 @@
                     <i class="mdi mdi-heart-outline" aria-hidden="true"></i>
                 </div>
                 <div class="icon">
-                  <i class="mdi mdi-dots-horizontal" aria-hidden="true"></i>
+                  <i class="mdi mdi-open-in-new" aria-hidden="true"></i>
                 </div>
               </div>
             </div>
@@ -690,7 +761,13 @@
         </div>
        {{/each}}
     </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+
     <script src="./jquery.fontselect.min.js"></script>
     <script src="./script.js"></script>
     <script src="./createBoardScript.js"></script>

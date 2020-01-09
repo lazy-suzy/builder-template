@@ -21,7 +21,6 @@ $(document).ready(function() {
     }
     return options.inverse(this);
   });
-
   const template = Handlebars.compile($('#category').html());
   let products = [];
   const productTemplate = Handlebars.compile($('#products').html());
@@ -43,6 +42,31 @@ $(document).ready(function() {
     );
   });
 
+  let iItemsToShow = 2;
+  strItemsNumClass = 'item-2';
+
+  $('#priceRangeSlider').change(function() {
+      $('#priceInfo')
+          .find('.low')
+          .text($(this).attr('min'));
+      $('#priceInfo')
+          .find('.high')
+          .text($(this).val());
+  });
+
+  $priceRangeSlider = $('#priceRangeSlider');
+
+  $priceRangeSlider.ionRangeSlider({
+      skin: 'sharp',
+      type: 'double',
+      min: 100,
+      max: 5000,
+      from: 500,
+      to: 2500,
+      prefix: '$',
+      prettify_separator: ','
+  });
+  
   $('body').on('click', '.category-label', function() {
     $('.custom-products').removeClass('show');
     const category = $(this).attr('data-category');
@@ -62,7 +86,7 @@ $(document).ready(function() {
   $('body').on('click', '.js-bottom-panel-close', function() {
     $('.bottom-panel').html('');
   });
-
+  
   $('.nav-link').click(function(event) {
     event.preventDefault();
     $('.nav-link').removeClass('active');
@@ -75,6 +99,15 @@ $(document).ready(function() {
     if (target !== '#browse') {
       $('.custom-products').removeClass('show');
     }
+    if (target === '#browse') {
+      $('.spinner-loader').addClass('show');
+    }
+    $('.mdi-arrow-left').click(function() {
+      $(target).removeClass('active');
+      $('.nav-link').removeClass('active');
+      $('#select').addClass('active');
+      $('[href*="#select"').addClass('active');
+    })
   });
 
   $('body').on('click', '.product-image', function() {
@@ -147,11 +180,22 @@ $(document).ready(function() {
       $('.canvas-config').toggleClass('show');
     }
   });
+
   $('.js-open-background, .js-close-background-modal').click(function() {
     $('.backdrop').toggleClass('show');
     $('.background-modal').toggleClass('show');
   });
   $('.js-font-select').fontselect();
   
+  $('.browse-filter-item').click(function() {
+    $('.browse-filter-item.selected').removeClass('selected');
+    $(this).addClass('selected');
+  })
+
+  $('.text-items').click(function() {
+    $('.text-items.selected').removeClass('selected');
+    $(this).addClass('selected');
+  })
+
 });
 

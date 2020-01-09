@@ -187,9 +187,34 @@ body {
 }
 
 .icon.add-new {
-  max-width: 100px;
+  width: 96%;
   margin: auto;
   display: block;
+  font-size: 14px;
+  border: 1px black dotted;
+  color: black;
+  background-color: #d6d6d6;
+}
+
+.add-new-url {
+  margin-left: 5px;
+}
+.add-new-url:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.add-new-title{
+  margin: auto;
+  padding: 0 20px;
+  font-size: 18px;
+  border-bottom: 2px solid #b76e79;
+}
+
+.add-new-url-msg{
+  color:#aaabaa;
+  margin-left: 2rem;
+  font-size: 12px;
 }
 
 .components,
@@ -225,10 +250,17 @@ body {
 .tab.active {
   display: block;
 }
-
+.product-image{
+  position: relative;
+}
 .product-image img {
   width: 100%;
   margin-bottom: 10px;
+}
+.product-image i{
+  position: absolute;
+  right: 2px;
+  color: #b76e79;
 }
 .gray-bg {
   background: #f2f3f4;
@@ -271,12 +303,12 @@ body {
   margin-bottom: 3px;
 }
 .form-control.board-title:hover {
-  background: transparent;
+  background: #fff;
   border: 1px solid #d6d6d6;
 }
 .form-control.board-title:focus {
-  background: #fff;
-  box-shadow: 0 0 2px 0 #d6d6d6;
+  background: transparent;
+  box-shadow: 0 0 2px 0 #ccc;
 }
 .canvas {
   width: 100%;
@@ -293,7 +325,7 @@ body {
   text-align: right;
   color: #666;
   position: relative;
-  top: 12px;
+  top: 7px;
   display: inline-flex;
 }
 .canvas-icons a {
@@ -315,6 +347,7 @@ body {
 .left-panel .tab {
   padding: 20px 0;
   overflow: auto;
+  margin: 0;
 }
 
 .left-panel .category-label {
@@ -452,7 +485,7 @@ body {
   width: 5px;
 }
 .filter-section ::-webkit-scrollbar-thumb {
-  background: #b76e79;
+  background: #b76e79; 
   border-radius: 5px;
 }
 .filter-section .item-list .filter-item {
@@ -556,7 +589,7 @@ body {
 .modal.background-modal {
   padding: 30px;
   max-width: 500px;
-  max-height: 500px;
+  max-height: 400px;
 }
 
 .modal.confirmation-modal {
@@ -637,18 +670,23 @@ body {
   border-radius: 2px;
   margin-right: 5px;
 }
+
 .catalog-item h5 {
   margin: 0;
 }
+
 .custom-products {
   display: none;
 }
+
 .custom-products.show {
   display: block;
 }
+
 .canvas-pallete {
   text-align: center;
 }
+
 .canvas-pallete-color {
   height: 35px;
   width: 35px;
@@ -656,95 +694,114 @@ body {
   display: inline-block;
   margin: 0.5rem;
 }
+
 .color-white {
   background-color: #ffffff;
   border: 1px solid #000000;
 }
+
+
 .color-red {
   background-color: #ff0000;
 }
+
 .color-black {
   background-color: #000000;
 }
+
 .color-gray {
   background-color: #808080;
 }
+
 .color-blue {
   background-color: #0000ff;
 }
+
 .color-green {
   background-color: #008000;
 }
+
 .canvas-pallete-carpet-patterns {
   height: 35px;
   width: 35px;
   display: inline-block;
   margin: 0.5rem;
 }
+
 .canvas-pallete-floor-patterns {
   height: 35px;
   width: 35px;
   display: inline-block;
   margin: 0.5rem;
 }
+
 .canvas-pallete-wood-patterns {
   height: 35px;
   width: 35px;
   display: inline-block;
   margin: 0.5rem;
 }
+
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
   background-color: #000000;
   width: 15px;
   height: 15px;
 }
+
 .canvas-pallete-color.selected {
   -webkit-box-shadow: 0px 0px 2px 2px #ffc107;
   -moz-box-shadow: 0px 0px 2px 2px #ffc107;
   box-shadow: 0px 0px 2px 2px #ffc107;
 }
+
 .canvas-pallete-carpet-patterns.selected {
   -webkit-box-shadow: 0px 0px 2px 2px #ffc107;
   -moz-box-shadow: 0px 0px 2px 2px #ffc107;
   box-shadow: 0px 0px 2px 2px #ffc107;
 }
+
 .canvas-pallete-wood-patterns.selected {
   -webkit-box-shadow: 0px 0px 2px 2px #ffc107;
   -moz-box-shadow: 0px 0px 2px 2px #ffc107;
   box-shadow: 0px 0px 2px 2px #ffc107;
 }
+
 .carousel-control-next,
 .carousel-control-prev {
   width: 5%;
   margin: -1rem;
 }
+
 .carousel {
   margin-bottom: 2%;
 }
+
 .board-header {
   color: #0c1c31;
 }
+
 .flooring-options {
   color: #0c1c31;
   margin-bottom: -5px;
 }
-.selected-right-scroll {
-  opacity: 1 !important;
-}
+
 .canvas-pallete-wrapper {
   position: relative;
   /* padding: 0 11px; */
   box-sizing: border-box;
   text-align: center;
 }
-.top-panel-container {
+
+.top-panel-container{
   overflow-x: auto;
   overflow-y: visible;
 }
-.top-panel-scroll-contents {
+
+.top-panel-scroll-contents{
   white-space: nowrap;
 }
+
 .canvas-pallete-scroll {
   /* Make this scrollable when needed */
   overflow-x: hidden;
@@ -759,11 +816,13 @@ body {
   position: relative;
   font-size: 0;
 }
+
 .js .canvas-pallete-scroll {
   /* Make an auto-hiding scroller for the 3 people using a IE */
   -ms-overflow-style: -ms-autohiding-scrollbar;
   /* Remove the default scrollbar for WebKit implementations */
 }
+
 .js .canvas-pallete-scroll::-webkit-scrollbar {
   display: none;
 }
@@ -796,9 +855,11 @@ body {
   opacity: 1;
   transition: opacity 0.3s;
 }
+
 .canvas-scroll:focus {
   outline: 0;
 }
+
 .canvas-scroll:hover {
   cursor: pointer;
 }
@@ -842,6 +903,7 @@ body {
   transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out,
     -webkit-transform 0.2s ease-in-out;
 }
+
 .canvas-container {
   width: 100%;
   max-width: 360px;
@@ -850,7 +912,93 @@ body {
   margin: auto;
 }
 
+.spinner-loader {
+  display: none;
+}
+
+.spinner-loader.show {
+  display: inline;
+  margin: auto;
+}
+
+.browse-filter {
+  display: flex;
+}
+
+.browse-filter-item {
+  padding: 5px 10px;
+  background-color: #f2f4f3;
+  color: #b76e79;
+  margin-left: .5rem;
+  border-radius: 5px;
+}
+
+.browse-filter-item.selected {
+  color: #f2f4f3;
+  background-color: #b76e79;
+}
+
+.add-image-input {
+  width: 50%;
+  margin: 5px auto;
+}
+
+.add-image-form {
+  min-height: 200px;
+  display: grid;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.add-image-input-checkbox {
+  display: flex;
+  width: 50%;
+  margin: -5px auto 5px auto;
+}
+
+.add-image-form input {
+  padding: 0 5px;
+  height: auto;
+}
+
+.checkbox-margin {
+  margin-top: 2px;
+}
+
+.text-items{
+  cursor: pointer;
+}
+
+.text-items:hover{
+  background-color: #f2f4f3;
+}
+
+.text-items.selected {
+  background-color: #f2f4f3;
+}
+
+.helvetica {
+  font-family: Helvetica;
+}
+
+.times-new-roman {
+  font-family: 'Times New Roman';
+}
+
+.arial {
+  font-family: Arial;
+}
+
+.courier-new {
+  font-family: 'Courier New';
+}
+
+.georgia {
+  font-family: Georgia;
+}
+
 @media screen and (max-width: 991px) {
+  
   .logo {
     max-width: 100px;
     vertical-align: sub;
@@ -1074,12 +1222,19 @@ body {
     display: none;
   }
 }
-@media screen and (max-width: 767px) {
-  .canvas {
+@media screen and (max-width: 767px ) {
+  .canvas{
     height: 400px;
   }
   .editor-icons {
     white-space: nowrap;
     max-width: 340px;
+  }
+  .add-new-url-msg{
+    margin-left: 0;
+    font-size: 10px;
+  }
+  .add-new-title{
+    padding: 0 10px;
   }
 }

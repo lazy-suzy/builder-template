@@ -24,6 +24,7 @@ $(document).ready(function() {
     $('.canvas-pallete-carpet-patterns.selected').removeClass('selected');
     $(this).addClass('selected');
   })
+  
   $('.canvas-pallete-wood-patterns').click(function() {
     $('.canvas-pallete-wood-patterns.selected').removeClass('selected');
     $(this).addClass('selected');
