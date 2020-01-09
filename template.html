@@ -745,7 +745,7 @@
         {{#each filterData}}
         <div id="{{@key}}" class="tab-pane filter {{#ifEq @key 'brand'}}active{{/ifEq}}" data-filter="{{@key}}">
           <ul class="item-list">
-              {{#ifEq @key price}}
+              {{#ifEq @key 'price'}}
                   <li class="filter-item"  href="#"><input class="price-range-slider" id="priceRangeSlider" name="price_range" value="" tabindex="-1" readonly=""></li>
               {{else}}
                   {{#each this}}
