@@ -135,6 +135,7 @@ body {
 }
 .board-list-container {
   padding-top: 30px;
+  min-height: 550px;
 }
 .canvas-style {
   text-align: center;
