@@ -193,14 +193,15 @@ body {
   font-size: 14px;
   border: 1px black dotted;
   color: black;
+  padding: 14px;
   background-color: #d6d6d6;
 }
 
 .add-new-url {
   margin-left: 5px;
+  text-decoration: underline;
 }
 .add-new-url:hover {
-  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -208,7 +209,15 @@ body {
   margin: auto;
   padding: 0 20px;
   font-size: 18px;
+}
+
+.add-new-title.active{
   border-bottom: 2px solid #b76e79;
+}
+
+.add-new-title:hover {
+  border-bottom: 2px solid #b76e79;
+  cursor: pointer;
 }
 
 .add-new-url-msg {
@@ -492,8 +501,12 @@ body {
   width: 5px;
 }
 
+.filter-section.item-list ::-webkit-scrollbar {
+  width: 2px;
+}
+
 .filter-section ::-webkit-scrollbar-thumb {
-  background: #b76e79;
+  background: #b76e79; 
   border-radius: 5px;
 }
 
@@ -607,7 +620,7 @@ body {
 .modal.background-modal {
   padding: 30px;
   max-width: 500px;
-  max-height: 400px;
+  max-height: 450px;
 }
 
 .modal.confirmation-modal {
@@ -958,8 +971,8 @@ body {
 }
 
 .add-image-input {
-  width: 50%;
-  margin: 5px auto;
+  width: 100%;
+  margin: 10px auto;
 }
 
 .add-image-form {
@@ -971,13 +984,18 @@ body {
 
 .add-image-input-checkbox {
   display: flex;
-  width: 50%;
-  margin: -5px auto 5px auto;
+  margin: auto;
+  color: #717a82;
 }
 
 .add-image-form input {
   padding: 0 5px;
   height: auto;
+  font-size: 18px;
+}
+
+.add-image-form input:focus {
+  box-shadow: none;
 }
 
 .checkbox-margin {
@@ -986,6 +1004,8 @@ body {
 
 .text-items {
   cursor: pointer;
+  font-size: 18px;
+  padding: 5px 0;
 }
 
 .text-items:hover {
@@ -1025,7 +1045,50 @@ body {
   color: #b76d79;
 }
 
+.browse-header {
+  display: flex;
+}
+.browse-header i {
+  margin-top: -6px;
+  font-size: 24px;
+  color: #d6d6d6;
+}
+
+.irs--sharp .irs-from,.irs-to,
+.irs-handle,.irs-bar, .irs-single {
+  background-color: #ffcc00 !important;
+}
+
+.irs--sharp .irs-max,
+.irs--sharp .irs-min {
+  background-color: #ffcc00 ;
+}
+
+.irs--sharp .irs-handle>i:first-child {
+  border-top-color: #ffcc00;
+}
+
+.irs--sharp .irs-to:before,
+.irs--sharp .irs-from:before,
+.irs--sharp .irs-single:before  {
+  border-top-color: #ffcc00;
+}
+
+.irs--sharp .irs-line {
+  background-color: transparent !important;
+  border: 1px solid #0c1c31;
+}
+
+.items-board {
+  display: none;
+}
+
+.items-board.active {
+  display: block;
+}
+
 @media screen and (max-width: 991px) {
+  
   .logo {
     max-width: 100px;
     vertical-align: sub;
@@ -1255,8 +1318,8 @@ body {
     display: none;
   }
 }
-@media screen and (max-width: 767px) {
-  .canvas {
+@media screen and (max-width: 767px ) {
+  .canvas{
     height: 400px;
   }
   .editor-icons {

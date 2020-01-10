@@ -87,7 +87,7 @@ $(document).ready(function() {
     if (target === '#browse') {
       $('.spinner-loader').addClass('show');
     }
-    $('.mdi-arrow-left').click(function() {
+    $('.mdi-chevron-left').click(function() {
       $(target).removeClass('active');
       $('.nav-link').removeClass('active');
       $('#select').addClass('active');
@@ -178,7 +178,7 @@ $(document).ready(function() {
   });
 
   $('.browse-filter-item').click(function() {
-    $('.browse-filter-item.selected').removeClass('selected');
+    $('.broxwse-filter-item.selected').removeClass('selected');
     $(this).addClass('selected');
   });
 
@@ -186,4 +186,14 @@ $(document).ready(function() {
     $('.text-items.selected').removeClass('selected');
     $(this).addClass('selected');
   });
+
+  $('.add-new-title').click(function(){
+    event.preventDefault();
+    $('.add-new-title.active').removeClass('active');
+    $(this).addClass('active');
+    $('.items-board.active').removeClass('active');
+    const target = $(this).attr('href');
+    $('#'+target).addClass('active');
+  });
+ 
 });

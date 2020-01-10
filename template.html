@@ -132,9 +132,9 @@
                 <i class="mdi mdi-filter" aria-hidden="true"></i>
               </div>
             </div>
-            <div class="d-flex">
-              <i class="mdi mdi-arrow-left ml-2" aria-hidden="true"></i>
-              <h5 class="title ml-2">Sofa</h5>
+            <div class="browse-header">
+              <i class="mdi mdi-chevron-left ml-2" aria-hidden="true"></i>
+              <h5 class="title">Sofa</h5>
             </div>
             <div class="browse-filter">
               <div class="browse-filter-item">New</div>
@@ -219,7 +219,6 @@
           </div>
           <div id="add" class="tab">
             <div class="catalog-content">
-              <h4 class="title">My Items</h4>
               <div class="icon lg add-new js-addProduct">
                 Click to Upload or Drag & Drop Here
               </div>
@@ -228,29 +227,50 @@
                 <span class="add-new-url-msg"><i class="mdi mdi-information" aria-hidden="true"></i> Must be .jpg or .png file</span>
               </div>
               <div class="d-flex mb-3">
-                <div class="add-new-title">My Items</div>
-                <div class="add-new-title">All Uploads</div>
+                <div class="add-new-title active" href="myItems">My Items</div>
+                <div class="add-new-title" href="allUploads">All Uploads</div>
               </div>
-              <div class="flex-grid">
-                <div class="flex-grid-item">
-                    <div class="product-image" data-product="0">
-                        <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3185438_main.jpg">
-                    </div>
+              <div class="items-board active" id="myItems">
+                <div class="flex-grid" >
+                  <div class="flex-grid-item">
+                      <div class="product-image" data-product="0">
+                          <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3185438_main.jpg">
+                      </div>
+                  </div>
+                  <div class="flex-grid-item">
+                      <div class="product-image" data-product="1">
+                          <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937287_main.jpg">
+                      </div>
+                  </div>
+                  <div class="flex-grid-item">
+                      <div class="product-image" data-product="2">
+                          <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937311_main.jpg">
+                      </div>
+                  </div>
+                  <div class="flex-grid-item">
+                      <div class="product-image" data-product="3">
+                          <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937352_main.jpg">
+                      </div>
+                  </div>
                 </div>
-                <div class="flex-grid-item">
-                    <div class="product-image" data-product="1">
-                        <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937287_main.jpg">
-                    </div>
-                </div>
-                <div class="flex-grid-item">
-                    <div class="product-image" data-product="2">
-                        <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937311_main.jpg">
-                    </div>
-                </div>
-                <div class="flex-grid-item">
-                    <div class="product-image" data-product="3">
-                        <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937352_main.jpg">
-                    </div>
+              </div>
+              <div class="items-board" id="allUploads">
+                <div class="flex-grid">
+                  <div class="flex-grid-item">
+                      <div class="product-image" data-product="1">
+                          <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937287_main.jpg">
+                      </div>
+                  </div>
+                  <div class="flex-grid-item">
+                      <div class="product-image" data-product="2">
+                          <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937311_main.jpg">
+                      </div>
+                  </div>
+                  <div class="flex-grid-item">
+                      <div class="product-image" data-product="3">
+                          <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937352_main.jpg">
+                      </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -457,7 +477,7 @@
       </div>
       <div id="step2" class="step">
         <h4>Add Image</h4>
-        <div class="content">
+        <div class="add-image-form">
           <div>
             <input class="form-control" placeholder="Image url" />
             <div class="subtle">Must be .png or .jpg</div>
