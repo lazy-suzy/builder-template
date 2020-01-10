@@ -51,16 +51,19 @@
           </div>
         </div>
         <div class="mobile-filter">
+          
           <div class="filter-header">
             <div class="filter-title">
               Filters
             </div>
-            <div class="subtle clear-all-btn">
+            <div class="clear-all-btn">
               Clear All
+              <i class="mdi mdi-menu-up filter-bar-arrow" aria-hidden="true"></i>
             </div>
             <div class="close-btn js-filter-close">
               <i class="mdi mdi-close" aria-hidden="true"></i>
             </div>
+            
           </div>
           <div class="filter-section"></div>
         </div>
@@ -90,7 +93,6 @@
           
           <div id="select" class="tab active components ">
             <div class="flex-grid">
-              <div class="left-tab-pane-header">
                 <div class="input-group">
                   <input
                     type="text"
@@ -107,10 +109,9 @@
                     <i class="mdi mdi-filter" aria-hidden="true"></i>
                   </div>
                 </div>
-                <div class="text-left">
+                <div class="text-left w-100">
                   <h5 class="title ml-2">Select New Category</h5>
                 </div>
-              </div>
               <!-- <img src="./Spinner-1s-100px.gif" class="spinner-loader"> -->
             </div>
           </div>
@@ -744,7 +745,11 @@
         </div>
         {{#each filterData}}
         <div id="{{@key}}" class="tab-pane filter {{#ifEq @key 'brand'}}active{{/ifEq}}" data-filter="{{@key}}">
-          <ul class="item-list">
+          <div class="clear-filter">
+            <label for="{{@key}}" class="mb-0">Clear</label>
+          </div>
+          <div>
+            <ul class="item-list">
               {{#ifEq @key 'price'}}
                   <li class="filter-item"  href="#"><input class="price-range-slider" id="priceRangeSlider" name="price_range" value="" tabindex="-1" readonly=""></li>
               {{else}}
@@ -756,11 +761,20 @@
                   {{/with}}
                   {{/each}}
               {{/ifEq}}
-          </ul>
-          <label for="{{@key}}" class="subtle clear-filter float-right">Clear</label>
+            </ul>
+          </div>
         </div>
        {{/each}}
+       <script>
+         $('.checkmark').click(function() {
+            $(this).addClass('selected');
+          })
+          $('.checkmark.selected').click(function() {
+            $(this).removeClass('selected');
+          })
+       </script>
     </script>
+    
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="

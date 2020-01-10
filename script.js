@@ -52,31 +52,6 @@ $(document).ready(function() {
     });
   });
 
-  let iItemsToShow = 2;
-  strItemsNumClass = 'item-2';
-
-  $('#priceRangeSlider').change(function() {
-    $('#priceInfo')
-      .find('.low')
-      .text($(this).attr('min'));
-    $('#priceInfo')
-      .find('.high')
-      .text($(this).val());
-  });
-
-  $priceRangeSlider = $('#priceRangeSlider');
-
-  $priceRangeSlider.ionRangeSlider({
-    skin: 'sharp',
-    type: 'double',
-    min: 100,
-    max: 5000,
-    from: 500,
-    to: 2500,
-    prefix: '$',
-    prettify_separator: ','
-  });
-
   $('body').on('click', '.category-label', function() {
     $('.custom-products').removeClass('show');
     const category = $(this).attr('data-category');
@@ -196,6 +171,11 @@ $(document).ready(function() {
     $('.background-modal').toggleClass('show');
   });
   $('.js-font-select').fontselect();
+
+  $('.browse-filter-item').click(function() {
+    $('.browse-filter-item.selected').removeClass('selected');
+    $(this).addClass('selected');
+  });
 
   $('.browse-filter-item').click(function() {
     $('.browse-filter-item.selected').removeClass('selected');
