@@ -11,7 +11,9 @@ window.isMobile = function() {
     )
       check = true;
   })(navigator.userAgent || navigator.vendor || window.opera);
+
   return check;
+  
 };
 
 $(document).ready(function() {
@@ -34,7 +36,8 @@ $(document).ready(function() {
     $('.components')
       .children('.flex-grid')
       .append(template({ categories: data.filterData.category }));
-    $('.filter-section').html(
+      delete data.filterData.category;
+    $('.js-filter-section').html(
       filterTemplate({
         filterData: data.filterData,
         filterKeys: Object.keys(data.filterData)
@@ -111,11 +114,11 @@ $(document).ready(function() {
 
   $('body').on('click', '.tabs .nav-link', function(e) {
     e.preventDefault();
-    $('.tab-pane').removeClass('active');
-    $('.tabs .nav-link').removeClass('active');
+    $('.tab-pane.selected').removeClass('selected');
+    $('.tabs .nav-link.selected').removeClass('selected');
 
-    $(this).addClass('active');
-    $($(this).attr('href')).addClass('active');
+    $(this).addClass('selected');
+    $($(this).attr('href')).addClass('selected');
   });
   function toggleAddProduct(e) {
     e.preventDefault();
@@ -173,13 +176,8 @@ $(document).ready(function() {
   $('.js-font-select').fontselect();
 
   $('.browse-filter-item').click(function() {
-    $('.browse-filter-item.selected').removeClass('selected');
-    $(this).addClass('selected');
-  });
-
-  $('.browse-filter-item').click(function() {
-    $('.broxwse-filter-item.selected').removeClass('selected');
-    $(this).addClass('selected');
+    $('.browse-filter-item.active').removeClass('active');
+    $(this).addClass('active');
   });
 
   $('.text-items').click(function() {
@@ -196,4 +194,23 @@ $(document).ready(function() {
     $('#'+target).addClass('active');
   });
  
+  $('.close-background-msg').click(function(){
+    $('.background-msg').addClass('hide');
+  });
+
+  $('.filter-icon').click(function(){
+    $('#mobile-filter').addClass('js-filter-section');
+    document.getElementById('mobile-filter').innerHTML = document.getElementById("desktop-filter").innerHTML;
+
+  });
+
+  $('.dropdown-toggle.selected').click(function(){
+    $(this).removeClass('selected');
+    $($(this).attr('href')).removeClass('selected');
+  });
+
+  $('body').on('click', '.dropdown-toggle.selected', function () {
+    $(this).removeClass('selected');
+    $($(this).attr('href')).removeClass('selected');
+  });
 });

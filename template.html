@@ -61,11 +61,11 @@
               <i class="mdi mdi-arrow-up-bold filter-bar-arrow" aria-hidden="true"></i>
             </div>
             <div class="close-btn js-filter-close">
-              <i class="mdi mdi-close" aria-hidden="true"></i>
+              <i class="mdi mdi-arrow-left" aria-hidden="true"></i>
             </div>
             
           </div>
-          <div class="filter-section"></div>
+          <div class="filter-section" id="mobile-filter"></div>
         </div>
         <div class="left-tabs">
           <ul class="nav nav-tabs flex-column">
@@ -93,53 +93,57 @@
           
           <div id="select" class="tab active components ">
             <div class="flex-grid">
-                <div class="input-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="inlineFormInputGroupUsername"
-                    placeholder="Search"
-                  />
-                  <div class="input-group-append">
-                    <div class="input-group-text icon">
-                      <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                <div class="item-search-bar">
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inlineFormInputGroupUsername"
+                      placeholder="Search"
+                    />
+                    <div class="input-group-append">
+                      <div class="input-group-text icon">
+                        <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                      </div>
                     </div>
-                  </div>
-                  <div class="icon filter-icon">
-                    <i class="mdi mdi-filter" aria-hidden="true"></i>
                   </div>
                 </div>
                 <div class="text-left w-100">
                   <h5 class="title ml-2">Select New Category</h5>
                 </div>
-              <!-- <img src="./Spinner-1s-100px.gif" class="spinner-loader"> -->
             </div>
           </div>
           <div id="browse" class="tab">
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                id="inlineFormInputGroupUsername"
-                placeholder="Search"
-              />
-              <div class="input-group-append">
-                <div class="input-group-text icon">
-                  <i class="mdi mdi-magnify" aria-hidden="true"></i>
+            <div class="item-search-bar">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inlineFormInputGroupUsername"
+                  placeholder="Search"
+                />
+                <div class="input-group-append">
+                  <div class="input-group-text icon">
+                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                  </div>
                 </div>
               </div>
-              <div class="icon filter-icon">
-                <i class="mdi mdi-filter" aria-hidden="true"></i>
-              </div>
+              
             </div>
             <div class="browse-header">
-              <i class="mdi mdi-chevron-left ml-2" aria-hidden="true"></i>
+              <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
               <h5 class="title">Sofa</h5>
             </div>
             <div class="browse-filter">
               <div class="browse-filter-item">New</div>
               <div class="browse-filter-item">Sale</div>
-              <div class="browse-filter-item">Best Sellers</div>
+              <div class="browse-filter-item active">Best Sellers</div>
+              <div class="icon filter-icon">
+                  <i class="mdi mdi-filter" aria-hidden="true"></i>
+              </div>
+              <div class="clear-all">Clear All</div>
+            </div>
+            <div class="filter-bar js-filter-section" id="desktop-filter">
             </div>
             <div class="products">
               <div class="flex-grid">
@@ -315,7 +319,14 @@
               </div>
               <div class="col-sm-4 order-sm-3 item-action-icons">
                 <span data-title="Remove Background" class="js-open-background">
+                  
+                  
                   <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
+                </span>
+                <span class="background-msg">
+                    <i class="mdi mdi-arrow-up-bold background-msg-arrow" aria-hidden="true"></i>
+                    <i class="mdi mdi-close close-background-msg" aria-hidden="true"></i>
+                    Click here to remove background
                 </span>
                 <span data-title="Duplicate"
                   ><i class="mdi mdi-content-copy" aria-hidden="true"></i
@@ -408,36 +419,22 @@
                 
             </div>
             <div class="canvas-content">
-              <div class="row">
-                <div class="col-7 ">
-                  <input
-                    class="form-control board-title"
-                    placeholder="Board title"
-                  />
-                </div>
-                <div class="col-5 text-right">
+              <div class="d-flex">
+                <div class="canvas-title-bar">
                   <div class="canvas-icons">
-                    <span data-title="Edit Board Settings">
-                      <i class="mdi mdi-square-edit-outline" aria-hidden="true">
-                      </i>
-                    </span>
-
-                    <span data-title="Duplicate Board"
-                      ><i class="mdi mdi-content-copy" aria-hidden="true"></i>
-                    </span>
-                    <span data-title="Delete Board">
-                      <i
-                        class="mdi mdi-delete js-confirmation-modal"
-                        aria-hidden="true"
-                      ></i>
-                    </span>
                     <a href="./CreateBoardConfig.html" data-title="New Board">
                       <i
-                        class="mdi mdi-plus-circle js-open-config"
+                        class="mdi mdi-settings js-open-config"
                         aria-hidden="true"
                       ></i>
                     </a>
                   </div>
+                </div>
+                <div class="w-75">
+                  <input
+                    class="form-control board-title"
+                    placeholder="Board title"
+                  />
                 </div>
               </div>
 
@@ -758,7 +755,7 @@
           <ul class="nav flex-column">
           {{#each filterKeys}}
             <li class="nav-item ">
-              <a class="nav-link {{#ifEq @index 0}}active{{/ifEq}}" href="#{{this}}">{{this}}</a>
+              <a class="nav-link dropdown-toggle {{#ifEq @index 0}}active{{/ifEq}}" href="#{{this}}">{{this}}</a>
             </li>
            {{/each}}
           </ul>
