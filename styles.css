@@ -360,6 +360,7 @@ body {
   padding: 20px 0;
   overflow: auto;
   margin: 0;
+  position: relative;
 }
 
 .left-panel .category-label {
@@ -492,6 +493,10 @@ body {
 }
 .tab-pane.filter.selected {
   display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 .tab-pane.filter {
   display: none;
@@ -1107,7 +1112,7 @@ body {
   border-radius: 5px;
 }
 
-.background-msg.hide{
+.background-msg.hide {
   display: none;
 }
 
@@ -1137,8 +1142,8 @@ i.background-msg-arrow {
   color: #bababa;
 }
 
-.filter-bar ul{
-  flex-direction: row!important;
+.filter-bar ul {
+  flex-direction: row !important;
   list-style-type: none;
   max-height: 275px;
   overflow: auto;
@@ -1152,16 +1157,16 @@ i.background-msg-arrow {
 }
 
 .filter-bar ul a {
-  color:#9c9898;
+  color: #9c9898;
 }
 
 .filter-bar .nav-link {
   text-transform: capitalize;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
-.filter-bar .nav-link.selected{
-  color:#ffcc00;
+.filter-bar .nav-link.selected {
+  color: #ffcc00;
 }
 
 .filter-bar .item-list .filter-item {
@@ -1169,8 +1174,6 @@ i.background-msg-arrow {
   padding: 5px 25px 5px 10px;
   border-bottom: 1px solid #ccc;
 }
-
-
 
 .canvas-title-bar {
   text-align: right;
@@ -1501,10 +1504,10 @@ i.background-msg-arrow {
     color: #b76e79;
     border-left: 3px solid #b76e79;
   }
-  .item-list{
+  .item-list {
     background-color: #fff;
     border: none;
-  } 
+  }
   .dropdown-toggle::after {
     display: none;
   }
