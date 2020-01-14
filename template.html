@@ -36,7 +36,7 @@
             </div>
           </div>
           <div class="col-8 text-right">
-            <a class="btn btn-primary" href="./myboards.html">Publish</a>
+            <a class="btn btn-primary js-open-publish-board">Publish</a>
             <div class="header-right-icons">
               <i class="mdi mdi-share-variant" aria-hidden="true"></i>
               <i class="mdi mdi-account-circle" aria-hidden="true"></i>
@@ -91,60 +91,67 @@
         </div>
         <div class="left-tab-pane">
           
-          <div id="select" class="tab active components ">
+          <div id="select" class="tab active components tab-0-pad">
             <div class="flex-grid">
-                <div class="item-search-bar">
-                  <div class="input-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inlineFormInputGroupUsername"
-                      placeholder="Search"
-                    />
-                    <div class="input-group-append">
-                      <div class="input-group-text icon">
-                        <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                <div class="browse-header w-100">
+                  <div class="item-search-bar">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inlineFormInputGroupUsername"
+                        placeholder="Search"
+                      />
+                      <div class="input-group-append">
+                        <div class="input-group-text icon">
+                          <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="text-left w-100">
-                  <h5 class="title ml-2">Select New Category</h5>
+                  <div class="text-left w-100">
+                    <h5 class="title ml-2">Select New Category</h5>
+                  </div>
                 </div>
             </div>
           </div>
-          <div id="browse" class="tab">
-            <div class="item-search-bar">
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inlineFormInputGroupUsername"
-                  placeholder="Search"
-                />
-                <div class="input-group-append">
-                  <div class="input-group-text icon">
-                    <i class="mdi mdi-magnify" aria-hidden="true"></i>
+          <div id="browse" class="tab tab-0-pad">
+            <div class="browse-header">
+              <div class="item-search-bar">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inlineFormInputGroupUsername"
+                    placeholder="Search"
+                  />
+                  <div class="input-group-append">
+                    <div class="input-group-text icon">
+                      <i class="mdi mdi-magnify" aria-hidden="true"></i>
+                    </div>
                   </div>
                 </div>
               </div>
-              
-            </div>
-            <div class="browse-header">
-              <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
-              <h5 class="title">Sofa</h5>
-            </div>
-            <div class="browse-filter">
-              <div class="browse-filter-item">New</div>
-              <div class="browse-filter-item">Sale</div>
-              <div class="browse-filter-item active">Best Sellers</div>
-              <div class="icon filter-icon">
-                  <i class="mdi mdi-filter" aria-hidden="true"></i>
+              <div class="browse-title">
+                <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
+                <h5 class="title">Sofa</h5>
               </div>
-              <div class="clear-all">Clear All</div>
+              <div class="browse-filter">
+                <div class="browse-filter-item">New</div>
+                <div class="browse-filter-item">Sale</div>
+                <div class="browse-filter-item active">Best Sellers</div>
+                <div class="icon filter-icon">
+                    <i class="mdi mdi-filter" aria-hidden="true"></i>
+                </div>
+                <div class="clear-all d-none d-lg-block">Clear All</div>
+                <div class="filter-bar-container">
+                  <div class="filter-bar js-filter-section" id="desktop-filter"></div>
+                </div>
+                <div class="clear-all d-none d-md-block d-lg-none">Clear All</div>
+              </div>
             </div>
-            <div class="filter-bar js-filter-section" id="desktop-filter">
-            </div>
+            
+            
             <div class="products">
               <div class="flex-grid">
                 <img src="./Spinner-1s-100px.gif" class="spinner-loader">
@@ -690,6 +697,61 @@
         </div>
       </div>
     </div>
+    <div class="modal publish-board">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h4 class="board-header m-3">TELL US MORE</h4>
+        </div>
+        <div class="publish-board-input">
+          <div>
+            <input class="form-control" placeholder="Board Name" />
+          </div>
+          <div>
+            <label>Name your board</label>
+          </div>
+        </div>
+        <div class="publish-board-title">
+          <h5 class="board-header">Select Room</h5>
+          <div class="publish-board-options">
+            <div class="publish-board-room-items active">Living</div>
+            <div class="publish-board-room-items">Bedroom</div>
+            <div class="publish-board-room-items">Dining</div>
+            <div class="publish-board-room-items">Office</div>
+            <div class="publish-board-room-items">Nursery/Kids</div>
+            <div class="publish-board-room-items">Other</div>
+          </div>
+        </div>
+        <div class="publish-board-title">
+          <h5 class="board-header">Pick a Style</h5>
+          <div class="publish-board-options">
+            <div class="publish-board-style-items active">Modern</div>
+            <div class="publish-board-style-items">Mid-Century</div>
+            <div class="publish-board-style-items">Contemporary</div>
+            <div class="publish-board-style-items">Traditional</div>
+            <div class="publish-board-style-items">Bohemian</div>
+            <div class="publish-board-style-items">Minimalist</div>
+          </div>
+        </div>
+        <div class="publish-board-title d-flex">
+          <div>
+            <input type="checkbox" class="keep-private-checkbox">
+          </div>
+          <div class="ml-2">
+            Keep Private
+          </div>
+        </div>
+      </div>
+      <div class="row modal-action mb-3">
+        <div class="col-6 text-right">
+          <button class="btn btn-cancel js-close-publish-board">Cancel</button>
+        </div>
+        <div class="col-6">
+          <a href="./publishBoard.html">
+            <button class="btn red-button">Save </button>
+          </a>
+        </div>
+      </div>
+    </div>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -801,6 +863,7 @@
 
     <script src="./jquery.fontselect.min.js"></script>
     <script src="./script.js"></script>
+    <script src="./boardConfigure.js"></script>
     <script src="./createBoardScript.js"></script>
     <script src="./horizontalScroll.js"></script>
   </body>

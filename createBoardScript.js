@@ -1,9 +1,4 @@
 $(document).ready(function() {
-  var scrollLeft;
-  var scrollRight;
-  var indicator;
-  var scroll;
-  var scrollContents;
   $('.js-btn-go').hide();
 
   $('.canvas-style').click(function() {

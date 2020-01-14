@@ -13,7 +13,6 @@ window.isMobile = function() {
   })(navigator.userAgent || navigator.vendor || window.opera);
 
   return check;
-  
 };
 
 $(document).ready(function() {
@@ -30,13 +29,13 @@ $(document).ready(function() {
   const filterTemplate = Handlebars.compile($('#filter-template').html());
   $.ajax({
     url:
-      'http://staging.lazysuzy.com/api/products/all?filters=brand:pier1;&sort_type=&pageno=0',
+      'http://staging.lazysuzy.com/api/products/all?filters=brand:nw;&sort_type=&pageno=0',
     context: document.body
   }).done(function(data) {
     $('.components')
       .children('.flex-grid')
       .append(template({ categories: data.filterData.category }));
-      delete data.filterData.category;
+    delete data.filterData.category;
     $('.js-filter-section').html(
       filterTemplate({
         filterData: data.filterData,
@@ -60,7 +59,7 @@ $(document).ready(function() {
     const category = $(this).attr('data-category');
     $(".nav-link[href='#browse']").click();
     $.ajax({
-      url: `http://staging.lazysuzy.com/api/products/all?filters=brand:pier1;category:${category}&sort_type=&pageno=0`,
+      url: `http://staging.lazysuzy.com/api/products/all?filters=brand:nw;category:${category}&sort_type=&pageno=0`,
       context: document.body
     }).done(function(data) {
       products = data.products;
@@ -153,19 +152,11 @@ $(document).ready(function() {
 
   $('.js-btn-go').hide();
 
-  $('.canvas-style').click(function() {
-    $('.canvas-style').removeClass('selected');
-    $(this).addClass('selected');
-    $('.js-btn-go').show();
-    $('.canvas-options').addClass('d-none');
-    $($(this).attr('target')).removeClass('d-none');
-  });
-
-  $('.js-open-config, .js-close-config-modal').click(function(e) {
+  $('.js-open-publish-board, .js-close-publish-board').click(function(e) {
     if (!isMobile()) {
       e.preventDefault();
       $('.backdrop').toggleClass('show');
-      $('.canvas-config').toggleClass('show');
+      $('.publish-board').toggleClass('show');
     }
   });
 
@@ -185,32 +176,38 @@ $(document).ready(function() {
     $(this).addClass('selected');
   });
 
-  $('.add-new-title').click(function(){
+  $('.add-new-title').click(function() {
     event.preventDefault();
     $('.add-new-title.active').removeClass('active');
     $(this).addClass('active');
     $('.items-board.active').removeClass('active');
     const target = $(this).attr('href');
-    $('#'+target).addClass('active');
+    $('#' + target).addClass('active');
   });
- 
-  $('.close-background-msg').click(function(){
+
+  $('.close-background-msg').click(function() {
     $('.background-msg').addClass('hide');
   });
 
-  $('.filter-icon').click(function(){
+  $('.filter-icon').click(function() {
     $('#mobile-filter').addClass('js-filter-section');
-    document.getElementById('mobile-filter').innerHTML = document.getElementById("desktop-filter").innerHTML;
-
+    document.getElementById(
+      'mobile-filter'
+    ).innerHTML = document.getElementById('desktop-filter').innerHTML;
   });
 
-  $('.dropdown-toggle.selected').click(function(){
+  $('body').on('click', '.dropdown-toggle.selected', function() {
     $(this).removeClass('selected');
     $($(this).attr('href')).removeClass('selected');
   });
 
-  $('body').on('click', '.dropdown-toggle.selected', function () {
-    $(this).removeClass('selected');
-    $($(this).attr('href')).removeClass('selected');
+  $('.publish-board-room-items').click(function() {
+    $('.publish-board-room-items.active').removeClass('active');
+    $(this).addClass('active');
+  });
+
+  $('.publish-board-style-items').click(function() {
+    $('.publish-board-style-items.active').removeClass('active');
+    $(this).addClass('active');
   });
 });
