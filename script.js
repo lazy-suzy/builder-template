@@ -89,6 +89,12 @@ $(document).ready(function() {
     if (target === '#browse') {
       $('.spinner-loader').addClass('show');
     }
+    if (target === '#favorites') {
+      $('.static-bottom-panel').addClass('selected');
+    } 
+    else  {
+      $('.static-bottom-panel.selected').removeClass('selected');
+    }
     $('.mdi-chevron-left').click(function() {
       $(target).removeClass('active');
       $('.nav-link').removeClass('active');
