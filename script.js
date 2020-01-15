@@ -59,7 +59,7 @@ $(document).ready(function() {
     const category = $(this).attr('data-category');
     $(".nav-link[href='#browse']").click();
     $.ajax({
-      url: `http://staging.lazysuzy.com/api/products/all?filters=brand:nw;category:${category}&sort_type=&pageno=0`,
+      url: `http://staging.lazysuzy.com/api/products/all?filters=brand:nw;category:${category}&sort_type=&pageno=0&limit=48`,
       context: document.body
     }).done(function(data) {
       products = data.products;
@@ -91,8 +91,7 @@ $(document).ready(function() {
     }
     if (target === '#favorites') {
       $('.static-bottom-panel').addClass('selected');
-    } 
-    else  {
+    } else {
       $('.static-bottom-panel.selected').removeClass('selected');
     }
     $('.mdi-chevron-left').click(function() {
@@ -135,7 +134,7 @@ $(document).ready(function() {
 
   $('.js-addProduct, .close-modal').click(toggleAddProduct);
 
-  $('.js-addUrl').click(function(){
+  $('.js-addUrl').click(function() {
     $('.add-product-modal').toggleClass('show');
     $('.backdrop').toggleClass('show');
     $('#step1').removeClass('active');
