@@ -30,38 +30,180 @@
                 </div>
             </div>
         </div>
-        <div class="share-board-container">
+        <div class="share-board-container container">
             <div class="share-board-header">
-                <h4>Nicely done, you've got style!</h4>
+                <h3>Nicely done, you've got style!</h3>
             </div>
-            <div class="share-board-content">
-                <div class="text-center">
-                    <h5>Want to share it with the world?</h5>
+            <div class="share-board-content ">
+                <div class="share-board-width">
+                    <div class="text-center">
+                        <h4>Share your style</h4>
+                    </div>
+                    <div class="share-board-options ">
+                        <div class="share-board-items">
+                            <i class="mdi mdi-pinterest" aria-hidden="true"></i>
+                            Pin your Board
+                        </div>
+                        <div class="share-board-items">
+                            <i class="mdi mdi-link" aria-hidden="true"></i>
+                            Share a link
+                        </div>
+                        <div class="share-board-items">
+                            <i class="mdi mdi-code-tags" aria-hidden="true"></i>
+                            Embed in Blog
+                        </div>
+                    </div>
                 </div>
-                <div class="share-board-options ">
-                    <div class="share-board-items">
-                        <i class="mdi mdi-pinterest" aria-hidden="true"></i>
-                        Pin your Board
-                    </div>
-                    <div class="share-board-items">
-                        <i class="mdi mdi-link" aria-hidden="true"></i>
-                        Share a link
-                    </div>
-                </div>
-                <hr>
-                <div class="share-board-options ">
-                    <div class="share-board-items">
-                        Shop Your Board
-                    </div>
-                    <div><span>OR</span></div>
-                    <div class="share-board-items">
-                        Create New Board
+                <div class="vr d-none d-md-block"></div>
+                <hr class="d-sm-none">
+                <div class="share-board-width">
+                    <div class="share-board-options p-t-14">
+                        <div class="share-board-items">
+                            <span><a href="./template.html">Go to Dashboard</a></span>
+                        </div>
+                        <div class="share-board-items">
+                            <span>Shop Your Board</span>
+                        </div>
+                        <div class="share-board-items">
+                            <span class="js-open-config cursor-pointer"> Create New Board</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="backdrop"></div>
+    <div class="modal canvas-config">
+      <div class="row">
+        <div class="col-12">
+          <h4 class="board-header">CREATE NEW BOARD</h4>
+          <h5 class="title ml-2">Select Layout Style</h5>
+        </div>
+        <div class="col-6 ">
+          <div class="canvas-style" target="#board-options-modal">
+            <div class="canvas-layout"></div>
+            <h5>BOARD</h5>
+          </div>
+        </div>
+        <div class="col-6 text-center">
+          <div class="canvas-style" target="#room-options-modal">
+            <div class="canvas-layout"></div>
+            <h5>ROOM</h5>
+          </div>
+        </div>
+        <div class="col-12 d-none canvas-options" id="board-options-modal">
+          <h5 class="title ml-2 mt-4">Select Canvas Color</h5>
+          <div class="canvas-pallete">
+            <div class="canvas-pallete-color color-white"></div>
+            <div class="canvas-pallete-color color-red"></div>
+            <div class="canvas-pallete-color color-black"></div>
+            <div class="canvas-pallete-color color-gray"></div>
+            <div class="canvas-pallete-color color-blue"></div>
+            <div class="canvas-pallete-color color-green"></div>
+          </div>
+          <div class="canvas-pallete">
+            <div class="canvas-pallete-color color-white"></div>
+            <div class="canvas-pallete-color color-red"></div>
+            <div class="canvas-pallete-color color-black"></div>
+            <div class="canvas-pallete-color color-gray"></div>
+            <div class="canvas-pallete-color color-blue"></div>
+            <div class="canvas-pallete-color color-green"></div>
+          </div>
+        </div>
+        <div class="col-12 d-none canvas-options" id="room-options-modal">
+          <h5 class="title ml-2 mt-4">Select Wall Color</h5>
+          <div class="canvas-pallete-wrapper">
+            <div id="container" class="canvas-pallete-scroll canvas-container" >
+              <div id="canvasPalleteScrollContents" class="canvas-pallete-scroll-contents">
+                  <div  class="canvas-pallete-color color-white" aria-selected="true"></div>
+                  <div  class="canvas-pallete-color color-red"></div>
+                  <div  class="canvas-pallete-color color-black"></div>
+                  <div  class="canvas-pallete-color color-gray"></div>
+                  <div  class="canvas-pallete-color color-blue"></div>
+                  <div  class="canvas-pallete-color color-green"></div>
+                  <div  class="canvas-pallete-color color-white"></div>
+                  <div  class="canvas-pallete-color color-red"></div>
+                  <div  class="canvas-pallete-color color-black"></div>
+                  <div  class="canvas-pallete-color color-gray"></div>
+                  <div  class="canvas-pallete-color color-blue"></div>
+                  <div  class="canvas-pallete-color color-green"></div>  
+              </div>
+            </div>
+            <button id="slideBack" class="canvas-scroll js-left-scroll canvas-scroll-left" type="button">
+              <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
+            </button>
+            <button id="slide" class="canvas-scroll js-right-scroll canvas-scroll-right" type="button">
+              <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
+            </button>
+          </div>
+          <h5 class="title ml-2 mt-4">Select Flooring</h5>
+          <h6 class="flooring-options ml-2">Carpet</h6>
+              <div class="canvas-pallete-wrapper">
+                <div id="container2" class="canvas-pallete-scroll canvas-container" >
+                  <div id="canvasPalleteScrollContents" class="canvas-pallete-scroll-contents">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-carpet-patterns">
+                  </div>
+                </div>
+                <button id="slideBack2" class="canvas-scroll js-left-scroll canvas-scroll-left" type="button">
+                  <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
+                </button>
+                <button id="slide2" class="canvas-scroll js-right-scroll canvas-scroll-right" type="button">
+                  <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
+                </button>
+              </div>
+              <h6 class="flooring-options ml-2">Wood</h6>
+              <div class="canvas-pallete-wrapper">
+                <div id="container3" class="canvas-pallete-scroll canvas-container" >
+                  <div id="canvasPalleteScrollContents" class="canvas-pallete-scroll-contents">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
+                  </div>
+                </div>
+                <button id="slideBack3" class="canvas-scroll js-left-scroll canvas-scroll-left" type="button">
+                  <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
+                </button>
+                <button id="slide3" class="canvas-scroll js-right-scroll canvas-scroll-right" type="button">
+                  <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
+                </button>
+              </div>
+        </div>
+      </div>
+      <div class="row modal-action">
+        <div class="col-6 text-right">
+          <button class="btn btn-cancel js-close-config-modal">Cancel</button>
+        </div>
+        <div class="col-6">
+          <button class="btn red-button js-btn-go">Go</button>
+        </div>
+      </div>
+    </div>
 
-    
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./boardConfigure.js"></script>
+    <script src="./horizontalScroll.js"></script>
+    <script src="./createBoardScript.js"></script>
   </body>
 </html>

@@ -337,7 +337,6 @@ body {
   color: #666;
   position: relative;
   bottom: -7px;
-  right: 20px;
   display: inline-flex;
 }
 .canvas-icons a {
@@ -583,6 +582,7 @@ body {
 }
 .backdrop.show {
   display: block;
+  z-index: 1;
 }
 
 .modal.show {
@@ -595,7 +595,7 @@ body {
 .modal.background-modal {
   padding: 30px;
   max-width: 500px;
-  max-height: 450px;
+  max-height: 500px;
 }
 
 .modal.confirmation-modal {
@@ -605,7 +605,8 @@ body {
 
 .modal.canvas-config {
   max-width: 400px;
-  max-height: 630px;
+  max-height: 650px;
+  overflow-y: auto;
 }
 
 .modal.publish-board {
@@ -626,8 +627,7 @@ body {
 }
 
 .modal .modal-action {
-  position: absolute;
-  bottom: 10px;
+  position: relative;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -641,7 +641,7 @@ body {
 }
 
 .step .content {
-  min-height: 300px;
+  min-height: 400px;
   display: flex;
   align-items: center;
   white-space: nowrap;
@@ -656,7 +656,6 @@ body {
 }
 
 .step h4 {
-  margin-bottom: 40px;
   text-align: center;
 }
 
@@ -958,11 +957,11 @@ body {
 
 .add-image-input {
   width: 100%;
-  margin: 10px auto;
+  margin: 12px auto;
 }
 
 .add-image-form {
-  min-height: 200px;
+  min-height: 330px;
   display: grid;
   align-items: center;
   white-space: nowrap;
@@ -970,13 +969,11 @@ body {
 
 .add-image-input-checkbox {
   display: flex;
-  margin: auto;
   color: #717a82;
 }
 
 .add-image-form input {
   padding: 0 5px;
-  height: auto;
   font-size: 18px;
 }
 
@@ -1077,7 +1074,7 @@ body {
 .board-card:hover {
   box-shadow: 0 0 2px 1px #eee;
 }
-.board-card:hover .board-card-icons {
+.canvas-preview:hover .board-card-icons {
   display: flex;
 }
 .board-card .canvas-preview {
@@ -1089,17 +1086,18 @@ body {
 .board-card .board-card-icons {
   background-color: #eee;
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 0;
   right: 0;
   display: none;
+  width: 80%;
+  margin: auto;
   justify-content: space-evenly;
 }
 
 .footer {
-  padding: 10px 15px;
-  position: relative;
-  bottom: 10px;
+  padding: 12px 15px;
+  position: fixed;
   width: 100%;
   background-color: #0c1c31;
   color: #fff;
@@ -1192,10 +1190,6 @@ i.background-msg-arrow {
   border-bottom: 1px solid #ccc;
 }
 
-.canvas-title-bar {
-  text-align: right;
-  margin-left: 12px;
-}
 
 .clear-filter {
   display: none;
@@ -1291,41 +1285,50 @@ i.background-msg-arrow {
 
 .share-board-items {
   padding: 1rem;
-  background: white;
+  background: #fff;
   color: #b76c79;
   border-radius: 5px;
   font-size: 18px;
   margin: 1rem auto;
-  width: 230px;
+  max-height: 60px;
   text-align: center;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 
+.share-board-items i {
+  vertical-align: middle;
+}
+
+.share-board-items a {
+  color: #b76c79;
+}
+
 .share-board-options {
-  display: flex;
   width: 90%;
   margin: 3rem auto;
   align-items: center;
 }
 
 .share-board-container hr {
-  margin: 2rem;
   border: 1px solid #fff;
+  width: 100%;
 }
 
 .share-board-content {
   margin: 1rem;
+  display: flex;
+}
+
+.share-board-width {
+  width: 50%;
 }
 
 .add-board {
-  font-size: 32px;
   height: 198px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: #e9ecef;
+  color: #5f5f5f;
 }
 
 .browse-header {
@@ -1340,6 +1343,59 @@ i.background-msg-arrow {
   padding-top: 0px;
 }
 
+.add-board-icon {
+  font-size: 42px;
+  padding-top: 3rem;
+  margin-bottom: -1rem;
+}
+
+.add-board-icon a {
+  color: #5f5f5f;
+}
+.box-shadow-0:hover {
+  box-shadow: none;
+}
+
+.board-list-header {
+  margin: 2rem 0;
+}
+
+.p-t-14 {
+  padding-top: 14px;
+}
+
+.vr {
+  border-left: 1px solid;
+  margin: 0 1rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.dimension-wrapper {
+  display: flex;
+}
+
+.dimension-options {
+  margin: 8px -8px 8px -4px;
+  text-align: center;
+  color: #9b9a9a;
+  font-size: 18px;
+}
+
+.dimension-input {
+  width: 50%;
+  border-color: #9b9a9a;
+  border-width: 1px;
+  border-radius: 5px;
+  background: #f2f4f3;
+}
+
+.dimension-input:focus,
+.dimension-input:hover {
+  background: #fff
+}
 @media screen and (max-width: 991px) {
   .logo {
     max-width: 100px;
@@ -1462,7 +1518,7 @@ i.background-msg-arrow {
     left: 0;
     right: 0;
     transform: none;
-    bottom: -15px;
+    bottom: -5px;
     max-height: 480px;
     top: auto;
   }
@@ -1692,6 +1748,8 @@ i.background-msg-arrow {
   }
   .share-board-content {
     margin: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   .left-panel {
     padding: 0px 5px;
@@ -1704,5 +1762,23 @@ i.background-msg-arrow {
   }
   .left-panel .tab-0-pad {
     padding-top: 0px;
+  }
+  .add-image-form {
+    min-height: 300px;
+  }
+  .p-t-14 {
+    padding-top: 0;
+  }
+  .share-board-width {
+    width: 60%;
+  }
+  .board-card {
+    margin: 1rem 0;
+  }
+  .board-list-header {
+    margin: 1rem 0;
+  }
+  .modal-action.selected {
+    margin: 2rem;
   }
 }

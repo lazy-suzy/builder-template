@@ -38,16 +38,23 @@
         </div>
       </div>
       <div class="board-list-container container">
+        <div class="board-list-header">
+          <h5 class="title">MY BOARDS</h5>
+        </div>
         <div class="row">
           <div class="col-sm-3">
-            <div class="board-card">
+            <div class="board-card box-shadow-0">
               <div class="canvas-preview">
                 <div class="add-board">
-                  <i class="mdi mdi-plus-box-outline js-open-config" aria-hidden="true"></i>
+                  <div class="add-board-icon ">
+                    <a href="./CreateBoardConfig.html">
+                      <i class="mdi mdi-plus-box-outline js-open-config cursor-pointer" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                  <div>
+                    Start new design
+                  </div>
                 </div>
-              </div>
-              <div>
-                Start new Design
               </div>
             </div>
           </div>
@@ -113,6 +120,7 @@
       </div>
       
     </div>
+    <div class="backdrop"></div>
     <div class="modal canvas-config">
       <div class="row">
         <div class="col-12">

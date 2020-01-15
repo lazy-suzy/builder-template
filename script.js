@@ -126,7 +126,15 @@ $(document).ready(function() {
     $('.step').removeClass('active');
     $('#step1').addClass('active');
   }
+
   $('.js-addProduct, .close-modal').click(toggleAddProduct);
+
+  $('.js-addUrl').click(function(){
+    $('.add-product-modal').toggleClass('show');
+    $('.backdrop').toggleClass('show');
+    $('#step1').removeClass('active');
+    $('#step2').addClass('active');
+  });
 
   $('.js-confirmation-modal, .js-close-confirmation-modal').click(function(e) {
     e.preventDefault();

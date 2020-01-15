@@ -203,25 +203,21 @@
               <div class="flex-grid">
                 <div class="flex-grid-item">
                     <div class="product-image" data-product="0">
-                        <i class="mdi mdi-cards-heart" aria-hidden="true"></i>
                         <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3185438_main.jpg">
                     </div>
                 </div>
                 <div class="flex-grid-item">
                     <div class="product-image" data-product="1">
-                        <i class="mdi mdi-cards-heart" aria-hidden="true"></i>
                         <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937287_main.jpg">
                     </div>
                 </div>
                 <div class="flex-grid-item">
                     <div class="product-image" data-product="2">
-                        <i class="mdi mdi-cards-heart" aria-hidden="true"></i>
                         <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937311_main.jpg">
                     </div>
                 </div>
                 <div class="flex-grid-item">
                     <div class="product-image" data-product="3">
-                        <i class="mdi mdi-cards-heart" aria-hidden="true"></i>
                         <img src="https://www.lazysuzy.com/Pier-1/pier1_images/3937352_main.jpg">
                     </div>
                 </div>
@@ -234,7 +230,7 @@
                 Click to Upload or Drag & Drop Here
               </div>
               <div class="mb-3">
-                <span class="add-new-url js-addProduct">Or add via URL</span>
+                <span class="add-new-url js-addUrl">Or add via URL</span>
                 <span class="add-new-url-msg"><i class="mdi mdi-information" aria-hidden="true"></i> Must be .jpg or .png file</span>
               </div>
               <div class="d-flex mb-3">
@@ -429,7 +425,7 @@
               <div class="d-flex">
                 <div class="canvas-title-bar">
                   <div class="canvas-icons">
-                    <a href="./CreateBoardConfig.html" data-title="New Board">
+                    <a href="./CreateBoardConfig.html" data-title="Edit Board Settings">
                       <i
                         class="mdi mdi-settings js-open-config"
                         aria-hidden="true"
@@ -516,7 +512,7 @@
           </div>
           <div class="add-image-input-checkbox">
             <div>
-              <input type="checkbox">
+              <input type="checkbox" class="keep-private-checkbox">
             </div>
             <div class="ml-1">
               <span>Keep Private</span>
@@ -574,7 +570,7 @@
         </div>
       </div>
     </div>
-    <div class="modal canvas-config">
+    <div class="modal canvas-config pb-0">
       <div class="row">
         <div class="col-12">
           <h4 class="board-header">CREATE NEW BOARD</h4>
@@ -609,6 +605,18 @@
             <div class="canvas-pallete-color color-gray"></div>
             <div class="canvas-pallete-color color-blue"></div>
             <div class="canvas-pallete-color color-green"></div>
+          </div>
+          <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
+          <div class="dimension-wrapper">
+            <div class="dimension-options">
+              <input class="dimension-input" placeholder="Width">
+              <label class="ml-2">W</label>
+            </div>
+            <div class="dimension-options">
+              <input class="dimension-input" placeholder="Height">
+              <label class="ml-2">H</label>
+            </div>
+            <div class="dimension-options">px</div>
           </div>
         </div>
         <div class="col-12 d-none canvas-options" id="room-options-modal">
@@ -686,9 +694,21 @@
                   <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
                 </button>
               </div>
+              <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
+              <div class="dimension-wrapper">
+                <div class="dimension-options">
+                  <input class="dimension-input" placeholder="Width">
+                  <label class="ml-2">W</label>
+                </div>
+                <div class="dimension-options">
+                  <input class="dimension-input" placeholder="Height">
+                  <label class="ml-2">H</label>
+                </div>
+                <div class="dimension-options">px</div>
+              </div>
         </div>
       </div>
-      <div class="row modal-action">
+      <div class="row modal-action mt-2 mb-2">
         <div class="col-6 text-right">
           <button class="btn btn-cancel js-close-config-modal">Cancel</button>
         </div>
