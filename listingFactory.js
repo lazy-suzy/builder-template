@@ -192,7 +192,7 @@ class ListingFactory {
     this.bFetchingProducts = true;
     const _self = this;
     var strLimit = this.iLimit === undefined ? "" : "&limit=" + this.iLimit;
-    var filterQuery = `?filters=${this.strFilters}&sort_type=${this.sortType}&pageno=${this.iPageNo}${strLimit}`;
+    var filterQuery = `?filters=${this.strFilters}&sort_type=${this.sortType}&pageno=${this.iPageNo}${strLimit}&board-view=true`;
     var listingApiPath = this.base_url + filterQuery;
     if (bClearPrevProducts) {
       $(".products")
