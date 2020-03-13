@@ -14,7 +14,7 @@ window.isMobile = function() {
 
   return check;
 };
-
+var remoteProducts = [];
 $(document).ready(function() {
   Handlebars.registerHelper('ifEq', function(v1, v2, options) {
     if (v1 === v2) {
@@ -63,6 +63,7 @@ $(document).ready(function() {
       context: document.body
     }).done(function(data) {
       products = data.products;
+      remoteProducts = data.products;
       $('.products')
         .children('.flex-grid')
         .html(productTemplate({ products: data.products }));
@@ -173,11 +174,12 @@ $(document).ready(function() {
     }
   });
 
-  $('.js-open-background, .js-close-background-modal').click(function() {
-    $('.backdrop').toggleClass('show');
-    $('.background-modal').toggleClass('show');
-  });
-  $('.js-font-select').fontselect();
+  // $('.js-open-background, .js-close-background-modal').click(function() {
+  //   $('.backdrop').toggleClass('show');
+  //   $('.background-modal').toggleClass('show');
+  // });
+  
+  // $('.js-font-select').fontselect();
 
   $('.browse-filter-item').click(function() {
     $('.browse-filter-item.active').removeClass('active');
