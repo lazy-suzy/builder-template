@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 10, 2020 at 08:19 AM
+-- Generation Time: Mar 21, 2020 at 04:16 PM
 -- Server version: 5.7.14
--- PHP Version: 7.0.10
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,9 +29,11 @@ SET time_zone = "+00:00";
 CREATE TABLE `asset` (
   `asset_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `price` varchar(10) DEFAULT NULL,
+  `brand` varchar(200) DEFAULT NULL,
   `path` varchar(200) NOT NULL,
   `transparent_path` varchar(200) DEFAULT NULL,
-  `is_transparent` tinyint(1) NOT NULL DEFAULT '0',
   `is_private` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -47,11 +49,9 @@ CREATE TABLE `asset` (
 CREATE TABLE `board` (
   `board_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `state` json DEFAULT NULL,
+  `state` longtext,
   `title` varchar(200) DEFAULT NULL,
-  `preview` text,
-  `item` json DEFAULT NULL,
-  `item_total` float DEFAULT '0',
+  `preview` longtext,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_active` tinyint(1) DEFAULT '1'

@@ -26,7 +26,8 @@ $(document).ready(function() {
   let products = [];
   const bottomPanelTemplate = Handlebars.compile($("#bottom-panel").html());
   $.ajax({
-    url: "http://staging.lazysuzy.com/api/all-departments?board-view=true",
+    url: "https://lazysuzy.com/api/all-departments?board-view=true",
+    // url: "http://staging.lazysuzy.com/api/all-departments?board-view=true",
     context: document.body
   }).done(function(data) {
     $(".components")
@@ -66,12 +67,19 @@ $(document).ready(function() {
     });
   });
 
-  $("body").on("click", ".product-image", function() {
-    const product = products[$(this).attr("data-product")];
+  $("body").on("click", ".product-image[type='default']", function() {
+    const product = remoteProducts[$(this).attr("data-product")];
+    product.index = $(this).attr("data-product");
     $(".bottom-panel").html(bottomPanelTemplate(product));
   });
 
   $(".toggle-icon").click(function() {
+    $(".toggle-icon").toggleClass("open");
+    $(".left-panel").toggleClass("open");
+  });
+  
+  // mobile window closed on item manual add click
+  $("body").on("click", ".manual-drop", function() {
     $(".toggle-icon").toggleClass("open");
     $(".left-panel").toggleClass("open");
   });
@@ -141,7 +149,7 @@ $(document).ready(function() {
     $(".backdrop").toggleClass("show");
     $(".background-modal").toggleClass("show");
   });
-  $(".js-font-select").fontselect();
+  // $(".js-font-select").fontselect();
 
   $(".text-items").click(function() {
     $(".text-items.selected").removeClass("selected");

@@ -172,11 +172,11 @@
             <div >
               <h5 class="title ml-2">Insert Text</h5>
               <div>
-                <div class="text-items ml-2"><span drop-type="text" draggable="true" class="helvetica">Helvetica</span></div>
-                <div class="text-items ml-2"><span drop-type="text" draggable="true" class="times-new-roman">Times New Roman</span></div>
-                <div class="text-items ml-2"><span drop-type="text" draggable="true" class="courier-new">Courier New</span></div>
-                <div class="text-items ml-2"><span drop-type="text" draggable="true" class="georgia">Georgia</span></div>
-                <div class="text-items ml-2"><span drop-type="text" draggable="true" class="arial">Arial</span></div>
+                <div class="text-items ml-2 manual-drop" drop-type="text" draggable="true" class="helvetica"><span>Helvetica</span></div>
+                <div class="text-items ml-2 manual-drop" drop-type="text" draggable="true" class="times-new-roman"><span>Times New Roman</span></div>
+                <div class="text-items ml-2 manual-drop" drop-type="text" draggable="true" class="courier-new"><span>Courier New</span></div>
+                <div class="text-items ml-2 manual-drop" drop-type="text" draggable="true" class="georgia"><span>Georgia</span></div>
+                <div class="text-items ml-2 manual-drop" drop-type="text" draggable="true" class="arial"><span>Arial</span></div>
               </div>
             </div>
           </div>
@@ -272,8 +272,6 @@
                 <i class="mdi mdi-magnify-plus" onclick="zoomIn()" aria-hidden="true"></i>
                 <i class="mdi mdi-undo" onclick="undo()" aria-hidden="true"></i>
                 <i class="mdi mdi-redo" onclick="redo()" aria-hidden="true"></i>
-                <i class="mdi mdi-check crop-icons" onclick="handleCrop(true)" aria-hidden="true"></i>
-                <i class="mdi mdi-minus crop-icons" onclick="handleCrop(false)" aria-hidden="true"></i>
               </div>
               <div class="col-sm-6 order-last order-sm-2 editor-icons">
                 <!-- <input class="js-font-select" type="text"> -->
@@ -317,8 +315,11 @@
                 </span> -->
               </div>
               <div class="col-sm-4 order-sm-3 item-action-icons">
-                <span data-title="Remove Background" class="image-icons js-open-background" onclick="action('transparent')">
+                <span data-title="Remove Background" class="image-icons do-transparent" onclick="action('transparent')">
                   <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
+                </span>
+                <span data-title="Apply Background" class="image-icons undo-transparent" onclick="action('undoTransparent')">
+                  <i class="mdi mdi-format-paint" aria-hidden="true"></i>
                 </span>
                 <span class="background-msg hide">
                     <i class="mdi mdi-arrow-up-bold background-msg-arrow" aria-hidden="true"></i>
@@ -349,6 +350,13 @@
                 <span data-title="Delete" onclick="action('delete')">
                   <i class="mdi mdi-delete" aria-hidden="true"></i>
                 </span>
+              </div>
+            </div>
+            <div class="top-panel row top-panel-hide crop-toolbar">
+              <div class="col-sm-12 ">
+                <button class="btn" onclick="handleCrop(true)"><i class="mdi mdi-check" aria-hidden="true"></i> Crop</button>
+                <button class="btn" onclick="handleCrop(false)"><i class="mdi mdi-undo" aria-hidden="true"></i> Cancel</button>
+                <button class="btn" onclick="handleCrop(false, true)"><i class="mdi mdi-minus" aria-hidden="true"></i> Revert</button>
               </div>
             </div>
             <div class="top-panel row top-panel-wrapper d-xl-none" data-interval="false">
@@ -399,13 +407,16 @@
                   <span data-title="Uppercase">
                     <i class="mdi mdi-format-letter-case" aria-hidden="true"></i>
                   </span> -->
-                  <span data-title="Remove Background" class="image-icons js-open-background" onclick="action('transparent')">
+                  <span data-title="Remove Background" class="image-icons do-transparent" onclick="action('transparent')">
                     <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
+                  </span>
+                  <span data-title="Apply Background" class="image-icons undo-transparent" onclick="action('undoTransparent')">
+                    <i class="mdi mdi-format-paint" aria-hidden="true"></i>
                   </span>
                   <span data-title="Duplicate" onclick="action('duplicate')"
                     ><i class="mdi mdi-content-copy" aria-hidden="true"></i
                   ></span>
-                  <span data-title="Crop" class="image-icons"
+                  <span data-title="Crop" onclick="handleCrop()" class="image-icons"
                     ><i class="mdi mdi-crop" aria-hidden="true"></i
                   ></span>
                   <span data-title="Flip" onclick="action('flip')">
@@ -434,7 +445,7 @@
               <div class="d-flex">
                 <div class="canvas-title-bar">
                   <div class="canvas-icons">
-                    <a href="./CreateBoardConfig.html" data-title="Edit Board Settings">
+                    <a data-title="Edit Board Settings">
                       <i
                         class="mdi mdi-settings js-open-config"
                         aria-hidden="true"
@@ -449,9 +460,9 @@
                   />
                 </div>
               </div>
-              <div class="canvas" style="background: inherit">
-                <div id="canvas-droparea" style="background: #ffffff">
-                   <canvas id="canvas-area"></canvas>
+              <div class="canvas">
+                <div id="canvas-droparea">
+                   <canvas id="canvas-area" style="border:1px solid black"></canvas>
                 </div>
               </div>
               <div class="col-sm-2 col-5 state-icons d-lg-none">
@@ -618,7 +629,7 @@
             <div class="canvas-pallete-color color-blue"></div>
             <div class="canvas-pallete-color color-green"></div>
           </div>
-          <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
+          <!-- <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
           <div class="dimension-wrapper">
             <div class="dimension-options">
               <input class="dimension-input" placeholder="Width" value="500">
@@ -629,7 +640,7 @@
               <label class="ml-2">H</label>
             </div>
             <div class="dimension-options">px</div>
-          </div>
+          </div> -->
         </div>
         <div class="col-12 d-none canvas-options" id="room-options-modal">
           <h5 class="title ml-2 mt-4">Select Wall Color</h5>
@@ -699,7 +710,7 @@
                   <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
                 </button>
               </div>
-              <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
+              <!-- <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
               <div class="dimension-wrapper">
                 <div class="dimension-options">
                   <input class="dimension-input" placeholder="Width" value="500">
@@ -710,7 +721,7 @@
                   <label class="ml-2">H</label>
                 </div>
                 <div class="dimension-options">px</div>
-              </div>
+              </div> -->
         </div>
       </div>
       <div class="row modal-action mt-2 mb-2">
@@ -802,8 +813,8 @@
       {{#each products}}
       {{#with this}}
         <div class="flex-grid-item">
-            <div class="product-image" data-product="{{@index}}">
-                <img drop-type="image" draggable="true" type="{{#if type}}{{type}}{{else}}default{{/if}}" src="{{main_image}}"/>
+            <div class="product-image" data-product="{{@index}}" type="{{#if type}}{{type}}{{else}}default{{/if}}">
+                <img drop-type="image" draggable="true" src="{{main_image}}"/>
             </div>
         </div>
         {{/with}}
@@ -823,7 +834,7 @@
               <div class="brand">{{site}}</div>
               <div class="price">${{is_price}}</div>
               <div class="icons">
-                <div class="icon top-tooltip" data-title="Add to Board">
+                <div class="icon top-tooltip manual-drop" data-product="{{index}}" drop-type="image" type="{{#if type}}{{type}}{{else}}default{{/if}}" data-title="Add to Board">
                   <i class="mdi mdi-plus"  aria-hidden="true"></i>
                 </div>
                 <div class="icon top-tooltip" data-title="Save to Favorites">

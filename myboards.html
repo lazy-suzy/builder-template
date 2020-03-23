@@ -78,7 +78,7 @@
       
     </div>
     <div class="backdrop"></div>
-    <div class="modal canvas-config">
+    <div class="modal canvas-config pb-0">
       <div class="row">
         <div class="col-12">
           <h4 class="board-header">CREATE NEW BOARD</h4>
@@ -114,18 +114,18 @@
             <div class="canvas-pallete-color color-blue"></div>
             <div class="canvas-pallete-color color-green"></div>
           </div>
-          <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
-              <div class="dimension-wrapper">
-                <div class="dimension-options">
-                  <input class="dimension-input" placeholder="Width" value="500">
-                  <label class="ml-2">W</label>
-                </div>
-                <div class="dimension-options">
-                  <input class="dimension-input" placeholder="Height" value="500">
-                  <label class="ml-2">H</label>
-                </div>
-                <div class="dimension-options">px</div>
-              </div>
+          <!-- <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
+          <div class="dimension-wrapper">
+            <div class="dimension-options">
+              <input class="dimension-input" placeholder="Width" value="500">
+              <label class="ml-2">W</label>
+            </div>
+            <div class="dimension-options">
+              <input class="dimension-input" placeholder="Height" value="500">
+              <label class="ml-2">H</label>
+            </div>
+            <div class="dimension-options">px</div>
+          </div> -->
         </div>
         <div class="col-12 d-none canvas-options" id="room-options-modal">
           <h5 class="title ml-2 mt-4">Select Wall Color</h5>
@@ -182,17 +182,10 @@
               <div class="canvas-pallete-wrapper">
                 <div id="container3" class="canvas-pallete-scroll canvas-container" >
                   <div id="canvasPalleteScrollContents" class="canvas-pallete-scroll-contents">
-                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
-                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
-                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
-                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
-                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
-                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
-                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
-                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
-                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
-                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
-                    <img src="./flooring-pattern.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./uploads/floor1.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./uploads/floor2.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./uploads/floor3.jpg" class="canvas-pallete-wood-patterns">
+                    <img src="./uploads/floor4.jpg" class="canvas-pallete-wood-patterns">
                   </div>
                 </div>
                 <button id="slideBack3" class="canvas-scroll js-left-scroll canvas-scroll-left" type="button">
@@ -202,7 +195,7 @@
                   <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
                 </button>
               </div>
-              <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
+              <!-- <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
               <div class="dimension-wrapper">
                 <div class="dimension-options">
                   <input class="dimension-input" placeholder="Width" value="500">
@@ -213,15 +206,28 @@
                   <label class="ml-2">H</label>
                 </div>
                 <div class="dimension-options">px</div>
-              </div>
+              </div> -->
         </div>
       </div>
-      <div class="row modal-action">
+      <div class="row modal-action mt-4 mb-4">
         <div class="col-6 text-right">
           <button class="btn btn-cancel js-close-config-modal">Cancel</button>
         </div>
         <div class="col-6">
           <button class="btn red-button js-btn-go">Go</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal confirmation-modal text-center">
+      <div>
+        Are you sure? This can't be undone.
+      </div>
+      <div class="row modal-action mt-4 mb-4">
+        <div class="col-6 text-right">
+          <button class="btn red-button" data-action="delete">DELETE</button>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-cancel" data-action="cancel">CANCEL</button>
         </div>
       </div>
     </div>
@@ -239,7 +245,7 @@
       <div class="col-sm-3">
         <div class="board-card box-shadow-0">
           <div class="canvas-preview">
-            <div class="add-board">
+            <div class="add-board" data-action="create">
               <div class="add-board-icon">
                   <i class="mdi mdi-plus-box-outline js-open-config cursor-pointer" aria-hidden="true"></i>
               </div>
@@ -284,16 +290,22 @@
       {{/each}}
     </script>
     <script type="text/javascript">
+    
+    var boardConfig = {
+      backgroundColor: "rgb(255, 255, 255)",
+      backgroundImage: ""
+    };
+    
     // when document is ready load all boards
     $(document).ready(function () {
       let apiEndpoint = "server.php";
-      let boardEndpoint = "template.html";
+      let boardEndpoint = "index.html";
       
       let board = [];
       let boardTemplate = Handlebars.compile(
         $('#board-template').html()
       );
-      
+            
       let renderBoard = function(){
         $('#board-list').html(
           boardTemplate({
@@ -334,7 +346,7 @@
             createBoard({
               user_id: referenceObject.user_id,
               state: referenceObject.state,
-              title: referenceObject.title,
+              title: "Copy Of " + referenceObject.title,
               preview: referenceObject.preview,
               item: referenceObject.item
             });
@@ -345,9 +357,29 @@
         let boardIndex = $(this).parent().parent().attr('data-board');
         let action = $(this).attr('data-action');
         
-        if(boardIndex && boardIndex.length > 0)
-          handleAction(boardIndex, action);
+        switch(action) {
+          case "create":
+            $('.canvas-config').toggleClass("show");
+            $('.backdrop').toggleClass('show');
+          break;
+          case "delete":
+            $('.confirmation-modal').attr("data-board", boardIndex);
+            $('.confirmation-modal').toggleClass("show");
+            $('.backdrop').toggleClass('show');
+          break;
+          default:
+            if(boardIndex && boardIndex.length > 0)
+              handleAction(boardIndex, action);
+        }
         
+      });
+      
+      $('.confirmation-modal .btn').click(function(){
+        let boardIndex = $('.confirmation-modal').attr('data-board');
+        let action = $(this).attr('data-action');
+        handleAction(boardIndex, action);
+        $('.confirmation-modal').toggleClass("show");
+        $('.backdrop').toggleClass('show');
       });
       
       // get boards from server and render them using a template
@@ -356,8 +388,17 @@
         renderBoard();
       });
       
-      $('#board-list').on("click", ".add-board", function(){
-        createBoard({"user_id": 1}, function (response) {
+      $('.canvas-pallete-color').click((e) => boardConfig.backgroundColor = $(e.currentTarget).css("background-color"));
+      $('.canvas-pallete-wood-patterns').click((e) => boardConfig.backgroundImage = $(e.currentTarget).attr("src"));
+      
+      $('.canvas-config .js-btn-go').click( function(){
+        console.log('click');
+        createBoard({
+          "user_id": 1,
+          "title": "Untitled Board " + getToday()
+        }, function (response) {
+            Cookies.set('backgroundColor', boardConfig.backgroundColor);
+            Cookies.set('backgroundImage', boardConfig.backgroundImage);
             Cookies.set('board_id', response);
             window.location.replace(boardEndpoint);
         });
@@ -371,6 +412,15 @@
       $('.mdi-heart-outline').on("click", renderBoard);
       
     });
+    
+    function getToday(){
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+
+      return mm + '/' + dd + '/' + yyyy;
+    }
     </script>
     <script src="./boardConfigure.js"></script>
     <script src="./horizontalScroll.js"></script>

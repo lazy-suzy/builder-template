@@ -63,6 +63,9 @@ class databaseClass{
       
       $insertID = false;
       if(is_array($insertData)){
+        foreach ($insertData as $key => $value) {
+          $insertData[$key] = $this -> connection -> real_escape_string($value);
+        }
          $stmt = $this -> connection -> prepare("INSERT INTO `{$tableName}` (" . implode("," , array_keys($insertData)) . ") VALUES ('" .  implode("','" , $insertData) . "')");
          if($stmt->execute())
             $insertID = $stmt->insert_id;
@@ -94,7 +97,7 @@ class databaseClass{
          $updateDataStatement = array();
          if(is_array($updateData)){
             foreach ($updateData as $key => $value) {
-               $updateDataStatement[] = "{$key} = '{$value}'";
+               $updateDataStatement[] = "{$key} = '" . $this -> connection -> real_escape_string($value) . "'";
             }
          }
          $updateData = empty($updateDataStatement) ? '' : "SET " . implode(", ", $updateDataStatement);

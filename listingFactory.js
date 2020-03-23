@@ -1,3 +1,4 @@
+var remoteProducts = [];
 class ListingFactory {
   constructor(
     base_url,
@@ -229,6 +230,7 @@ class ListingFactory {
       }
 
       if (data.products && data.products.length) {
+        remoteProducts = data.products;
         _self.bNoMoreProductsToShow = true;
 
         totalResults = data.total;
@@ -331,7 +333,8 @@ $(document).ready(function() {
   const productTemplate = Handlebars.compile($("#products").html());
   const filterTemplate = Handlebars.compile($("#filter-template").html());
   const listingFactory = new ListingFactory(
-    "http://staging.lazysuzy.com/api/products/all",
+    "https://lazysuzy.com/api/products/all",
+    // "http://staging.lazysuzy.com/api/products/all",
     { filterToIgnore: "category" },
     {},
     productTemplate,

@@ -78,7 +78,8 @@ let canvasMeta = {
     isZoomed: false,
     isCurrentObjectText: false,
     isCurrentObjectImage: false,
-    isCurrentObjectTransparent: false
+    isCurrentObjectTransparentable: false,
+    isCurrentObjectTransparentSelected: false,
   }
 };
 let appMeta = {
@@ -99,6 +100,7 @@ let appMeta = {
     isProductPanelDirty: false,
     isBoardItemDirty: false,
     isBoot: true,
+    isPreviewEnabled: false
   },
   value: {
     fontFamily: "Arial",
@@ -108,7 +110,7 @@ let appMeta = {
     lastVisitedTab: ""
   },
   identifier: {
-    customProduct: '.product-image',
+    customProduct: '.product-image[type="custom"]',
 
     boardTitle: ".board-title",
     tab: '.nav-link',
@@ -117,12 +119,14 @@ let appMeta = {
     fontFamily: ".js-font-select",
     fontSize: ".js-font-select-size",
 
-    completeToolbarElement: ".top-panel-hide",
+    completeToolbarElement: ".top-panel",
+    completeTitleElement: ".d-flex:has(.canvas-title-bar)",
 
     fontToolbarElement: ".editor-icons",
     imageToolbarElement: ".image-icons",
-    cropToolbarElement: ".crop-icons",
-    transparentToolbarElement: ".js-open-background",
+    cropToolbarElement: ".crop-toolbar",
+    transparentToolbarElement: ".do-transparent",
+    undoTransparentToolbarElement: ".undo-transparent",
 
     dropzoneElement: ".add-new",
 
@@ -133,12 +137,19 @@ let appMeta = {
     uploadByURLSubmit: "#step3 .red-button",
 
     backgroundColorElement: ".canvas-pallete-color",
-    floorPatternElement: ".canvas-pallete-wood-patterns"
+    floorPatternElement: ".canvas-pallete-wood-patterns",
+    
+    manualDrop: ".manual-drop",
   },
   template: {
-    product: {
+    privateProduct: {
       template: "#products",
-      container: ".items-board > .flex-grid",
+      container: "#myItems > .flex-grid",
+      renderer: () => {}
+    },
+    publicProduct: {
+      template: "#products",
+      container: "#allUploads > .flex-grid",
       renderer: () => {}
     },
     productPanel: {
@@ -211,6 +222,23 @@ let getBoards = () => {
     // if board does not exist redirect user to board list
     if (boardFound == false)
       window.location.replace(appMeta.endpoint.boardView);
+    else{
+      if(Cookies.get('backgroundColor').length > 0){
+        canvas.setBackgroundColor(Cookies.get('backgroundColor'), function() {
+          canvas.renderAll();
+          saveHistory();
+        });
+        Cookies.set('backgroundColor', "");
+      }
+      if(Cookies.get('backgroundImage').length > 0){
+        fb.Image.fromURL(Cookies.get('backgroundImage'), function(img) {
+          img.set({originX: 'left', originY: 'top', scaleX: canvas.width / img.width, scaleY: canvas.height / img.height});
+          canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+          saveHistory();
+        });
+        Cookies.set('backgroundImage', "");
+      }
+    }
   });
 };
 let getAssets = () => {
@@ -252,26 +280,30 @@ let initializeCanvas = (callback) => {
   updateCanvasCenter();
 
   // bind drop area events
-  $(canvasMeta.identifier.dropArea).bind("drop", handleDrop);
-
+  $(canvasMeta.identifier.dropArea).bind("drop", (e) => {
+    let draggedObject = $(appMeta.identifier.currentDragableObject);
+    let dropType = draggedObject.attr("drop-type");
+    let referenceID = draggedObject.parent().attr('data-product');
+    let referenceType = draggedObject.parent().attr("type");
+    handleDrop(e, draggedObject, dropType, referenceID, referenceType);
+  });
+  
   // handle canvas events
   canvas.on("selection:created", handleSelection);
   canvas.on("selection:updated", handleSelection);
 
   // stop objects from going out of canvas area
   canvas.on("object:moving", (e) => {
+    return;
     var obj = e.target;
     var boundingRect = obj.getBoundingRect();
     // if object is too big ignore
-    if (obj.currentHeight > obj.canvas.height || obj.currentWidth > obj.canvas.width)
+    if (obj.currentHeight > obj.canvas.height || obj.currentWidth > obj.canvas.width || obj.clipPath)
       return;
 
     obj.setCoords();
-    
-    if(canvasMeta.flag.cropEnabled){
-      console.log(obj.referenceObject);
-    }
-    else{
+  
+    if(!canvasMeta.flag.cropEnabled){
       if (boundingRect.top < 0 || boundingRect.left < 0) {
         obj.top = Math.max(obj.top, obj.top - boundingRect.top);
         obj.left = Math.max(obj.left, obj.left - boundingRect.left);
@@ -293,8 +325,11 @@ let initializeCanvas = (callback) => {
       canvas.selection = false;
     }
     else if(canvasMeta.flag.cropEnabled)
-      if(canvasMeta.value.crop.box)
+    // if cropbox exist and empty area was clicked
+      if(canvasMeta.value.crop.box && e.target == null){
         canvas.setActiveObject(canvasMeta.value.crop.box);
+        handleCrop(true);
+      }
   });
   canvas.on("mouse:up", (e) => {
 
@@ -304,11 +339,11 @@ let initializeCanvas = (callback) => {
 
   });
   canvas.on("mouse:move", (e) => {
-
     if (canvasMeta.flag.panningEnabled && e && e.e) {
       let delta = new fb.Point(e.e.movementX, e.e.movementY);
       canvas.relativePan(delta);
-      keepPositionInBounds(canvas);
+      if(canvasMeta.value.zoomValue > 1)
+        keepPositionInBounds(canvas);
     }
 
   });
@@ -338,18 +373,9 @@ let initializeAppMeta = () => {
   $(appMeta.identifier.floorPatternElement).click((e) => {
     let src = $(e.currentTarget).attr("src");
     fb.Image.fromURL(src, function(img) {
-      canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
-        scaleX: canvas.width / img.width,
-        scaleY: canvas.height / img.height
-      });
+      img.set({originX: 'left', originY: 'top', scaleX: canvas.width / img.width, scaleY: canvas.height / img.height});
+      canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
     });
-    // canvas.setBackgroundImage(src, () => {
-    //   canvas.renderAll();
-    //   saveHistory();
-    // }, {
-    //   width: canvas.getWidth(),
-    //   height: canvas.getHeight()
-    // });
   });
 
   $(appMeta.identifier.boardTitle).change((e) => {
@@ -370,6 +396,21 @@ let initializeAppMeta = () => {
 
   // handle board tab or preview mode
   $(appMeta.identifier.tab).click((e) => togglePreviewMode(e));
+  
+  // handle manual add
+  $(document).on('click', appMeta.identifier.manualDrop, (e) => {
+    let dropType = $(e.currentTarget).attr('drop-type');
+    if(dropType == "image"){
+      let referenceID = $(e.currentTarget).attr('data-product');
+      let referenceType = $(e.currentTarget).attr('type');
+      let draggedObject = $('.product-image[type="'+referenceType+'"][data-product="'+referenceID+'"] img');
+      // console.log(draggedObject, dropType, referenceID, referenceType);
+      handleDrop(false, draggedObject, dropType, referenceID, referenceType);
+    }
+    else if(dropType == "text")
+      handleDrop(false, $(e.target), dropType);
+  });
+  
 
   // Render first updates
   updateToolbar();
@@ -425,7 +466,8 @@ let initializeUploadMethods = () => {
   });
 }
 let initializeTemplates = () => {
-  appMeta.template.product.renderer = Handlebars.compile($(appMeta.template.product.template).html());
+  appMeta.template.privateProduct.renderer = Handlebars.compile($(appMeta.template.privateProduct.template).html());
+  appMeta.template.publicProduct.renderer = Handlebars.compile($(appMeta.template.publicProduct.template).html());
   appMeta.template.productPanel.renderer = Handlebars.compile($(appMeta.template.productPanel.template).html());
   appMeta.template.boardItem.renderer = Handlebars.compile($(appMeta.template.boardItem.template).html());
 };
@@ -466,7 +508,7 @@ let updateStateFromHistory = () => {
 let handleSelection = () => {
   let activeObject = canvas.getActiveObject();
   // reset selection
-  canvasMeta.flag.isCurrentObjectText = canvasMeta.flag.isCurrentObjectImage = canvasMeta.flag.isCurrentObjectTransparent = false;
+  canvasMeta.flag.isCurrentObjectText = canvasMeta.flag.isCurrentObjectImage = canvasMeta.flag.isCurrentObjectTransparentSelected = false;
 
   if (activeObject) {
     if (activeObject.type == "textbox") {
@@ -474,32 +516,30 @@ let handleSelection = () => {
       appMeta.value.fontSize = activeObject.fontSize;
       appMeta.flag.isFontToolbarDirty = true;
       canvasMeta.flag.isCurrentObjectText = true;
-    } else if (activeObject.type == "image") {
+    } 
+    else if (activeObject.type == "image") {
       canvasMeta.flag.isCurrentObjectImage = true;
-      canvasMeta.flag.isCurrentObjectTransparent = activeObject.referenceObject.isTransparent == 1 ? true : false;
+      canvasMeta.flag.isCurrentObjectTransparentable = activeObject.referenceObject.type == "custom";
+      canvasMeta.flag.isCurrentObjectTransparentSelected = activeObject.getSrc().includes(activeObject.referenceObject.transparentPath);
     }
     updateToolbar();
   }
 };
-let handleDrop = (e) => {
-  let draggedObject = $(appMeta.identifier.currentDragableObject);
+let handleDrop = (e, draggedObject, dropType, referenceID, referenceType) => {
+  if (dropType == "image") {
 
-  if (draggedObject.attr("drop-type") == "image") {
-
-    let referenceID = draggedObject.parent().attr('data-product');
     let referenceObjectValue = {
-      type: draggedObject.attr("type")
+      type: referenceType
     };
 
-    if (draggedObject.attr("type") == "custom") {
+    if (referenceType == "custom") {
       referenceObjectValue.id = appMeta.asset[referenceID].asset_id;
-      referenceObjectValue.isTransparent = appMeta.asset[referenceID].is_transparent;
       referenceObjectValue.path = appMeta.asset[referenceID].path;
       referenceObjectValue.transparentPath = appMeta.asset[referenceID].transparent_path;
       referenceObjectValue.name = appMeta.asset[referenceID].name;
       referenceObjectValue.price = appMeta.asset[referenceID].price;
       referenceObjectValue.brand = appMeta.asset[referenceID].brand;
-    } else if (draggedObject.attr("type") == "default") {
+    } else if (referenceType == "default") {
       referenceObjectValue.id = remoteProducts[referenceID].id;
       referenceObjectValue.isTransparent = 1;
       referenceObjectValue.path = remoteProducts[referenceID].main_image;
@@ -513,7 +553,6 @@ let handleDrop = (e) => {
       lockScalingFlip: true,
       referenceObject: referenceObjectValue
     });
-
     applyDrop(e, imageToInsert);
     // fb.util.loadImage(draggedObject[0].src,
     //   (img) => {
@@ -527,27 +566,37 @@ let handleDrop = (e) => {
     //     // crossOrigin: 'anonymous'
     //   }
     // );
-  } else if (draggedObject.attr("drop-type") == "text") {
-    let textToInsert = new fb.Textbox(draggedObject.text(), {
-      fontFamily: draggedObject.text(),
-      fontSize: 24
-    });
-    textToInsert.setControlsVisibility(canvasMeta.value.textControl);
-    applyDrop(e, textToInsert);
+  } else if (dropType == "text") {
+      let textToInsert = new fb.Textbox(draggedObject.text(), {
+        fontFamily: draggedObject.text(),
+        fontSize: 24
+      });
+      textToInsert.setControlsVisibility(canvasMeta.value.textControl);
+      applyDrop(e, textToInsert);
   }
 
 };
 let applyDrop = (e, objectToInsert) => {
   if (objectToInsert) {
-    let offset = $("#" + canvasMeta.identifier.id).offset();
-    let x = e.clientX - offset.left;
-    let y = e.clientY - offset.top;
-
+    
+    let x = y = 0;
+    
     // if object is more then 30% size on canvas then make it 30%
     if ((objectToInsert.width / canvas.getWidth()) >= 0.3)
       objectToInsert.scale((canvas.getWidth() * 0.3) / objectToInsert.width);
     else if ((objectToInsert.height / canvas.getHeight()) >= 0.3)
       objectToInsert.scale((canvas.getHeight() * 0.3) / objectToInsert.height);
+    
+      
+    if(e){
+      let offset = $("#" + canvasMeta.identifier.id).offset();
+      x = e.clientX - offset.left;
+      y = e.clientY - offset.top;
+    }
+    else{
+      x = canvasMeta.value.center.x - ((objectToInsert.width * objectToInsert.scaleX) / 2);
+      y = canvasMeta.value.center.y - ((objectToInsert.height * objectToInsert.scaleY) / 2);
+    }
 
     objectToInsert.set({
       left: x,
@@ -557,7 +606,6 @@ let applyDrop = (e, objectToInsert) => {
       cornerSize: canvasMeta.value.cornerSize,
       cornerColor: canvasMeta.value.cornerColor,
     });
-
     canvas.add(objectToInsert);
     canvas.setActiveObject(objectToInsert);
     canvas.requestRenderAll();
@@ -625,6 +673,10 @@ let saveHistory = () => {
   appMeta.board.update.method();
 };
 let updateBoard = () => {
+  
+  if(canvasMeta.flag.cropEnabled)
+    return;
+    
   let previewObject = "";
   try {
     previewObject = canvas.toDataURL({
@@ -666,7 +718,11 @@ let updateToolbar = () => {
   // toggle visibility of toolbar elements based on flag
   $(appMeta.identifier.fontToolbarElement).toggle(canvasMeta.flag.isCurrentObjectText);
   $(appMeta.identifier.imageToolbarElement).toggle(canvasMeta.flag.isCurrentObjectImage);
-  $(appMeta.identifier.transparentToolbarElement).toggle(!canvasMeta.flag.isCurrentObjectTransparent);
+  $(appMeta.identifier.transparentToolbarElement).toggle(canvasMeta.flag.isCurrentObjectTransparentable && !canvasMeta.flag.isCurrentObjectTransparentSelected);
+  $(appMeta.identifier.undoTransparentToolbarElement).toggle(canvasMeta.flag.isCurrentObjectTransparentable && canvasMeta.flag.isCurrentObjectTransparentSelected);
+  $(appMeta.identifier.completeToolbarElement).toggle(!appMeta.flag.isPreviewEnabled);
+  // had to do it this way because of css important on flex
+  $(appMeta.identifier.completeTitleElement).css("visibility", appMeta.flag.isPreviewEnabled ? 'hidden' : 'visible');
   $(appMeta.identifier.cropToolbarElement).toggle(canvasMeta.flag.cropEnabled);
 
 };
@@ -674,11 +730,21 @@ let renderAppMeta = () => {
 
   if (appMeta.flag.isAssetDirty) {
     appMeta.flag.isAssetDirty = false;
-    $(appMeta.template.product.container).html(
-      appMeta.template.product.renderer({
-        products: appMeta.asset.map((x) => {
+    $(appMeta.template.privateProduct.container).html(
+      appMeta.template.privateProduct.renderer({
+        products: appMeta.asset.filter(x => x.user_id == appMeta.value.userID).map((x) => {
           return {
-            main_image: x.is_transparent == 1 ? x.transparent_path : x.path,
+            main_image: x.transparent_path ? x.transparent_path : x.path,
+            type: "custom",
+          }
+        })
+      })
+    );
+    $(appMeta.template.publicProduct.container).html(
+      appMeta.template.publicProduct.renderer({
+        products: appMeta.asset.filter(x => !x.is_private).map((x) => {
+          return {
+            main_image: x.transparent_path ? x.transparent_path : x.path,
             type: "custom",
           }
         })
@@ -690,6 +756,9 @@ let renderAppMeta = () => {
     appMeta.flag.isProductPanelDirty = false;
     $(appMeta.template.productPanel.container).html(
       appMeta.template.productPanel.renderer({
+        index: appMeta.value.currentSelectedItem,
+        main_image: appMeta.asset[appMeta.value.currentSelectedItem].transparent_path ? appMeta.asset[appMeta.value.currentSelectedItem].transparent_path : appMeta.asset[appMeta.value.currentSelectedItem].path,
+        type: "custom",
         name: appMeta.asset[appMeta.value.currentSelectedItem].name,
         site: "custom",
         is_price: appMeta.asset[appMeta.value.currentSelectedItem].price,
@@ -790,18 +859,23 @@ let zoomIn = () => {
     canvasMeta.value.center,
     canvasMeta.value.zoomValue
   );
+  handleResize();
 };
 let zoomOut = () => {
-  if (canvasMeta.value.zoomValue > 1) {
+  if (canvasMeta.value.zoomValue > 0.5) {
+    // set default color
+    canvas.setBackgroundColor("#f2f3f4");
     canvasMeta.value.zoomValue -= canvasMeta.value.zoomFactor;
     canvas.zoomToPoint(
       canvasMeta.value.center,
       canvasMeta.value.zoomValue
     );
     // handling a glitch in zooming out with background
-    keepPositionInBounds();
+    // keepPositionInBounds();
   } else
     canvasMeta.flag.isZoomed = false;
+  
+  handleResize();
 };
 
 let undo = () => {
@@ -819,97 +893,114 @@ let redo = () => {
   }
 };
 
-let handleCrop = (action) => {
+let handleCrop = (action, secondaryAction) => {
   
   let activeObject = canvas.getActiveObject();
-  
-  canvas.selection = true;
-  
-  if(canvasMeta.value.crop.box){
-    canvas.remove(canvasMeta.value.crop.box);
-    canvasMeta.value.crop.box = false;
+  if(activeObject){
+    
+    canvas.selection = true;
+    
+    if(canvasMeta.value.crop.box){
+      canvas.remove(canvasMeta.value.crop.box);
+      canvasMeta.value.crop.box = false;
+    }
+    
+    switch(action) {
+      case true:
+        canvasMeta.flag.cropEnabled = false;
+        appMeta.flag.isPreviewEnabled = false;
+        canvasMeta.value.crop.active.angle = canvasMeta.value.crop.copy.angle;
+        canvasMeta.value.crop.active.flipX = canvasMeta.value.crop.copy.flipX;
+        canvasMeta.value.crop.active.top = canvasMeta.value.crop.copy.top;
+        canvasMeta.value.crop.active.left = canvasMeta.value.crop.copy.left;
+        saveHistory();
+      break;
+      case false:
+        if(secondaryAction)
+          canvasMeta.value.crop.active.clipPath = false;
+        else
+          canvasMeta.value.crop.active.clipPath = canvasMeta.value.crop.copy.clipPath;
+          
+        canvasMeta.value.crop.active.dirty = true;
+        canvasMeta.flag.cropEnabled = false;
+        appMeta.flag.isPreviewEnabled = false;
+      break;
+      case undefined:
+        canvas.selection = false;
+        
+        canvasMeta.flag.cropEnabled = true;
+        appMeta.flag.isPreviewEnabled = true;
+        
+        canvasMeta.value.crop.copy = Object.assign({}, activeObject);
+        
+        activeObject.angle = 0;
+        activeObject.flipX = false;
+        // activeObject.referenceObject.isCropped = true;
+        // activeObject.referenceObject.originalSrc = canvasMeta.value.crop.copy.src;
+        canvasMeta.value.crop.active = activeObject;
+        
+        canvasMeta.value.crop.box = new fb.Rect({
+          width: activeObject.width,
+          height: activeObject.height,
+          scaleX: activeObject.scaleX,
+          scaleY: activeObject.scaleY,
+          top: activeObject.top,
+          left: activeObject.left,
+          fill: '',
+          transparentCorners: false
+        });
+        
+        if(canvasMeta.value.crop.active.clipPath){
+          
+          let center = activeObject.getCenterPoint();
+          canvasMeta.value.crop.box.width = canvasMeta.value.crop.active.clipPath.width;
+          canvasMeta.value.crop.box.height = canvasMeta.value.crop.active.clipPath.height;
+          canvasMeta.value.crop.box.left = center.x + canvasMeta.value.crop.active.clipPath.left * activeObject.scaleX;
+          canvasMeta.value.crop.box.top = center.y + canvasMeta.value.crop.active.clipPath.top * activeObject.scaleY;
+          
+        }
+        
+        canvasMeta.value.crop.box.on('scaling', applyCrop);
+        canvasMeta.value.crop.box.on('mouseup', applyCrop);
+        canvasMeta.value.crop.box.on('moving', applyCrop);
+        
+        canvasMeta.value.crop.box.setControlsVisibility(canvasMeta.value.crop.control);
+        
+        canvas.add(canvasMeta.value.crop.box);
+        canvas.setActiveObject(canvasMeta.value.crop.box);
+        
+      break;
+    };
+    
+    canvas.getObjects().forEach((object) => object.selectable = canvas.selection);
+    canvas.renderAll();
+    updateToolbar();  
+    
   }
-  
-  switch(action) {
-    case true:
-      canvasMeta.flag.cropEnabled = false;
-      saveHistory();
-    break;
-    case false:
-      canvasMeta.value.crop.active.clipPath = false;
-      canvasMeta.value.crop.active.dirty = true;
-      canvasMeta.flag.cropEnabled = false;
-    break;
-    case undefined:
-      canvas.selection = false;
-      
-      canvasMeta.flag.cropEnabled = true;
-      
-      canvasMeta.value.crop.copy = Object.assign({}, activeObject);
-      
-      activeObject.angle = 0;
-      // activeObject.referenceObject.isCropped = true;
-      // activeObject.referenceObject.originalSrc = canvasMeta.value.crop.copy.src;
-      canvasMeta.value.crop.active = activeObject;
-      
-      canvasMeta.value.crop.box = new fb.Rect({
-        width: activeObject.width,
-        height: activeObject.height,
-        scaleX: activeObject.scaleX,
-        scaleY: activeObject.scaleY,
-        top: activeObject.top,
-        left: activeObject.left,
-        fill: '',
-        transparentCorners: false
-      });
-      
-      // if(canvasMeta.value.crop.active.clipPath){
-      //   canvasMeta.value.crop.box = new fb.Rect({
-      //     width: canvasMeta.value.crop.active.clipPath.width,
-      //     height: canvasMeta.value.crop.active.clipPath.height,
-      //     scaleX: activeObject.scaleX,
-      //     scaleY: activeObject.scaleY,
-      //     top: activeObject.top,
-      //     left: activeObject.left,
-      //     fill: '',
-      //     transparentCorners: false
-      //   });
-      //   console.log(activeObject.top, activeObject.left, activeObject.height, activeObject.width);
-      //   console.log(canvasMeta.value.crop.active.clipPath.top, canvasMeta.value.crop.active.clipPath.left, canvasMeta.value.crop.active.clipPath.height, canvasMeta.value.crop.active.clipPath.width);
-      //   console.log(canvasMeta.value.crop.active.clipPath.top * activeObject.scaleX, canvasMeta.value.crop.active.clipPath.left * activeObject.scaleX)
-      //   console.log(canvasMeta.value.crop.active.clipPath);
-      // }
-      // mask = new fb.Rect({
-      //   width: (image.width * rect.scaleX) / image.scaleX,
-      //   height: (image.height * rect.scaleY) / image.scaleY,
-      //   left: ((image.width / 2) * -1) + offsetX,
-      //   top: ((image.height / 2) * -1) + offsetY
-      // });
-      // 
-      // image.clipPath = mask;
-      // image.dirty = true;
-      
-      canvasMeta.value.crop.box.on('scaling', applyCrop);
-      canvasMeta.value.crop.box.on('mouseup', applyCrop);
-      canvasMeta.value.crop.box.on('moving', applyCrop);
-      
-      canvasMeta.value.crop.box.setControlsVisibility(canvasMeta.value.crop.control);
-      
-      canvas.add(canvasMeta.value.crop.box);
-      canvas.setActiveObject(canvasMeta.value.crop.box);
-      
-    break;
-  };
-  
-  canvas.getObjects().forEach((object) => object.selectable = canvas.selection);
-  canvas.renderAll();
-  updateToolbar();  
     
 };
 let applyCrop = (e) => {
   
   let rect = canvasMeta.value.crop.box;
   let image = canvasMeta.value.crop.active;
+  
+  let maxScaleX = (image.width * image.scaleX) / rect.width;
+  let maxScaleY = (image.height * image.scaleY) / rect.height;
+  
+  if(rect.scaleX > maxScaleX || rect.scaleY > maxScaleY) {
+    rect.scaleX = Math.min(rect.scaleX, maxScaleX);
+    rect.scaleY = Math.min(rect.scaleY, maxScaleY);
+  }
+  
+  if (rect.top < image.top || rect.left < image.left) {
+    rect.top = Math.max(rect.top, image.top);
+    rect.left = Math.max(rect.left, image.left);
+  }
+  
+  if (rect.top + (rect.height * rect.scaleY) > image.top + (image.height * image.scaleY) || rect.left + (rect.width * rect.scaleX) > image.left + (image.width * image.scaleX)) {
+    rect.top = Math.min(rect.top, image.top + (image.height * image.scaleY) - (rect.height * rect.scaleY));
+    rect.left = Math.min(rect.left, image.left + (image.width * image.scaleY) - (rect.width * rect.scaleX));
+  }
 
   offsetX = (rect.left - image.left) / image.scaleX;
   offsetY = (rect.top - image.top) / image.scaleY;
@@ -918,8 +1009,8 @@ let applyCrop = (e) => {
   offsetY = offsetY <= 1 ? 0 : offsetY;
 
   mask = new fb.Rect({
-    width: (image.width * rect.scaleX) / image.scaleX,
-    height: (image.height * rect.scaleY) / image.scaleY,
+    width: (rect.width * rect.scaleX) / image.scaleX,
+    height: (rect.height * rect.scaleY) / image.scaleY,
     left: ((image.width / 2) * -1) + offsetX,
     top: ((image.height / 2) * -1) + offsetY
   });
@@ -962,20 +1053,53 @@ let action = (type) => {
       break;
     case "transparent":
       if (activeObject.referenceObject.type == "custom") {
+        var dimentionBefore = {
+          width: activeObject.width,
+          height: activeObject.height,
+          scaleX: activeObject.scaleX,
+          scaleY: activeObject.scaleY,
+        };
+        canvasMeta.flag.isCurrentObjectTransparentable = false;
+        canvasMeta.flag.isCurrentObjectTransparentSelected = false;
+        updateToolbar();
         $.post(appMeta.endpoint.api, {
           operation: "transparent",
           asset_id: activeObject.referenceObject.id,
           user_id: appMeta.value.userID
         }, (response) => {
+          activeObject.referenceObject.transparentPath = response.transparent_path;
           activeObject.setSrc(response.transparent_path, () => {
-            activeObject.referenceObject.isTransparent = response.is_transparent;
-            canvasMeta.flag.isCurrentObjectTransparent = true;
+            activeObject.scaleX = (dimentionBefore.width * dimentionBefore.scaleX) / activeObject.width;
+            activeObject.scaleY = (dimentionBefore.height * dimentionBefore.scaleY) / activeObject.height;
+            canvasMeta.flag.isCurrentObjectTransparentSelected = true;
+            canvas.discardActiveObject();
             updateToolbar();
-            canvas.requestRenderAll();
+            canvas.renderAll();
           });
         });
       }
       break;
+      case "undoTransparent":
+        if (activeObject.referenceObject.type == "custom") {
+          var dimentionBefore = {
+            width: activeObject.width,
+            height: activeObject.height,
+            scaleX: activeObject.scaleX,
+            scaleY: activeObject.scaleY,
+          };
+          canvasMeta.flag.isCurrentObjectTransparentable = false;
+          canvasMeta.flag.isCurrentObjectTransparentSelected = false;
+          updateToolbar();
+          activeObject.setSrc(activeObject.referenceObject.path, () => {
+            activeObject.scaleX = (dimentionBefore.width * dimentionBefore.scaleX) / activeObject.width;
+            activeObject.scaleY = (dimentionBefore.height * dimentionBefore.scaleY) / activeObject.height;
+            canvasMeta.flag.isCurrentObjectTransparentSelected = false;
+            canvas.discardActiveObject();
+            updateToolbar();
+            canvas.renderAll();
+          })
+        }
+        break;
   };
 
   canvas.requestRenderAll();
@@ -993,10 +1117,10 @@ let togglePreviewMode = (e) => {
     appMeta.value.lastVisitedTab = targetLink;
 
     // check if state has changed
-    if (appMeta.isPreviewEnabled !== toggle)
-      appMeta.isPreviewEnabled = toggle;
+    if (appMeta.flag.isPreviewEnabled !== toggle)
+      appMeta.flag.isPreviewEnabled = toggle;
 
-    $(appMeta.identifier.completeToolbarElement).toggle(!toggle);
+    updateToolbar();
     canvas.selection = !toggle;
     canvas.discardActiveObject();
 

@@ -24,7 +24,7 @@ function removeBackground($db, $user_id, $asset_id) {
     // Fetch the object from database
     $asset = $db->selectOne("*", 'asset', array("asset_id" => $asset_id));
     // Check if object is valid with the required feild
-    if ($asset && isset($asset['is_transparent']) && !$asset['is_transparent']) {
+    if ($asset && empty($asset['transparent_path'])) {
       
         // Get the transparent image
         if (ENVIROMENT == "DEV") 
@@ -42,12 +42,11 @@ function removeBackground($db, $user_id, $asset_id) {
             $response = curl_exec($curl);
             curl_close($curl);
         }
-        // Save file to file system
-        $pathInfo = pathinfo($asset['path']);
-        $asset['transparent_path'] = $pathInfo['dirname'] . '/' . $pathInfo['filename'] . '-t.png';
+        
+        $asset['transparent_path'] = STORAGE_FOLDER_PATH . '/' . generateGUID() . '.png';
         if (file_put_contents($asset['transparent_path'], $response)) {
             // Update database
-            $db->update("asset", array("is_transparent" => 1, "transparent_path" => $asset['transparent_path']), array("asset_id" => $asset_id));
+            $db->update("asset", array("transparent_path" => $asset['transparent_path']), array("asset_id" => $asset_id));
         }
     }
 
@@ -67,6 +66,7 @@ function moveImageAndInsert($db, $user_id, $filePath, $additionalData = array())
       
       if(rename($filePath, realpath(STORAGE_FOLDER_PATH) . DIRECTORY_SEPARATOR . $newFileName)){
         
+        chmod(realpath(STORAGE_FOLDER_PATH) . DIRECTORY_SEPARATOR . $newFileName, 0644);
         $insertArray = array("user_id" => $user_id, "path" => STORAGE_FOLDER_PATH . '/' . $newFileName);
         
         if(!empty($additionalData) && is_array($additionalData))
