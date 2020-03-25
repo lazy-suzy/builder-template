@@ -40,7 +40,9 @@
             <a href="http://staging.lazysuzy.com:82/myboards.html" class="btn btn-primary">Dashboard</a>
             <div class="header-right-icons">
               <!-- <i class="mdi mdi-share-variant" aria-hidden="true"></i> -->
-              <i class="mdi mdi-account-circle js-open-auth" aria-hidden="true"></i>
+              <a href="#">
+                <i class="mdi mdi-account-circle js-open-auth" aria-hidden="true"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -275,30 +277,7 @@
                 <i class="mdi mdi-redo" onclick="redo()" aria-hidden="true"></i>
               </div>
               <div class="col-sm-6 order-last order-sm-2 editor-icons">
-                <!-- <input class="js-font-select" type="text"> -->
-                <select class="js-font-select">
-                  <option value="Helvetica" class="helvetica">Helvetica</option>
-                  <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
-                  <option value="Courier New" class="courier-new">Courier New</option>
-                  <option value="Georgia" class="georgia">Georgia</option>
-                  <option value="Arial" class="arial" selected>Arial</option>
-                </select>
-                <select class="js-font-select-size">
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="14" selected>14</option>
-                  <option value="18">18</option>
-                  <option value="24">24</option>
-                  <option value="30">30</option>
-                  <option value="36">36</option>
-                  <option value="48">48</option>
-                  <option value="60">60</option>
-                  <option value="72">72</option>
-                  <option value="96">96</option>
-                </select>
+                
                 <!-- <span data-title="Change color">
                   <i class="mdi mdi-format-color-text" aria-hidden="true"></i>
                 </span>
@@ -817,7 +796,11 @@
       </div>
     </div>
 
-    <div class="modal open-auth" id="open-auth">
+    <div class="modal open-auth">
+      <div class="close-icon js-close-auth">
+        <i class="mdi mdi-close" aria-hidden="true"></i>
+      </div>
+     
       <div class="row">
         <div class="col-12 text-center">
           <h5 class="modal-heading" style="margin-top: 5px;" id="signInModalLabel">Hey, Star Stuff!</h5>
@@ -857,16 +840,6 @@
 
         </div>
 
-        <!-- <div class="row modal-action mb-3">
-          <div class="col-6 text-right">
-            <button class="btn btn-cancel js-close-auth">Cancel</button>
-          </div>
-          <div class="col-6">
-            <a href="./publishBoard.html">
-              <button class="btn red-button">Save </button>
-            </a>
-          </div>
-        </div> -->
         <div class="modal-footer">
           <span class="footer-content">Not a member yet?&nbsp;
             <button class="btn btn-sm btn-light js-open-signup" id="signUpLink">

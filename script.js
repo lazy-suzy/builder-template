@@ -139,6 +139,14 @@ $(document).ready(function() {
 
   $(".js-btn-go").hide();
 
+  $(".js-open-auth, .js-close-auth").click(function(e) {
+    if (!isMobile()) {
+      e.preventDefault();
+      $(".backdrop").toggleClass("show");
+      $(".open-auth").toggleClass("show");
+    }
+  });
+
   $(".js-open-publish-board, .js-close-publish-board").click(function(e) {
     if (!isMobile()) {
       e.preventDefault();
@@ -193,19 +201,11 @@ $(document).ready(function() {
     $(this).addClass("active");
   });
 
-  $(".js-open-auth, .js-close-auth").click(function (e) {
+  $(".js-open-publish-board, .js-close-publish-board").click(function(e) {
     if (!isMobile()) {
       e.preventDefault();
       $(".backdrop").toggleClass("show");
-      $(".open-auth").toggleClass("show");
-    }
-  });
-
-  $(".js-open-signup, .js-close-signup").click(function (e) {
-    if (!isMobile()) {
-      e.preventDefault();
-      $(".backdrop").toggleClass("show");
-      $(".open-signup").toggleClass("show");
+      $(".publish-board").toggleClass("show");
     }
   });
 
