@@ -186,8 +186,34 @@ class ListingFactory {
     } else {
       this.strFilters = `${strFilters}category:${this.category}`;
     }
-
+    if(this.checkIfFiltersApplied(this.strFilters)){
+      this.showClearAll();
+    }
+    else{
+      this.hideClearAll();
+    }
     return this.strFilters;
+  }
+
+  checkIfFiltersApplied(strFilters) {
+    let count = 0;
+    strFilters.split(';').forEach(ele => {
+      let query = ele.split(':');
+      if (query[1] !== '') {
+        count++;
+      }
+    });
+    return count !== 1;
+  }
+
+  hideClearAll() {
+    $('.clear-all').removeClass('show');
+    $('.clear-all-btn').removeClass('show');
+  }
+
+  showClearAll() {
+    $('.clear-all').addClass('show');
+    $('.clear-all-btn').addClass('show');
   }
 
   fetchProducts(bClearPrevProducts) {
