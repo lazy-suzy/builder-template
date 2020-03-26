@@ -37,9 +37,12 @@
           </div>
           <div class="col-8 text-right">
             <a class="btn btn-primary js-open-publish-board">Publish</a>
+            <a href="http://staging.lazysuzy.com:82/myboards.html" class="btn btn-primary">Dashboard</a>
             <div class="header-right-icons">
-              <i class="mdi mdi-share-variant" aria-hidden="true"></i>
-              <i class="mdi mdi-account-circle" aria-hidden="true"></i>
+              <!-- <i class="mdi mdi-share-variant" aria-hidden="true"></i> -->
+              <a href="#">
+                <i class="mdi mdi-account-circle js-open-auth" aria-hidden="true"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -265,7 +268,7 @@
       </div>
       <div class="main-content container-fluid">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 tool-bar-holder" id="tool-bar-holder">
             <div class="top-panel row top-panel-hide">
               <div class="col-sm-2  state-icons order-sm-1 ">
                 <i class="mdi mdi-magnify-minus" onclick="zoomOut()" aria-hidden="true"></i>
@@ -274,7 +277,24 @@
                 <i class="mdi mdi-redo" onclick="redo()" aria-hidden="true"></i>
               </div>
               <div class="col-sm-6 order-last order-sm-2 editor-icons">
-                <!-- <input class="js-font-select" type="text"> -->
+                
+                <!-- <span data-title="Change color">
+                  <i class="mdi mdi-format-color-text" aria-hidden="true"></i>
+                </span>
+                <span data-title="Bold">
+                  <i class="mdi mdi-format-bold" aria-hidden="true"></i>
+                </span>
+                <span data-title="Italic">
+                  <i class="mdi mdi-format-italic" aria-hidden="true"></i>
+                </span>
+                <span data-title="Underline">
+                  <i class="mdi mdi-format-underline" aria-hidden="true"></i>
+                </span>
+                <span data-title="Uppercase">
+                  <i class="mdi mdi-format-letter-case" style="font-size: 1.3em" aria-hidden="true"></i>
+                </span> -->
+              </div>
+              <div class="col-sm-4 order-sm-3 item-action-icons">
                 <select class="js-font-select">
                   <option value="Helvetica" class="helvetica">Helvetica</option>
                   <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
@@ -298,23 +318,6 @@
                   <option value="72">72</option>
                   <option value="96">96</option>
                 </select>
-                <!-- <span data-title="Change color">
-                  <i class="mdi mdi-format-color-text" aria-hidden="true"></i>
-                </span>
-                <span data-title="Bold">
-                  <i class="mdi mdi-format-bold" aria-hidden="true"></i>
-                </span>
-                <span data-title="Italic">
-                  <i class="mdi mdi-format-italic" aria-hidden="true"></i>
-                </span>
-                <span data-title="Underline">
-                  <i class="mdi mdi-format-underline" aria-hidden="true"></i>
-                </span>
-                <span data-title="Uppercase">
-                  <i class="mdi mdi-format-letter-case" style="font-size: 1.3em" aria-hidden="true"></i>
-                </span> -->
-              </div>
-              <div class="col-sm-4 order-sm-3 item-action-icons">
                 <span data-title="Remove Background" class="image-icons do-transparent" onclick="action('transparent')">
                   <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
                 </span>
@@ -369,6 +372,23 @@
                     <i class="mdi mdi-redo" onclick="redo()" aria-hidden="true"></i>
                   </span>
                   <!-- <input class="js-font-select" type="text"> -->
+                  
+                  <!-- <span data-title="Change color">
+                    <i class="mdi mdi-format-color-text" aria-hidden="true"></i>
+                  </span>
+                  <span data-title="Bold">
+                    <i class="mdi mdi-format-bold" aria-hidden="true"></i>
+                  </span>
+                  <span data-title="Italic">
+                    <i class="mdi mdi-format-italic" aria-hidden="true"></i>
+                  </span>
+                  <span data-title="Underline">
+                    <i class="mdi mdi-format-underline" aria-hidden="true"></i>
+                  </span>
+                  <span data-title="Uppercase">
+                    <i class="mdi mdi-format-letter-case" aria-hidden="true"></i>
+                  </span> -->
+
                   <select class="js-font-select">
                     <option value="Helvetica" class="helvetica">Helvetica</option>
                     <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
@@ -392,21 +412,7 @@
                     <option value="72">72</option>
                     <option value="96">96</option>
                   </select>
-                  <!-- <span data-title="Change color">
-                    <i class="mdi mdi-format-color-text" aria-hidden="true"></i>
-                  </span>
-                  <span data-title="Bold">
-                    <i class="mdi mdi-format-bold" aria-hidden="true"></i>
-                  </span>
-                  <span data-title="Italic">
-                    <i class="mdi mdi-format-italic" aria-hidden="true"></i>
-                  </span>
-                  <span data-title="Underline">
-                    <i class="mdi mdi-format-underline" aria-hidden="true"></i>
-                  </span>
-                  <span data-title="Uppercase">
-                    <i class="mdi mdi-format-letter-case" aria-hidden="true"></i>
-                  </span> -->
+                  
                   <span data-title="Remove Background" class="image-icons do-transparent" onclick="action('transparent')">
                     <i class="mdi mdi-auto-fix" aria-hidden="true"></i>
                   </span>
@@ -453,7 +459,7 @@
                     </a>
                   </div>
                 </div>
-                <div class="w-75">
+                <div class="w-38">
                   <input
                     class="form-control board-title"
                     placeholder="Board title"
@@ -733,6 +739,7 @@
         </div>
       </div>
     </div>
+
     <div class="modal publish-board">
       <div class="row">
         <div class="col-12 text-center">
@@ -788,6 +795,62 @@
         </div>
       </div>
     </div>
+
+    <div class="modal open-auth">
+      <div class="close-icon js-close-auth">
+        <i class="mdi mdi-close" aria-hidden="true"></i>
+      </div>
+     
+      <div class="row">
+        <div class="col-12 text-center">
+          <h5 class="modal-heading" style="margin-top: 5px;" id="signInModalLabel">Hey, Star Stuff!</h5>
+    
+          <div class="socialButtons">
+            <button type="button" class="btn btn-primary facebookBtn" style="background: #3b5998;">
+              <a [href]="facebookRedirect" class="white">
+                <i class="fab fa-facebook-f">&nbsp;<b>Continue with Facebook</b></i>
+              </a>
+            </button>
+            <br />
+            <button type="button" class="btn btn-light googleBtn">
+              <a [href]="googleRedirect" class="black">
+                <i class="fab fa-google">&nbsp;<b>Continue with Google</b></i>
+              </a>
+            </button>
+          </div>
+
+          <div class="span-line text-center">Not Feeling Social?</div>
+          <br />
+
+          
+        <form action="" id="signinform">
+          
+          <div class="formGroup">
+           
+            <input type="email" class="form-control text-input" id="txt_email" name="txt_email" placeholder="Username" required />
+            <input type="password" class="form-control text-input password" id="txt_pwd" name="txt_pwd" placeholder="Password" required />
+      
+            <button type="submit" class="form-control btn btn-dark submit" id="submitBtn">
+              Login
+            </button>
+            <br />
+            <a class="resetPassword" routerLink="/forgotpassword">Reset Password</a>
+          </div>
+        </form>
+
+        </div>
+
+        <div class="modal-footer">
+          <span class="footer-content">Not a member yet?&nbsp;
+            <button class="btn btn-sm btn-light js-open-signup" id="signUpLink">
+              Join Now.
+            </button></span>
+        </div>
+      </div>
+    
+    </div>
+
+    
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="

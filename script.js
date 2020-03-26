@@ -22,6 +22,7 @@ $(document).ready(function() {
     }
     return options.inverse(this);
   });
+  $("#tool-bar-holder").hide();
   const template = Handlebars.compile($("#category").html());
   let products = [];
   const bottomPanelTemplate = Handlebars.compile($("#bottom-panel").html());
@@ -71,6 +72,7 @@ $(document).ready(function() {
     const product = remoteProducts[$(this).attr("data-product")];
     product.index = $(this).attr("data-product");
     $(".bottom-panel").html(bottomPanelTemplate(product));
+    $("#tool-bar-holder").show();
   });
 
   $(".toggle-icon").click(function() {
@@ -137,6 +139,14 @@ $(document).ready(function() {
 
   $(".js-btn-go").hide();
 
+  $(".js-open-auth, .js-close-auth").click(function(e) {
+    if (!isMobile()) {
+      e.preventDefault();
+      $(".backdrop").toggleClass("show");
+      $(".open-auth").toggleClass("show");
+    }
+  });
+
   $(".js-open-publish-board, .js-close-publish-board").click(function(e) {
     if (!isMobile()) {
       e.preventDefault();
@@ -190,4 +200,35 @@ $(document).ready(function() {
     $(".publish-board-style-items.active").removeClass("active");
     $(this).addClass("active");
   });
+
+  $(".js-open-publish-board, .js-close-publish-board").click(function(e) {
+    if (!isMobile()) {
+      e.preventDefault();
+      $(".backdrop").toggleClass("show");
+      $(".publish-board").toggleClass("show");
+    }
+  });
+
+  $("#submitBtn").click(function (e) {
+    const email = $("#txt_email").val().trim();
+    const password = $("#txt_pwd").val().trim();
+    e.preventDefault();
+    e.stopPropagation();
+    $.ajax({
+      url: "https://www.lazysuzy.com/api/login",
+      type: 'post',
+      data: {
+        email: email,
+        password: password
+      },
+      success: function (response) {
+        // TODO: After Login Success
+        //InProgress
+      }
+    });
+
+  });
+
+  
+
 });
