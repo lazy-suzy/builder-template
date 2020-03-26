@@ -730,6 +730,55 @@ body {
   border: 1px solid #000000;
 }
 
+.color-pallete-1{
+  background-color: #FFFFFF;
+  border: 1px solid #000000;
+}
+
+.color-pallete-2{
+  background-color: #D9EDF7;
+}
+
+.color-pallete-3{
+  background-color: #DFF0D8;
+}
+
+.color-pallete-4{
+  background-color: #F3EDD2;
+}
+
+.color-pallete-5{
+  background-color: #C09853;
+}
+
+.color-pallete-6{
+  background-color: #F2DEDE;
+}
+
+.color-pallete-7{
+  background-color: #EEEEEE;
+}
+
+.color-pallete-8{
+  background-color: #4F9DDC;
+}
+
+.color-pallete-9{
+  background-color: #62C463;
+}
+
+.color-pallete-10{
+  background-color: #F3C30E;
+}
+
+.color-pallete-11{
+  background-color: #B94A48;
+}
+
+.color-pallete-12{
+  background-color: #E85F5B;
+}
+
 .color-red {
   background-color: #ff0000;
 }
