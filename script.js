@@ -147,14 +147,6 @@ $(document).ready(function() {
     }
   });
 
-  $(".js-open-publish-board, .js-close-publish-board").click(function(e) {
-    if (!isMobile()) {
-      e.preventDefault();
-      $(".backdrop").toggleClass("show");
-      $(".publish-board").toggleClass("show");
-    }
-  });
-
   $(".js-open-background, .js-close-background-modal").click(function() {
     $(".backdrop").toggleClass("show");
     $(".background-modal").toggleClass("show");
