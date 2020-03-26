@@ -22,7 +22,7 @@ $(document).ready(function() {
     }
     return options.inverse(this);
   });
-  $("#tool-bar-holder").hide();
+  $(".tool-bar-holder").hide();
   const template = Handlebars.compile($("#category").html());
   let products = [];
   const bottomPanelTemplate = Handlebars.compile($("#bottom-panel").html());
@@ -72,7 +72,7 @@ $(document).ready(function() {
     const product = remoteProducts[$(this).attr("data-product")];
     product.index = $(this).attr("data-product");
     $(".bottom-panel").html(bottomPanelTemplate(product));
-    $("#tool-bar-holder").show();
+    $(".tool-bar-holder").show();
   });
 
   $(".toggle-icon").click(function() {
