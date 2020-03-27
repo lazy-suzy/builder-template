@@ -186,10 +186,9 @@ class ListingFactory {
     } else {
       this.strFilters = `${strFilters}category:${this.category}`;
     }
-    if(this.checkIfFiltersApplied(this.strFilters)){
+    if (this.checkIfFiltersApplied(this.strFilters)) {
       this.showClearAll();
-    }
-    else{
+    } else {
       this.hideClearAll();
     }
     return this.strFilters;
@@ -268,7 +267,7 @@ class ListingFactory {
           id: '#anchor-page' + _self.iPageNo
         }).appendTo('#productsContainerDiv');
 
-        if (_self.iPageNo === 1) {
+        if (_self.iPageNo === 0) {
           $('.products')
             .children('.flex-grid')
             .html(_self.listingTemplate({ products: data.products }));
@@ -330,7 +329,7 @@ class ListingFactory {
         _self.iPageNo -= 1;
         $('.products')
           .children('.flex-grid')
-          .text('No products found');
+          .append('No products found');
       }
 
       if (data.sortType) {
