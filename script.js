@@ -227,6 +227,7 @@ $(document).ready(function() {
     const token = response.success.token;
 
     //Close modal
+    
     $(".backdrop").toggleClass("show");
     $(".open-auth").toggleClass("show");    
   }
