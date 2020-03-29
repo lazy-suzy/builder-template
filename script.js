@@ -215,12 +215,21 @@ $(document).ready(function() {
       },
       success: function (response) {
         // TODO: After Login Success
-        //InProgress
+        processAuthSuccess(response);
       }
     });
 
   });
 
+  function processAuthSuccess(response){
+    //Save token and refresh page elements
+    const user = response.user;
+    const token = response.success.token;
+
+    //Close modal
+    $(".backdrop").toggleClass("show");
+    $(".open-auth").toggleClass("show");    
+  }
   
 
 });
