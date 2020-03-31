@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css?family=Fenix");
+@import url('https://fonts.googleapis.com/css?family=Fenix');
 html,
 body {
-  font-family: "Fenix", serif;
+  font-family: 'Fenix', serif;
 }
 [data-title] {
   position: relative;
@@ -30,7 +30,7 @@ body {
   bottom: 40px;
 }
 [data-title]:hover::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -7px;
   left: 5px;
@@ -46,7 +46,7 @@ body {
 }
 
 .mdi-format-color-text::after {
-  content: "";
+  content: '';
   width: 12px;
   height: 12px;
   background: #333;
@@ -257,6 +257,9 @@ body {
   text-align: center;
   transition: all 0.3s 0s ease;
 }
+.nav-tabs .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
 
 .nav-tabs .nav-link.active {
   color: #b76e79;
@@ -287,12 +290,18 @@ body {
 }
 .top-panel {
   text-align: left;
-  padding: 10px 5px;
+  padding: 10px 5px 15px;
   background: #d6d6d6;
 }
 .top-panel i {
   margin-right: 10px;
-  font-size: 18px;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 3px;
+  transition: all 0.3s 0s ease;
+}
+.top-panel i:hover {
+  background: rgba(120, 120, 120, 0.3);
 }
 .top-panel .state-icons i {
   margin-right: 5px;
@@ -540,7 +549,7 @@ body {
 }
 
 .checkmark:after {
-  content: "";
+  content: '';
   position: absolute;
   display: none;
 }
@@ -730,13 +739,13 @@ body {
   border: 1px solid #000000;
 }
 
-.color-pallete-1{
-  background-color: #FFFFFF;
+.color-pallete-1 {
+  background-color: #ffffff;
   border: 1px solid #000000;
 }
 
 div.canvas-layout-room {
-  background-image:url('floor3.jpg');
+  background-image: url('floor3.jpg');
   max-width: 100%;
   max-height: 100%;
   object-fit: 'contain';
@@ -744,48 +753,48 @@ div.canvas-layout-room {
   background-repeat: round;
 }
 
-.color-pallete-2{
-  background-color: #D9EDF7;
+.color-pallete-2 {
+  background-color: #d9edf7;
 }
 
-.color-pallete-3{
-  background-color: #DFF0D8;
+.color-pallete-3 {
+  background-color: #dff0d8;
 }
 
-.color-pallete-4{
-  background-color: #F3EDD2;
+.color-pallete-4 {
+  background-color: #f3edd2;
 }
 
-.color-pallete-5{
-  background-color: #C09853;
+.color-pallete-5 {
+  background-color: #c09853;
 }
 
-.color-pallete-6{
-  background-color: #F2DEDE;
+.color-pallete-6 {
+  background-color: #f2dede;
 }
 
-.color-pallete-7{
-  background-color: #EEEEEE;
+.color-pallete-7 {
+  background-color: #eeeeee;
 }
 
-.color-pallete-8{
-  background-color: #4F9DDC;
+.color-pallete-8 {
+  background-color: #4f9ddc;
 }
 
-.color-pallete-9{
-  background-color: #62C463;
+.color-pallete-9 {
+  background-color: #62c463;
 }
 
-.color-pallete-10{
-  background-color: #F3C30E;
+.color-pallete-10 {
+  background-color: #f3c30e;
 }
 
-.color-pallete-11{
-  background-color: #B94A48;
+.color-pallete-11 {
+  background-color: #b94a48;
 }
 
-.color-pallete-12{
-  background-color: #E85F5B;
+.color-pallete-12 {
+  background-color: #e85f5b;
 }
 
 .color-red {
@@ -955,8 +964,8 @@ div.canvas-layout-room {
   left: 0;
   margin-left: -0.5rem;
 }
-[data-overflowing="both"] ~ .canvas-scroll-left,
-[data-overflowing="left"] ~ .canvas-scroll-left {
+[data-overflowing='both'] ~ .canvas-scroll-left,
+[data-overflowing='left'] ~ .canvas-scroll-left {
   opacity: 1;
 }
 
@@ -964,8 +973,8 @@ div.canvas-layout-room {
   right: 0;
   margin-right: -0.5rem;
 }
-[data-overflowing="both"] ~ .canvas-scroll-right,
-[data-overflowing="right"] ~ .canvas-scroll-right {
+[data-overflowing='both'] ~ .canvas-scroll-right,
+[data-overflowing='right'] ~ .canvas-scroll-right {
   opacity: 1;
 }
 
@@ -1077,7 +1086,7 @@ div.canvas-layout-room {
 }
 
 .times-new-roman {
-  font-family: "Times New Roman";
+  font-family: 'Times New Roman';
 }
 
 .arial {
@@ -1085,7 +1094,7 @@ div.canvas-layout-room {
 }
 
 .courier-new {
-  font-family: "Courier New";
+  font-family: 'Courier New';
 }
 
 .georgia {
@@ -1754,7 +1763,7 @@ i.background-msg-arrow {
 }
 @media screen and (max-width: 767px) {
   .canvas {
-    height: 400px;
+    height: auto;
   }
   .editor-icons {
     white-space: nowrap;
@@ -1891,7 +1900,6 @@ i.background-msg-arrow {
   }
 }
 
-
 /* Auth Related, Needs refactoring */
 
 .modal-dialog {
@@ -2011,7 +2019,7 @@ i.background-msg-arrow {
 }
 
 .account-icon {
-  margin-top: .25rem;
+  margin-top: 0.25rem;
 }
 
 @-webkit-keyframes opt-animation3 {
@@ -2063,7 +2071,6 @@ i.background-msg-arrow {
     top: 5%;
   }
   .account-icon {
-    margin-top: .5rem;
+    margin-top: 0.5rem;
   }
 }
-

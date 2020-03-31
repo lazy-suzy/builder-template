@@ -15,222 +15,257 @@ window.isMobile = function() {
   return check;
 };
 
+function setCookie(name, value, days = 1) {
+  var expires = '';
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = '; expires=' + date.toUTCString();
+  }
+  document.cookie = name + '=' + (value || '') + expires + '; path=/';
+}
+function getCookie(name) {
+  var nameEQ = name + '=';
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
 $(document).ready(function() {
-  Handlebars.registerHelper("ifEq", function(v1, v2, options) {
+  Handlebars.registerHelper('ifEq', function(v1, v2, options) {
     if (v1 === v2) {
       return options.fn(this);
     }
     return options.inverse(this);
   });
   // $(".tool-bar-holder").hide();
-  const template = Handlebars.compile($("#category").html());
+  const template = Handlebars.compile($('#category').html());
   let products = [];
-  const bottomPanelTemplate = Handlebars.compile($("#bottom-panel").html());
+  const bottomPanelTemplate = Handlebars.compile($('#bottom-panel').html());
   $.ajax({
-    url: "https://lazysuzy.com/api/all-departments?board-view=true",
+    url: 'https://lazysuzy.com/api/all-departments?board-view=true',
     // url: "http://staging.lazysuzy.com/api/all-departments?board-view=true",
     context: document.body
   }).done(function(data) {
-    $(".components")
-      .children(".flex-grid")
+    $('.components')
+      .children('.flex-grid')
       .append(template({ categories: data }));
   });
 
-  $("body").on("click", ".js-bottom-panel-close", function() {
-    $(".bottom-panel").html("");
+  $('body').on('click', '.js-bottom-panel-close', function() {
+    $('.bottom-panel').html('');
   });
 
-  $(".nav-link").click(function(event) {
+  $('.nav-link').click(function(event) {
     event.preventDefault();
-    $(".nav-link").removeClass("active");
-    $(this).addClass("active");
-    $(".tab").removeClass("active");
-    const target = $(this).attr("href");
-    $(target).addClass("active");
-    $(".left-panel").removeClass("board");
-    $(".left-panel").addClass(target.split("#")[1]);
-    if (target !== "#browse") {
-      $(".custom-products").removeClass("show");
+    $('.nav-link').removeClass('active');
+    $(this).addClass('active');
+    $('.tab').removeClass('active');
+    const target = $(this).attr('href');
+    $(target).addClass('active');
+    $('.left-panel').removeClass('board');
+    $('.left-panel').addClass(target.split('#')[1]);
+    if (target !== '#browse') {
+      $('.custom-products').removeClass('show');
     }
-    if (target === "#browse") {
-      $(".spinner-loader").addClass("show");
+    if (target === '#browse') {
+      $('.spinner-loader').addClass('show');
     }
-    if (target === "#favorites") {
-      $(".static-bottom-panel").addClass("selected");
+    if (target === '#favorites') {
+      $('.static-bottom-panel').addClass('selected');
     } else {
-      $(".static-bottom-panel.selected").removeClass("selected");
+      $('.static-bottom-panel.selected').removeClass('selected');
     }
-    $(".mdi-chevron-left").click(function() {
-      $(target).removeClass("active");
-      $(".nav-link").removeClass("active");
-      $("#select").addClass("active");
-      $('[href*="#select"').addClass("active");
+    $('.mdi-chevron-left').click(function() {
+      $(target).removeClass('active');
+      $('.nav-link').removeClass('active');
+      $('#select').addClass('active');
+      $('[href*="#select"').addClass('active');
     });
   });
 
-  $("body").on("click", ".product-image[type='default']", function() {
-    const product = remoteProducts[$(this).attr("data-product")];
-    product.index = $(this).attr("data-product");
-    $(".bottom-panel").html(bottomPanelTemplate(product));
+  $('body').on('click', ".product-image[type='default']", function() {
+    const product = remoteProducts[$(this).attr('data-product')];
+    product.index = $(this).attr('data-product');
+    $('.bottom-panel').html(bottomPanelTemplate(product));
     // $(".tool-bar-holder").show();
   });
 
-  $(".toggle-icon").click(function() {
-    $(".toggle-icon").toggleClass("open");
-    $(".left-panel").toggleClass("open");
+  $('.toggle-icon').click(function() {
+    $('.toggle-icon').toggleClass('open');
+    $('.left-panel').toggleClass('open');
   });
-  
+
   // mobile window closed on item manual add click
-  $("body").on("click", ".manual-drop", function() {
-    $(".toggle-icon").toggleClass("open");
-    $(".left-panel").toggleClass("open");
+  $('body').on('click', '.manual-drop', function() {
+    $('.toggle-icon').toggleClass('open');
+    $('.left-panel').toggleClass('open');
   });
 
-  $(".filter-icon, .js-filter-close").click(function() {
-    $(".mobile-filter").toggleClass("open");
+  $('.filter-icon, .js-filter-close').click(function() {
+    $('.mobile-filter').toggleClass('open');
   });
 
-  $("body").on("click", ".tabs .nav-link", function(e) {
+  $('body').on('click', '.tabs .nav-link', function(e) {
     e.preventDefault();
-    $(".tab-pane.selected").removeClass("selected");
-    $(".tabs .nav-link.selected").removeClass("selected");
+    $('.tab-pane.selected').removeClass('selected');
+    $('.tabs .nav-link.selected').removeClass('selected');
 
-    $(this).addClass("selected");
-    $($(this).attr("href")).addClass("selected");
+    $(this).addClass('selected');
+    $($(this).attr('href')).addClass('selected');
   });
   function toggleAddProduct(e) {
     e.preventDefault();
-    $(".backdrop").toggleClass("show");
-    $(".add-product-modal").toggleClass("show");
-    $(".step").removeClass("active");
-    $("#step1").addClass("active");
+    $('.backdrop').toggleClass('show');
+    $('.add-product-modal').toggleClass('show');
+    $('.step').removeClass('active');
+    $('#step1').addClass('active');
   }
 
-  $(".js-addProduct, .close-modal").click(toggleAddProduct);
+  $('.js-addProduct, .close-modal').click(toggleAddProduct);
 
-  $(".js-addUrl").click(function() {
-    $(".add-product-modal").toggleClass("show");
-    $(".backdrop").toggleClass("show");
-    $("#step1").removeClass("active");
-    $("#step2").addClass("active");
+  $('.js-addUrl').click(function() {
+    $('.add-product-modal').toggleClass('show');
+    $('.backdrop').toggleClass('show');
+    $('#step1').removeClass('active');
+    $('#step2').addClass('active');
   });
 
-  $(".js-confirmation-modal, .js-close-confirmation-modal").click(function(e) {
+  $('.js-confirmation-modal, .js-close-confirmation-modal').click(function(e) {
     e.preventDefault();
-    $(".backdrop").toggleClass("show");
-    $(".confirmation-modal").toggleClass("show");
+    $('.backdrop').toggleClass('show');
+    $('.confirmation-modal').toggleClass('show');
   });
 
-  $(".step .js-btn").click(function(e) {
+  $('.step .js-btn').click(function(e) {
     e.preventDefault();
-    $(".step").removeClass("active");
-    const target = $(this).attr("target");
-    target ? $(target).addClass("active") : toggleAddProduct(e);
+    $('.step').removeClass('active');
+    const target = $(this).attr('target');
+    target ? $(target).addClass('active') : toggleAddProduct(e);
   });
 
-  $(".toggle-catalog").click(function() {
-    $(".catalog-panel").toggleClass("open");
+  $('.toggle-catalog').click(function() {
+    $('.catalog-panel').toggleClass('open');
   });
 
-  $(".js-open-custom").click(function() {
-    $(".custom-products").addClass("show");
+  $('.js-open-custom').click(function() {
+    $('.custom-products').addClass('show');
     $(".nav-link[href='#browse']").click();
   });
 
-  $(".js-btn-go").hide();
+  $('.js-btn-go').hide();
 
-  $(".js-open-auth, .js-close-auth").click(function(e) {
+  $('.js-open-auth, .js-close-auth').click(function(e) {
     if (!isMobile()) {
       e.preventDefault();
-      $(".backdrop").toggleClass("show");
-      $(".open-auth").toggleClass("show");
+      $('.backdrop').toggleClass('show');
+      $('.open-auth').toggleClass('show');
     }
   });
 
-  $(".js-open-background, .js-close-background-modal").click(function() {
-    $(".backdrop").toggleClass("show");
-    $(".background-modal").toggleClass("show");
+  $('.js-open-background, .js-close-background-modal').click(function() {
+    $('.backdrop').toggleClass('show');
+    $('.background-modal').toggleClass('show');
   });
   // $(".js-font-select").fontselect();
 
-  $(".text-items").click(function() {
-    $(".text-items.selected").removeClass("selected");
-    $(this).addClass("selected");
+  $('.text-items').click(function() {
+    $('.text-items.selected').removeClass('selected');
+    $(this).addClass('selected');
   });
 
-  $(".add-new-title").click(function() {
+  $('.add-new-title').click(function() {
     event.preventDefault();
-    $(".add-new-title.active").removeClass("active");
-    $(this).addClass("active");
-    $(".items-board.active").removeClass("active");
-    const target = $(this).attr("href");
-    $("#" + target).addClass("active");
+    $('.add-new-title.active').removeClass('active');
+    $(this).addClass('active');
+    $('.items-board.active').removeClass('active');
+    const target = $(this).attr('href');
+    $('#' + target).addClass('active');
   });
 
-  $(".close-background-msg").click(function() {
-    $(".background-msg").addClass("hide");
+  $('.close-background-msg').click(function() {
+    $('.background-msg').addClass('hide');
   });
 
-  $(".filter-icon").click(function() {
-    $("#mobile-filter").addClass("js-filter-section");
+  $('.filter-icon').click(function() {
+    $('#mobile-filter').addClass('js-filter-section');
     document.getElementById(
-      "mobile-filter"
-    ).innerHTML = document.getElementById("desktop-filter").innerHTML;
+      'mobile-filter'
+    ).innerHTML = document.getElementById('desktop-filter').innerHTML;
   });
 
-  $("body").on("click", ".dropdown-toggle.selected", function() {
-    $(this).removeClass("selected");
-    $($(this).attr("href")).removeClass("selected");
+  $('body').on('click', '.dropdown-toggle.selected', function() {
+    $(this).removeClass('selected');
+    $($(this).attr('href')).removeClass('selected');
   });
 
-  $(".publish-board-room-items").click(function() {
-    $(".publish-board-room-items.active").removeClass("active");
-    $(this).addClass("active");
+  $('.publish-board-room-items').click(function() {
+    $('.publish-board-room-items.active').removeClass('active');
+    $(this).addClass('active');
   });
 
-  $(".publish-board-style-items").click(function() {
-    $(".publish-board-style-items.active").removeClass("active");
-    $(this).addClass("active");
+  $('.publish-board-style-items').click(function() {
+    $('.publish-board-style-items.active').removeClass('active');
+    $(this).addClass('active');
   });
 
-  $(".js-open-publish-board, .js-close-publish-board").click(function(e) {
+  $('.js-open-publish-board, .js-close-publish-board').click(function(e) {
     if (!isMobile()) {
       e.preventDefault();
-      $(".backdrop").toggleClass("show");
-      $(".publish-board").toggleClass("show");
+      $('.backdrop').toggleClass('show');
+      $('.publish-board').toggleClass('show');
     }
   });
 
-  $("#submitBtn").click(function (e) {
-    const email = $("#txt_email").val().trim();
-    const password = $("#txt_pwd").val().trim();
+  function setUserName() {
+    $('.auth-link').hide();
+    $('.name-link').show();
+    const user = JSON.parse(localStorage.getItem('user'));
+    $('.js-userName').text(user.name);
+  }
+
+  $('#submitBtn').click(function(e) {
+    const email = $('#txt_email')
+      .val()
+      .trim();
+    const password = $('#txt_pwd')
+      .val()
+      .trim();
     e.preventDefault();
     e.stopPropagation();
     $.ajax({
-      url: "https://www.lazysuzy.com/api/login",
+      url: 'https://www.lazysuzy.com/api/login',
       type: 'post',
       data: {
         email: email,
         password: password
       },
-      success: function (response) {
+      success: function(response) {
         // TODO: After Login Success
         processAuthSuccess(response);
       }
     });
-
   });
 
-  function processAuthSuccess(response){
+  function processAuthSuccess(response) {
     //Save token and refresh page elements
     const user = response.user;
     const token = response.success.token;
-
+    setCookie('token', token, 1);
+    localStorage.setItem('user', JSON.stringify(user));
+    setUserName();
     //Close modal
-    
-    $(".backdrop").toggleClass("show");
-    $(".open-auth").toggleClass("show");    
-  }
-  
 
+    $('.backdrop').toggleClass('show');
+    $('.open-auth').toggleClass('show');
+  }
+
+  //check if user exists
+  if (getCookie('token')) {
+    setUserName();
+  }
 });
