@@ -32,7 +32,16 @@
             <div class="header-right-icons">
               <span> The Lazy Story</span>
               <i class="mdi mdi-heart-outline" aria-hidden="true"></i>
-              <i class="mdi mdi-account-circle" aria-hidden="true"></i>
+              <a href="#" class="auth-link">
+                <i
+                  class="mdi mdi-account-circle js-open-auth"
+                  aria-hidden="true"
+                ></i>
+              </a>
+              <a href="#" class="name-link" style="display: none;">
+                <i class="mdi mdi-account-circle" aria-hidden="true"></i>
+                <span class="js-userName"></span>
+              </a>
             </div>
           </div>
         </div>
@@ -41,8 +50,7 @@
         <div class="board-list-header">
           <h5 class="title">MY BOARDS</h5>
         </div>
-        <div class="row" id="board-list">
-        </div>
+        <div class="row" id="board-list"></div>
       </div>
       <div class="footer">
         <div class="row">
@@ -75,7 +83,6 @@
           </div>
         </div>
       </div>
-      
     </div>
     <div class="backdrop"></div>
     <div class="modal canvas-config pb-0">
@@ -154,7 +161,7 @@
             </button>
           </div> -->
           <h5 class="title ml-2 mt-4">Select Canvas Background</h5>
-              <!-- <h6 class="flooring-options ml-2">Carpet</h6>
+          <!-- <h6 class="flooring-options ml-2">Carpet</h6>
               <div class="canvas-pallete-wrapper">
                 <div id="container2" class="canvas-pallete-scroll canvas-container" >
                   <div id="canvasPalleteScrollContents" class="canvas-pallete-scroll-contents">
@@ -178,24 +185,63 @@
                   <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
                 </button>
               </div> -->
-              <!-- <h6 class="flooring-options ml-2">Wood</h6> -->
-              <div class="canvas-pallete-wrapper">
-                <div id="container3" class="canvas-pallete-scroll canvas-container" >
-                  <div id="canvasPalleteScrollContents" class="canvas-pallete-scroll-contents">
-                    <img src="./uploads/floor1.jpg" class="canvas-pallete-wood-patterns">
-                    <img src="./uploads/floor2.jpg" class="canvas-pallete-wood-patterns">
-                    <img src="./uploads/floor3.jpg" class="canvas-pallete-wood-patterns">
-                    <img src="./uploads/floor4.jpg" class="canvas-pallete-wood-patterns">
-                  </div>
-                </div>
-                <button id="slideBack3" class="canvas-scroll js-left-scroll canvas-scroll-left" type="button">
-                  <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
-                </button>
-                <button id="slide3" class="canvas-scroll js-right-scroll canvas-scroll-right" type="button">
-                  <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
-                </button>
+          <!-- <h6 class="flooring-options ml-2">Wood</h6> -->
+          <div class="canvas-pallete-wrapper">
+            <div id="container3" class="canvas-pallete-scroll canvas-container">
+              <div
+                id="canvasPalleteScrollContents"
+                class="canvas-pallete-scroll-contents"
+              >
+                <img
+                  src="./uploads/floor1.jpg"
+                  class="canvas-pallete-wood-patterns"
+                />
+                <img
+                  src="./uploads/floor2.jpg"
+                  class="canvas-pallete-wood-patterns"
+                />
+                <img
+                  src="./uploads/floor3.jpg"
+                  class="canvas-pallete-wood-patterns"
+                />
+                <img
+                  src="./uploads/floor4.jpg"
+                  class="canvas-pallete-wood-patterns"
+                />
               </div>
-              <!-- <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
+            </div>
+            <button
+              id="slideBack3"
+              class="canvas-scroll js-left-scroll canvas-scroll-left"
+              type="button"
+            >
+              <svg
+                class="canvas-scroll-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 551 1024"
+              >
+                <path
+                  d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"
+                />
+              </svg>
+            </button>
+            <button
+              id="slide3"
+              class="canvas-scroll js-right-scroll canvas-scroll-right"
+              type="button"
+            >
+              <svg
+                class="canvas-scroll-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 551 1024"
+              >
+                <path
+                  d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"
+                />
+              </svg>
+            </button>
+          </div>
+          <!-- <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
               <div class="dimension-wrapper">
                 <div class="dimension-options">
                   <input class="dimension-input" placeholder="Width" value="500">
@@ -270,18 +316,18 @@
                       <i class="mdi mdi-delete" aria-hidden="true"></i>
                     </span>
                     <span data-title="Share" data-action="share">
-                      <i class="mdi mdi-share-variant" aria-hidden="true"></i>                  
+                      <i class="mdi mdi-share-variant" aria-hidden="true"></i>
                     </span>
                     <span data-title="Duplicate" data-action="duplicate">
-                      <i class="mdi mdi-content-copy" aria-hidden="true"></i>                                    
+                      <i class="mdi mdi-content-copy" aria-hidden="true"></i>
                     </span>
                     <span data-title="Shop" onclick="action('shop')">
-                      <i class="mdi mdi-cart" aria-hidden="true"></i>                                    
+                      <i class="mdi mdi-cart" aria-hidden="true"></i>
                     </span>
                   </div>
               </div>
               <div>
-                {{title}} 
+                {{title}}
                 <!-- ${{item_total}} -->
               </div>
             </div>
@@ -290,138 +336,174 @@
       {{/each}}
     </script>
     <script type="text/javascript">
-    
-    var boardConfig = {
-      backgroundColor: "rgb(255, 255, 255)",
-      backgroundImage: ""
-    };
-    
-    // when document is ready load all boards
-    $(document).ready(function () {
-      let apiEndpoint = "server.php";
-      let boardEndpoint = "index.html";
-      
-      let board = [];
-      let boardTemplate = Handlebars.compile(
-        $('#board-template').html()
-      );
-            
-      let renderBoard = function(){
-        $('#board-list').html(
-          boardTemplate({
-            board: board
-          })
-        );
+      var boardConfig = {
+        backgroundColor: 'rgb(255, 255, 255)',
+        backgroundImage: ''
       };
-      
-      let createBoard = function(referenceObject, callback){
-        $.post(apiEndpoint, { operation: "insert", entity: "board", data: referenceObject }, function(response){
-          if(response){
-            if(callback)
-              callback(response);
-            else{
-              $.post(apiEndpoint, { operation: "select", entity: "board", where: {"board_id": response} }, function (object) {
-                board.push(object[0]);
-                renderBoard();
-              });
-            }
-          }       
-        });
-      };
-      
-      let handleAction = function(boardIndex, action){
-        let referenceObject = board[boardIndex];
-        switch (action) {
-          case "edit":
-            Cookies.set('board_id', referenceObject.board_id);
-            window.location.replace(boardEndpoint);
-            break;
-          case "delete":
-            $.post(apiEndpoint, { operation: "update", entity: "board", data: {"is_active":0}, where: {"board_id": referenceObject.board_id} }, function (response) {
-              board.splice(boardIndex, 1);
-              renderBoard();
-            });
-            break;
-          case "duplicate":
-            createBoard({
-              user_id: referenceObject.user_id,
-              state: referenceObject.state,
-              title: "Copy Of " + referenceObject.title,
-              preview: referenceObject.preview,
-              item: referenceObject.item
-            });
-        };
-      }
-      
-      $('#board-list').on("click", "[data-action]", function(){
-        let boardIndex = $(this).parent().parent().attr('data-board');
-        let action = $(this).attr('data-action');
-        
-        switch(action) {
-          case "create":
-            $('.canvas-config').toggleClass("show");
-            $('.backdrop').toggleClass('show');
-          break;
-          case "delete":
-            $('.confirmation-modal').attr("data-board", boardIndex);
-            $('.confirmation-modal').toggleClass("show");
-            $('.backdrop').toggleClass('show');
-          break;
-          default:
-            if(boardIndex && boardIndex.length > 0)
-              handleAction(boardIndex, action);
-        }
-        
-      });
-      
-      $('.confirmation-modal .btn').click(function(){
-        let boardIndex = $('.confirmation-modal').attr('data-board');
-        let action = $(this).attr('data-action');
-        handleAction(boardIndex, action);
-        $('.confirmation-modal').toggleClass("show");
-        $('.backdrop').toggleClass('show');
-      });
-      
-      // get boards from server and render them using a template
-      $.post(apiEndpoint, { operation: "select", entity: "board", where: {"is_active": 1} }, function (response) {
-        board = response;
-        renderBoard();
-      });
-      
-      $('.canvas-pallete-color').click((e) => boardConfig.backgroundColor = $(e.currentTarget).css("background-color"));
-      $('.canvas-pallete-wood-patterns').click((e) => boardConfig.backgroundImage = $(e.currentTarget).attr("src"));
-      
-      $('.canvas-config .js-btn-go').click( function(){
-        console.log('click');
-        createBoard({
-          "user_id": 1,
-          "title": "Untitled Board " + getToday()
-        }, function (response) {
-            Cookies.set('backgroundColor', boardConfig.backgroundColor);
-            Cookies.set('backgroundImage', boardConfig.backgroundImage);
-            Cookies.set('board_id', response);
-            window.location.replace(boardEndpoint);
-        });
-      });
-      
-      $('#board-list').on("click", ".edit-board", function(){
-        let boardIndex = $(this).find('[data-board]').parent().attr('data-board');
-        handleAction(boardIndex, "edit");
-      });
-      
-      $('.mdi-heart-outline').on("click", renderBoard);
-      
-    });
-    
-    function getToday(){
-      var today = new Date();
-      var dd = String(today.getDate()).padStart(2, '0');
-      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-      var yyyy = today.getFullYear();
 
-      return mm + '/' + dd + '/' + yyyy;
-    }
+      // when document is ready load all boards
+      $(document).ready(function() {
+        let apiEndpoint = 'server.php';
+        let boardEndpoint = 'index.html';
+
+        let board = [];
+        let boardTemplate = Handlebars.compile($('#board-template').html());
+
+        let renderBoard = function() {
+          $('#board-list').html(
+            boardTemplate({
+              board: board
+            })
+          );
+        };
+
+        let createBoard = function(referenceObject, callback) {
+          $.post(
+            apiEndpoint,
+            { operation: 'insert', entity: 'board', data: referenceObject },
+            function(response) {
+              if (response) {
+                if (callback) callback(response);
+                else {
+                  $.post(
+                    apiEndpoint,
+                    {
+                      operation: 'select',
+                      entity: 'board',
+                      where: { board_id: response }
+                    },
+                    function(object) {
+                      board.push(object[0]);
+                      renderBoard();
+                    }
+                  );
+                }
+              }
+            }
+          );
+        };
+
+        let handleAction = function(boardIndex, action) {
+          let referenceObject = board[boardIndex];
+          switch (action) {
+            case 'edit':
+              Cookies.set('board_id', referenceObject.board_id);
+              window.location.replace(boardEndpoint);
+              break;
+            case 'delete':
+              $.post(
+                apiEndpoint,
+                {
+                  operation: 'update',
+                  entity: 'board',
+                  data: { is_active: 0 },
+                  where: { board_id: referenceObject.board_id }
+                },
+                function(response) {
+                  board.splice(boardIndex, 1);
+                  renderBoard();
+                }
+              );
+              break;
+            case 'duplicate':
+              createBoard({
+                user_id: referenceObject.user_id,
+                state: referenceObject.state,
+                title: 'Copy Of ' + referenceObject.title,
+                preview: referenceObject.preview,
+                item: referenceObject.item
+              });
+          }
+        };
+
+        $('#board-list').on('click', '[data-action]', function() {
+          let boardIndex = $(this)
+            .parent()
+            .parent()
+            .attr('data-board');
+          let action = $(this).attr('data-action');
+
+          switch (action) {
+            case 'create':
+              $('.canvas-config').toggleClass('show');
+              $('.backdrop').toggleClass('show');
+              break;
+            case 'delete':
+              $('.confirmation-modal').attr('data-board', boardIndex);
+              $('.confirmation-modal').toggleClass('show');
+              $('.backdrop').toggleClass('show');
+              break;
+            default:
+              if (boardIndex && boardIndex.length > 0)
+                handleAction(boardIndex, action);
+          }
+        });
+
+        $('.confirmation-modal .btn').click(function() {
+          let boardIndex = $('.confirmation-modal').attr('data-board');
+          let action = $(this).attr('data-action');
+          handleAction(boardIndex, action);
+          $('.confirmation-modal').toggleClass('show');
+          $('.backdrop').toggleClass('show');
+        });
+
+        // get boards from server and render them using a template
+        $.post(
+          apiEndpoint,
+          { operation: 'select', entity: 'board', where: { is_active: 1 } },
+          function(response) {
+            board = response;
+            renderBoard();
+          }
+        );
+
+        $('.canvas-pallete-color').click(
+          e =>
+            (boardConfig.backgroundColor = $(e.currentTarget).css(
+              'background-color'
+            ))
+        );
+        $('.canvas-pallete-wood-patterns').click(
+          e => (boardConfig.backgroundImage = $(e.currentTarget).attr('src'))
+        );
+
+        $('.canvas-config .js-btn-go').click(function() {
+          console.log('click');
+          createBoard(
+            {
+              user_id: 1,
+              title: 'Untitled Board ' + getToday()
+            },
+            function(response) {
+              Cookies.set('backgroundColor', boardConfig.backgroundColor);
+              Cookies.set('backgroundImage', boardConfig.backgroundImage);
+              Cookies.set('board_id', response);
+              window.location.replace(boardEndpoint);
+            }
+          );
+        });
+
+        $('#board-list').on('click', '.edit-board', function() {
+          let boardIndex = $(this)
+            .find('[data-board]')
+            .parent()
+            .attr('data-board');
+          handleAction(boardIndex, 'edit');
+        });
+
+        $('.mdi-heart-outline').on('click', renderBoard);
+      });
+
+      function getToday() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        return mm + '/' + dd + '/' + yyyy;
+      }
     </script>
+    <script src="./auth.js"></script>
     <script src="./boardConfigure.js"></script>
     <script src="./horizontalScroll.js"></script>
     <script src="./createBoardScript.js"></script>
