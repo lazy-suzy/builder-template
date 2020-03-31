@@ -123,7 +123,7 @@ let appMeta = {
 
     fontToolbarElement: '.editor-icons',
     imageToolbarElement: '.image-icons',
-    cropToolbarElement: '.item-action-icons',
+    cropToolbarElement: '.crop-toolbar',
     transparentToolbarElement: '.do-transparent',
     undoTransparentToolbarElement: '.undo-transparent',
 
@@ -811,10 +811,7 @@ let updateToolbar = () => {
     'visibility',
     appMeta.flag.isPreviewEnabled ? 'hidden' : 'visible'
   );
-  $(appMeta.identifier.cropToolbarElement).css(
-    'visibility',
-    canvasMeta.flag.cropEnabled ? 'hidden' : 'visible'
-  );
+  $(appMeta.identifier.cropToolbarElement).toggle(canvasMeta.flag.cropEnabled);
 };
 let renderAppMeta = () => {
   if (appMeta.flag.isAssetDirty) {
