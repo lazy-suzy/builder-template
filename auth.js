@@ -26,6 +26,19 @@ $(document).ready(function() {
     $('.js-userName').text(user.name);
   }
 
+  $('.js-open-auth, .js-close-auth').click(function(e) {
+    if (!isMobile()) {
+      e.preventDefault();
+      $('.backdrop').toggleClass('show');
+      $('.open-auth').toggleClass('show');
+    }
+  });
+
+  $('.js-logout').click(() => {
+    setCookie('token', '');
+    window.location.reload();
+  });
+
   $('#submitBtn').click(function(e) {
     const email = $('#txt_email')
       .val()
