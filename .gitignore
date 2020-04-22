@@ -1,2 +1,5 @@
 uploads/*.*
 .ftpconfig
+.htaccess
+keys/*
+image_api.php

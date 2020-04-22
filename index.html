@@ -23,6 +23,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"
       />
     <link href="./styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/>
   </head>
   <body class="gray-bg">
     <div>
@@ -274,14 +275,14 @@
                 <i class="mdi mdi-redo" onclick="redo()" aria-hidden="true"></i>
               </div>
               <div class="col-sm-6 order-last order-sm-2 editor-icons">
-                <!-- <input class="js-font-select" type="text"> -->
-                <select class="js-font-select">
+                <input class="js-font-select" type="text">
+                <!-- <select class="js-font-select">
                   <option value="Helvetica" class="helvetica">Helvetica</option>
                   <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
                   <option value="Courier New" class="courier-new">Courier New</option>
                   <option value="Georgia" class="georgia">Georgia</option>
                   <option value="Arial" class="arial" selected>Arial</option>
-                </select>
+                </select> -->
                 <select class="js-font-select-size">
                   <option value="8">8</option>
                   <option value="9">9</option>
@@ -298,10 +299,10 @@
                   <option value="72">72</option>
                   <option value="96">96</option>
                 </select>
-                <!-- <span data-title="Change color">
+                <span data-title="Change color">
                   <i class="mdi mdi-format-color-text" aria-hidden="true"></i>
                 </span>
-                <span data-title="Bold">
+                <!-- <span data-title="Bold">
                   <i class="mdi mdi-format-bold" aria-hidden="true"></i>
                 </span>
                 <span data-title="Italic">
@@ -368,14 +369,14 @@
                     <i class="mdi mdi-undo" onclick="undo()" aria-hidden="true"></i>
                     <i class="mdi mdi-redo" onclick="redo()" aria-hidden="true"></i>
                   </span>
-                  <!-- <input class="js-font-select" type="text"> -->
-                  <select class="js-font-select">
+                  <input class="js-font-select" type="text">
+                  <!-- <select class="js-font-select">
                     <option value="Helvetica" class="helvetica">Helvetica</option>
                     <option value="Times New Roman" class="times-new-roman">Times New Roman</option>
                     <option value="Courier New" class="courier-new">Courier New</option>
                     <option value="Georgia" class="georgia">Georgia</option>
                     <option value="Arial" class="arial" selected>Arial</option>
-                  </select>
+                  </select> -->
                   <select class="js-font-select-size">
                     <option value="8">8</option>
                     <option value="9">9</option>
@@ -392,10 +393,10 @@
                     <option value="72">72</option>
                     <option value="96">96</option>
                   </select>
-                  <!-- <span data-title="Change color">
+                  <span data-title="Change color">
                     <i class="mdi mdi-format-color-text" aria-hidden="true"></i>
                   </span>
-                  <span data-title="Bold">
+                  <!-- <span data-title="Bold">
                     <i class="mdi mdi-format-bold" aria-hidden="true"></i>
                   </span>
                   <span data-title="Italic">
@@ -930,5 +931,52 @@
     <script src="./boardConfigure.js"></script>
     <script src="./createBoardScript.js"></script>
     <script src="./horizontalScroll.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    <script type="text/javascript">
+    const pickr = Pickr.create({
+        el: '.mdi-format-color-text',
+        theme: 'nano', // or 'monolith', or 'nano'
+
+        // swatches: [
+        //     'rgba(244, 67, 54, 1)',
+        //     'rgba(233, 30, 99, 0.95)',
+        //     'rgba(156, 39, 176, 0.9)',
+        //     'rgba(103, 58, 183, 0.85)',
+        //     'rgba(63, 81, 181, 0.8)',
+        //     'rgba(33, 150, 243, 0.75)',
+        //     'rgba(3, 169, 244, 0.7)',
+        //     'rgba(0, 188, 212, 0.7)',
+        //     'rgba(0, 150, 136, 0.75)',
+        //     'rgba(76, 175, 80, 0.8)',
+        //     'rgba(139, 195, 74, 0.85)',
+        //     'rgba(205, 220, 57, 0.9)',
+        //     'rgba(255, 235, 59, 0.95)',
+        //     'rgba(255, 193, 7, 1)'
+        // ],
+
+        components: {
+
+            // Main components
+            preview: true,
+            opacity: true,
+            hue: true,
+
+            // Input / output Options
+            // interaction: {
+                // hex: true,
+                // rgba: true,
+                // hsla: true,
+                // hsva: true,
+                // cmyk: true,
+                // input: true,
+                // clear: true,
+                // save: true
+            // }
+        }
+      }).on('change', (color, instance) => {
+        canvas.getActiveObject().setColor(color.toRGBA().toString());
+        canvas.renderAll();
+      });
+    </script>
   </body>
 </html>

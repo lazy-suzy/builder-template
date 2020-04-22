@@ -223,14 +223,14 @@ let getBoards = () => {
     if (boardFound == false)
       window.location.replace(appMeta.endpoint.boardView);
     else{
-      if(Cookies.get('backgroundColor').length > 0){
+      if(Cookies.get('backgroundColor') && Cookies.get('backgroundColor').length > 0){
         canvas.setBackgroundColor(Cookies.get('backgroundColor'), function() {
           canvas.renderAll();
           saveHistory();
         });
         Cookies.set('backgroundColor', "");
       }
-      if(Cookies.get('backgroundImage').length > 0){
+      if(Cookies.get('backgroundImage') && Cookies.get('backgroundImage').length > 0){
         fb.Image.fromURL(Cookies.get('backgroundImage'), function(img) {
           img.set({originX: 'left', originY: 'top', scaleX: canvas.width / img.width, scaleY: canvas.height / img.height});
           canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
@@ -291,6 +291,7 @@ let initializeCanvas = (callback) => {
   // handle canvas events
   canvas.on("selection:created", handleSelection);
   canvas.on("selection:updated", handleSelection);
+  canvas.on("selection:cleared", handleSelection);
 
   // stop objects from going out of canvas area
   canvas.on("object:moving", (e) => {
@@ -522,8 +523,9 @@ let handleSelection = () => {
       canvasMeta.flag.isCurrentObjectTransparentable = activeObject.referenceObject.type == "custom";
       canvasMeta.flag.isCurrentObjectTransparentSelected = activeObject.getSrc().includes(activeObject.referenceObject.transparentPath);
     }
-    updateToolbar();
   }
+  
+  updateToolbar();
 };
 let handleDrop = (e, draggedObject, dropType, referenceID, referenceType) => {
   if (dropType == "image") {

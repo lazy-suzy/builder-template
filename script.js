@@ -149,7 +149,7 @@ $(document).ready(function() {
     $(".backdrop").toggleClass("show");
     $(".background-modal").toggleClass("show");
   });
-  // $(".js-font-select").fontselect();
+  $(".js-font-select").fontselect();
 
   $(".text-items").click(function() {
     $(".text-items.selected").removeClass("selected");
