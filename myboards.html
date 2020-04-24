@@ -1,128 +1,114 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Lazysuzy Piranha templates</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="http://cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css"
-    />
 
-    <link href="./styles.css" rel="stylesheet" />
-  </head>
-  <body>
-    <div>
-      <div class="header container-fluid">
-        <div class="row">
-          <div class="col-4">
-            <div class="logo">
-              <img
-                src="https://www.lazysuzy.com/images/color_logo_transparent.png"
-              />
-            </div>
-          </div>
-          <div class="col-8 text-right">
-            <div class="header-right-icons">
-              <span> The Lazy Story</span>
-              <i class="mdi mdi-heart-outline" aria-hidden="true"></i>
-              <a href="#" class="auth-link">
-                <i
-                  class="mdi mdi-account-circle js-open-auth"
-                  aria-hidden="true"
-                ></i>
-              </a>
-              <a href="#" class="name-link" style="display: none;">
-                <i class="mdi mdi-account-circle" aria-hidden="true"></i>
-                <span class="js-userName"></span>
-                <div class="logout-btn js-logout">Logout</div>
-              </a>
-            </div>
+<head>
+  <title>Lazysuzy Piranha templates</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <link rel="stylesheet" href="http://cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css" />
+
+  <link href="./styles.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div>
+    <div class="header container-fluid">
+      <div class="row">
+        <div class="col-4">
+          <div class="logo">
+            <img src="https://www.lazysuzy.com/images/color_logo_transparent.png" />
           </div>
         </div>
-      </div>
-      <div class="board-list-container container">
-        <div class="board-list-header">
-          <h5 class="title">MY BOARDS</h5>
-        </div>
-        <div class="row" id="board-list"></div>
-      </div>
-      <div class="footer">
-        <div class="row">
-          <div class="col-6">
-            <div class="footer-text sm">© 2019 LazySuzy</div>
-            <span class="footer-text sm d-md-none">
-              <a href="/privacypolicy">Privacy Policy</a>
-              <span>|</span>
-              <a href="/termsofservice">Terms of service</a>
-            </span>
-          </div>
-          <div class="col-6 text-right">
-            <div class="footer-text d-md-none">
-              <a href="/aboutus">The Lazy Story</a>
-            </div>
-            <div class="footer-text">
-              Connect With Us
-              <a
-                target="_blank"
-                href="//www.facebook.com/shoplazysuzy"
-                class="-icon"
-                ><i class="fab fa-facebook-f -cicon"></i
-              ></a>
-            </div>
-            <div class="footer-text d-none d-md-block">
-              <a href="/privacypolicy">Privacy Policy</a>
-              <span>|</span>
-              <a href="/termsofservice">Terms of service</a>
-            </div>
+        <div class="col-8 text-right">
+          <div class="header-right-icons">
+            <span> The Lazy Story</span>
+            <i class="mdi mdi-heart-outline" aria-hidden="true"></i>
+            <a href="#" class="auth-link">
+              <i class="mdi mdi-account-circle js-open-auth" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="name-link" style="display: none;">
+              <i class="mdi mdi-account-circle" aria-hidden="true"></i>
+              <span class="js-userName"></span>
+              <div class="logout-btn js-logout">Logout</div>
+            </a>
           </div>
         </div>
       </div>
     </div>
-    <div class="backdrop"></div>
-    <div class="modal canvas-config pb-0">
+    <div class="board-list-container container">
+      <div class="board-list-header">
+        <h5 class="title">MY BOARDS</h5>
+      </div>
+      <div class="row" id="board-list"></div>
+    </div>
+    <div class="footer">
       <div class="row">
-        <div class="col-12">
-          <h4 class="board-header">CREATE NEW BOARD</h4>
-          <h5 class="title ml-2">Select Layout Style</h5>
+        <div class="col-6">
+          <div class="footer-text sm">© 2019 LazySuzy</div>
+          <span class="footer-text sm d-md-none">
+            <a href="/privacypolicy">Privacy Policy</a>
+            <span>|</span>
+            <a href="/termsofservice">Terms of service</a>
+          </span>
         </div>
-        <div class="col-6 ">
-          <div class="canvas-style" target="#board-options-modal">
-            <div class="canvas-layout"></div>
-            <h5>BOARD</h5>
+        <div class="col-6 text-right">
+          <div class="footer-text d-md-none">
+            <a href="/aboutus">The Lazy Story</a>
+          </div>
+          <div class="footer-text">
+            Connect With Us
+            <a target="_blank" href="//www.facebook.com/shoplazysuzy" class="-icon"><i
+                class="fab fa-facebook-f -cicon"></i></a>
+          </div>
+          <div class="footer-text d-none d-md-block">
+            <a href="/privacypolicy">Privacy Policy</a>
+            <span>|</span>
+            <a href="/termsofservice">Terms of service</a>
           </div>
         </div>
-        <div class="col-6 text-center">
-          <div class="canvas-style" target="#room-options-modal">
-            <div class="canvas-layout canvas-layout-room"></div>
-            <h5>ROOM</h5>
-          </div>
+      </div>
+    </div>
+  </div>
+  <div class="backdrop"></div>
+  <div class="modal canvas-config pb-0">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="board-header">CREATE NEW BOARD</h4>
+        <h5 class="title ml-2">Select Layout Style</h5>
+      </div>
+      <div class="col-6 ">
+        <div class="canvas-style" target="#board-options-modal">
+          <div class="canvas-layout"></div>
+          <h5>BOARD</h5>
         </div>
-        <div class="col-12 d-none canvas-options" id="board-options-modal">
-          <h5 class="title ml-2 mt-4">Select Canvas Color</h5>
-          <div class="canvas-pallete">
-            <div class="canvas-pallete-color color-pallete-1"></div>
-            <div class="canvas-pallete-color color-pallete-2"></div>
-            <div class="canvas-pallete-color color-pallete-3"></div>
-            <div class="canvas-pallete-color color-pallete-4"></div>
-            <div class="canvas-pallete-color color-pallete-5"></div>
-            <div class="canvas-pallete-color color-pallete-6"></div>
-          </div>
-          <div class="canvas-pallete">
-            <div class="canvas-pallete-color color-pallete-7"></div>
-            <div class="canvas-pallete-color color-pallete-8"></div>
-            <div class="canvas-pallete-color color-pallete-9"></div>
-            <div class="canvas-pallete-color color-pallete-10"></div>
-            <div class="canvas-pallete-color color-pallete-11"></div>
-            <div class="canvas-pallete-color color-pallete-12"></div>
-          </div>
-          <!-- <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
+      </div>
+      <div class="col-6 text-center">
+        <div class="canvas-style" target="#room-options-modal">
+          <div class="canvas-layout canvas-layout-room"></div>
+          <h5>ROOM</h5>
+        </div>
+      </div>
+      <div class="col-12 d-none canvas-options" id="board-options-modal">
+        <h5 class="title ml-2 mt-4">Select Canvas Color</h5>
+        <div class="canvas-pallete">
+          <div class="canvas-pallete-color color-pallete-1"></div>
+          <div class="canvas-pallete-color color-pallete-2"></div>
+          <div class="canvas-pallete-color color-pallete-3"></div>
+          <div class="canvas-pallete-color color-pallete-4"></div>
+          <div class="canvas-pallete-color color-pallete-5"></div>
+          <div class="canvas-pallete-color color-pallete-6"></div>
+        </div>
+        <div class="canvas-pallete">
+          <div class="canvas-pallete-color color-pallete-7"></div>
+          <div class="canvas-pallete-color color-pallete-8"></div>
+          <div class="canvas-pallete-color color-pallete-9"></div>
+          <div class="canvas-pallete-color color-pallete-10"></div>
+          <div class="canvas-pallete-color color-pallete-11"></div>
+          <div class="canvas-pallete-color color-pallete-12"></div>
+        </div>
+        <!-- <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
           <div class="dimension-wrapper">
             <div class="dimension-options">
               <input class="dimension-input" placeholder="Width" value="500">
@@ -134,9 +120,9 @@
             </div>
             <div class="dimension-options">px</div>
           </div> -->
-        </div>
-        <div class="col-12 d-none canvas-options" id="room-options-modal">
-          <!-- <h5 class="title ml-2 mt-4">Select Wall Color</h5>
+      </div>
+      <div class="col-12 d-none canvas-options" id="room-options-modal">
+        <!-- <h5 class="title ml-2 mt-4">Select Wall Color</h5>
           <div class="canvas-pallete-wrapper">
             <div id="container" class="canvas-pallete-scroll canvas-container" >
               <div id="canvasPalleteScrollContents" class="canvas-pallete-scroll-contents">
@@ -151,7 +137,7 @@
                   <div  class="canvas-pallete-color color-black"></div>
                   <div  class="canvas-pallete-color color-gray"></div>
                   <div  class="canvas-pallete-color color-blue"></div>
-                  <div  class="canvas-pallete-color color-green"></div>  
+                  <div  class="canvas-pallete-color color-green"></div>
               </div>
             </div>
             <button id="slideBack" class="canvas-scroll js-left-scroll canvas-scroll-left" type="button">
@@ -161,8 +147,8 @@
               <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
             </button>
           </div> -->
-          <h5 class="title ml-2 mt-4">Select Canvas Background</h5>
-          <!-- <h6 class="flooring-options ml-2">Carpet</h6>
+        <h5 class="title ml-2 mt-4">Select Canvas Background</h5>
+        <!-- <h6 class="flooring-options ml-2">Carpet</h6>
               <div class="canvas-pallete-wrapper">
                 <div id="container2" class="canvas-pallete-scroll canvas-container" >
                   <div id="canvasPalleteScrollContents" class="canvas-pallete-scroll-contents">
@@ -186,63 +172,30 @@
                   <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
                 </button>
               </div> -->
-          <!-- <h6 class="flooring-options ml-2">Wood</h6> -->
-          <div class="canvas-pallete-wrapper">
-            <div id="container3" class="canvas-pallete-scroll canvas-container">
-              <div
-                id="canvasPalleteScrollContents"
-                class="canvas-pallete-scroll-contents"
-              >
-                <img
-                  src="./uploads/floor1.jpg"
-                  class="canvas-pallete-wood-patterns"
-                />
-                <img
-                  src="./uploads/floor2.jpg"
-                  class="canvas-pallete-wood-patterns"
-                />
-                <img
-                  src="./uploads/floor3.jpg"
-                  class="canvas-pallete-wood-patterns"
-                />
-                <img
-                  src="./uploads/floor4.jpg"
-                  class="canvas-pallete-wood-patterns"
-                />
-              </div>
+        <!-- <h6 class="flooring-options ml-2">Wood</h6> -->
+        <div class="canvas-pallete-wrapper">
+          <div id="container3" class="canvas-pallete-scroll canvas-container">
+            <div id="canvasPalleteScrollContents" class="canvas-pallete-scroll-contents">
+              <img src="./uploads/floor1.jpg" class="canvas-pallete-wood-patterns" />
+              <img src="./uploads/floor2.jpg" class="canvas-pallete-wood-patterns" />
+              <img src="./uploads/floor3.jpg" class="canvas-pallete-wood-patterns" />
+              <img src="./uploads/floor4.jpg" class="canvas-pallete-wood-patterns" />
             </div>
-            <button
-              id="slideBack3"
-              class="canvas-scroll js-left-scroll canvas-scroll-left"
-              type="button"
-            >
-              <svg
-                class="canvas-scroll-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 551 1024"
-              >
-                <path
-                  d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"
-                />
-              </svg>
-            </button>
-            <button
-              id="slide3"
-              class="canvas-scroll js-right-scroll canvas-scroll-right"
-              type="button"
-            >
-              <svg
-                class="canvas-scroll-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 551 1024"
-              >
-                <path
-                  d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"
-                />
-              </svg>
-            </button>
           </div>
-          <!-- <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
+          <button id="slideBack3" class="canvas-scroll js-left-scroll canvas-scroll-left" type="button">
+            <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024">
+              <path
+                d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z" />
+            </svg>
+          </button>
+          <button id="slide3" class="canvas-scroll js-right-scroll canvas-scroll-right" type="button">
+            <svg class="canvas-scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024">
+              <path
+                d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z" />
+            </svg>
+          </button>
+        </div>
+        <!-- <h5 class="title ml-1 mt-4">Customize Dimensions</h5>
               <div class="dimension-wrapper">
                 <div class="dimension-options">
                   <input class="dimension-input" placeholder="Width" value="500">
@@ -254,123 +207,88 @@
                 </div>
                 <div class="dimension-options">px</div>
               </div> -->
-        </div>
-      </div>
-      <div class="row modal-action mt-4 mb-4">
-        <div class="col-6 text-right">
-          <button class="btn btn-cancel js-close-config-modal">Cancel</button>
-        </div>
-        <div class="col-6">
-          <button class="btn red-button js-btn-go">Go</button>
-        </div>
       </div>
     </div>
-    <div class="modal confirmation-modal text-center">
-      <div>
-        Are you sure? This can't be undone.
+    <div class="row modal-action mt-4 mb-4">
+      <div class="col-6 text-right">
+        <button class="btn btn-cancel js-close-config-modal">Cancel</button>
       </div>
-      <div class="row modal-action mt-4 mb-4">
-        <div class="col-6 text-right">
-          <button class="btn red-button" data-action="delete">DELETE</button>
-        </div>
-        <div class="col-6">
-          <button class="btn btn-cancel" data-action="cancel">CANCEL</button>
-        </div>
+      <div class="col-6">
+        <button class="btn red-button js-btn-go">Go</button>
       </div>
     </div>
-    <div class="modal open-auth">
-      <div class="close-icon js-close-auth">
-        <i class="mdi mdi-close" aria-hidden="true"></i>
+  </div>
+  <div class="modal confirmation-modal text-center">
+    <div>
+      Are you sure? This can't be undone.
+    </div>
+    <div class="row modal-action mt-4 mb-4">
+      <div class="col-6 text-right">
+        <button class="btn red-button" data-action="delete">DELETE</button>
       </div>
+      <div class="col-6">
+        <button class="btn btn-cancel" data-action="cancel">CANCEL</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal open-auth">
+    <div class="close-icon js-close-auth">
+      <i class="mdi mdi-close" aria-hidden="true"></i>
+    </div>
 
-      <div class="row">
-        <div class="col-12 text-center">
-          <h5
-            class="modal-heading"
-            style="margin-top: 5px;"
-            id="signInModalLabel"
-          >
-            Hey, Star Stuff!
-          </h5>
+    <div class="row">
+      <div class="col-12 text-center">
+        <h5 class="modal-heading" style="margin-top: 5px;" id="signInModalLabel">
+          Hey, Star Stuff!
+        </h5>
 
-          <div class="socialButtons">
-            <button
-              type="button"
-              class="btn btn-primary facebookBtn"
-              style="background: #3b5998;"
-            >
-              <a [href]="facebookRedirect" class="white">
-                <i class="fab fa-facebook-f"></i>&nbsp;<b
-                  >Continue with Facebook</b
-                >
-              </a>
+        <div class="socialButtons">
+          <button type="button" class="btn btn-primary facebookBtn" style="background: #3b5998;">
+            <a [href]="facebookRedirect" class="white">
+              <i class="fab fa-facebook-f"></i>&nbsp;<b>Continue with Facebook</b>
+            </a>
+          </button>
+          <br />
+          <button type="button" class="btn btn-light googleBtn">
+            <a [href]="googleRedirect" class="black">
+              <i class="fab fa-google"></i>&nbsp;<b>Continue with Google</b>
+            </a>
+          </button>
+        </div>
+
+        <div class="span-line text-center">Not Feeling Social?</div>
+        <br />
+
+        <form action="" id="signinform">
+          <div class="formGroup">
+            <input type="email" class="form-control text-input" id="txt_email" name="txt_email" placeholder="Username"
+              required />
+            <input type="password" class="form-control text-input password" id="txt_pwd" name="txt_pwd"
+              placeholder="Password" required />
+
+            <button type="submit" class="form-control btn btn-dark submit" id="submitBtn">
+              Login
             </button>
             <br />
-            <button type="button" class="btn btn-light googleBtn">
-              <a [href]="googleRedirect" class="black">
-                <i class="fab fa-google"></i>&nbsp;<b>Continue with Google</b>
-              </a>
-            </button>
+            <a class="resetPassword" routerLink="/forgotpassword">Reset Password</a>
           </div>
+        </form>
+      </div>
 
-          <div class="span-line text-center">Not Feeling Social?</div>
-          <br />
-
-          <form action="" id="signinform">
-            <div class="formGroup">
-              <input
-                type="email"
-                class="form-control text-input"
-                id="txt_email"
-                name="txt_email"
-                placeholder="Username"
-                required
-              />
-              <input
-                type="password"
-                class="form-control text-input password"
-                id="txt_pwd"
-                name="txt_pwd"
-                placeholder="Password"
-                required
-              />
-
-              <button
-                type="submit"
-                class="form-control btn btn-dark submit"
-                id="submitBtn"
-              >
-                Login
-              </button>
-              <br />
-              <a class="resetPassword" routerLink="/forgotpassword"
-                >Reset Password</a
-              >
-            </div>
-          </form>
-        </div>
-
-        <div class="modal-footer">
-          <span class="footer-content"
-            >Not a member yet?&nbsp;
-            <button class="btn btn-sm btn-light js-open-signup" id="signUpLink">
-              Join Now.
-            </button></span
-          >
-        </div>
+      <div class="modal-footer">
+        <span class="footer-content">Not a member yet?&nbsp;
+          <button class="btn btn-sm btn-light js-open-signup" id="signUpLink">
+            Join Now.
+          </button></span>
       </div>
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.5.3/handlebars.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script type="text/template" id="board-template">
+  </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.5.3/handlebars.min.js"
+    crossorigin="anonymous"></script>
+  <script type="text/template" id="board-template">
       <div class="col-sm-3">
         <div class="board-card box-shadow-0">
           <div class="canvas-preview">
@@ -418,177 +336,178 @@
         {{/with}}
       {{/each}}
     </script>
-    <script type="text/javascript">
-      var boardConfig = {
-        backgroundColor: 'rgb(255, 255, 255)',
-        backgroundImage: ''
+  <script type="text/javascript">
+    var boardConfig = {
+      backgroundColor: 'rgb(255, 255, 255)',
+      backgroundImage: ''
+    };
+
+    // when document is ready load all boards
+    $(document).ready(function () {
+      let apiEndpoint = 'server.php';
+      let boardEndpoint = 'index.html';
+
+      let board = [];
+      let boardTemplate = Handlebars.compile($('#board-template').html());
+
+      let renderBoard = function () {
+        $('#board-list').html(
+          boardTemplate({
+            board: board
+          })
+        );
       };
 
-      // when document is ready load all boards
-      $(document).ready(function() {
-        let apiEndpoint = 'server.php';
-        let boardEndpoint = 'index.html';
-
-        let board = [];
-        let boardTemplate = Handlebars.compile($('#board-template').html());
-
-        let renderBoard = function() {
-          $('#board-list').html(
-            boardTemplate({
-              board: board
-            })
-          );
-        };
-
-        let createBoard = function(referenceObject, callback) {
-          $.post(
-            apiEndpoint,
-            { operation: 'insert', entity: 'board', data: referenceObject },
-            function(response) {
-              if (response) {
-                if (callback) callback(response);
-                else {
-                  $.post(
-                    apiEndpoint,
-                    {
-                      operation: 'select',
-                      entity: 'board',
-                      where: { board_id: response }
-                    },
-                    function(object) {
-                      board.push(object[0]);
-                      renderBoard();
-                    }
-                  );
-                }
-              }
-            }
-          );
-        };
-
-        let handleAction = function(boardIndex, action) {
-          let referenceObject = board[boardIndex];
-          switch (action) {
-            case 'edit':
-              Cookies.set('board_id', referenceObject.board_id);
-              window.location.replace(boardEndpoint);
-              break;
-            case 'delete':
-              $.post(
-                apiEndpoint,
-                {
-                  operation: 'update',
-                  entity: 'board',
-                  data: { is_active: 0 },
-                  where: { board_id: referenceObject.board_id }
-                },
-                function(response) {
-                  board.splice(boardIndex, 1);
-                  renderBoard();
-                }
-              );
-              break;
-            case 'duplicate':
-              createBoard({
-                user_id: referenceObject.user_id,
-                state: referenceObject.state,
-                title: 'Copy Of ' + referenceObject.title,
-                preview: referenceObject.preview,
-                item: referenceObject.item
-              });
-          }
-        };
-
-        $('#board-list').on('click', '[data-action]', function() {
-          let boardIndex = $(this)
-            .parent()
-            .parent()
-            .attr('data-board');
-          let action = $(this).attr('data-action');
-
-          switch (action) {
-            case 'create':
-              $('.canvas-config').toggleClass('show');
-              $('.backdrop').toggleClass('show');
-              break;
-            case 'delete':
-              $('.confirmation-modal').attr('data-board', boardIndex);
-              $('.confirmation-modal').toggleClass('show');
-              $('.backdrop').toggleClass('show');
-              break;
-            default:
-              if (boardIndex && boardIndex.length > 0)
-                handleAction(boardIndex, action);
-          }
-        });
-
-        $('.confirmation-modal .btn').click(function() {
-          let boardIndex = $('.confirmation-modal').attr('data-board');
-          let action = $(this).attr('data-action');
-          handleAction(boardIndex, action);
-          $('.confirmation-modal').toggleClass('show');
-          $('.backdrop').toggleClass('show');
-        });
-
-        // get boards from server and render them using a template
+      let createBoard = function (referenceObject, callback) {
         $.post(
           apiEndpoint,
-          { operation: 'select', entity: 'board', where: { is_active: 1 } },
-          function(response) {
-            board = response;
-            renderBoard();
+          { operation: 'insert', entity: 'board', data: referenceObject },
+          function (response) {
+            if (response) {
+              if (callback) callback(response);
+              else {
+                $.post(
+                  apiEndpoint,
+                  {
+                    operation: 'select',
+                    entity: 'board',
+                    where: { board_id: response }
+                  },
+                  function (object) {
+                    board.push(object[0]);
+                    renderBoard();
+                  }
+                );
+              }
+            }
           }
         );
+      };
 
-        $('.canvas-pallete-color').click(
-          e =>
-            (boardConfig.backgroundColor = $(e.currentTarget).css(
-              'background-color'
-            ))
-        );
-        $('.canvas-pallete-wood-patterns').click(
-          e => (boardConfig.backgroundImage = $(e.currentTarget).attr('src'))
-        );
+      let handleAction = function (boardIndex, action) {
+        let referenceObject = board[boardIndex];
+        switch (action) {
+          case 'edit':
+            Cookies.set('board_id', referenceObject.board_id);
+            window.location.replace(boardEndpoint);
+            break;
+          case 'delete':
+            $.post(
+              apiEndpoint,
+              {
+                operation: 'update',
+                entity: 'board',
+                data: { is_active: 0 },
+                where: { board_id: referenceObject.board_id }
+              },
+              function (response) {
+                board.splice(boardIndex, 1);
+                renderBoard();
+              }
+            );
+            break;
+          case 'duplicate':
+            createBoard({
+              user_id: referenceObject.user_id,
+              state: referenceObject.state,
+              title: 'Copy Of ' + referenceObject.title,
+              preview: referenceObject.preview,
+              item: referenceObject.item
+            });
+        }
+      };
 
-        $('.canvas-config .js-btn-go').click(function() {
-          console.log('click');
-          createBoard(
-            {
-              user_id: 1,
-              title: 'Untitled Board ' + getToday()
-            },
-            function(response) {
-              Cookies.set('backgroundColor', boardConfig.backgroundColor);
-              Cookies.set('backgroundImage', boardConfig.backgroundImage);
-              Cookies.set('board_id', response);
-              window.location.replace(boardEndpoint);
-            }
-          );
-        });
+      $('#board-list').on('click', '[data-action]', function () {
+        let boardIndex = $(this)
+          .parent()
+          .parent()
+          .attr('data-board');
+        let action = $(this).attr('data-action');
 
-        $('#board-list').on('click', '.edit-board', function() {
-          let boardIndex = $(this)
-            .find('[data-board]')
-            .parent()
-            .attr('data-board');
-          handleAction(boardIndex, 'edit');
-        });
-
-        $('.mdi-heart-outline').on('click', renderBoard);
+        switch (action) {
+          case 'create':
+            $('.canvas-config').toggleClass('show');
+            $('.backdrop').toggleClass('show');
+            break;
+          case 'delete':
+            $('.confirmation-modal').attr('data-board', boardIndex);
+            $('.confirmation-modal').toggleClass('show');
+            $('.backdrop').toggleClass('show');
+            break;
+          default:
+            if (boardIndex && boardIndex.length > 0)
+              handleAction(boardIndex, action);
+        }
       });
 
-      function getToday() {
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
+      $('.confirmation-modal .btn').click(function () {
+        let boardIndex = $('.confirmation-modal').attr('data-board');
+        let action = $(this).attr('data-action');
+        handleAction(boardIndex, action);
+        $('.confirmation-modal').toggleClass('show');
+        $('.backdrop').toggleClass('show');
+      });
 
-        return mm + '/' + dd + '/' + yyyy;
-      }
-    </script>
-    <script src="./auth.js"></script>
-    <script src="./boardConfigure.js"></script>
-    <script src="./horizontalScroll.js"></script>
-    <script src="./createBoardScript.js"></script>
-  </body>
+      // get boards from server and render them using a template
+      $.post(
+        apiEndpoint,
+        { operation: 'select', entity: 'board', where: { is_active: 1 } },
+        function (response) {
+          board = response;
+          renderBoard();
+        }
+      );
+
+      $('.canvas-pallete-color').click(
+        e =>
+          (boardConfig.backgroundColor = $(e.currentTarget).css(
+            'background-color'
+          ))
+      );
+      $('.canvas-pallete-wood-patterns').click(
+        e => (boardConfig.backgroundImage = $(e.currentTarget).attr('src'))
+      );
+
+      $('.canvas-config .js-btn-go').click(function () {
+        console.log('click');
+        createBoard(
+          {
+            user_id: 1,
+            title: 'Untitled Board ' + getToday()
+          },
+          function (response) {
+            Cookies.set('backgroundColor', boardConfig.backgroundColor);
+            Cookies.set('backgroundImage', boardConfig.backgroundImage);
+            Cookies.set('board_id', response);
+            window.location.replace(boardEndpoint);
+          }
+        );
+      });
+
+      $('#board-list').on('click', '.edit-board', function () {
+        let boardIndex = $(this)
+          .find('[data-board]')
+          .parent()
+          .attr('data-board');
+        handleAction(boardIndex, 'edit');
+      });
+
+      $('.mdi-heart-outline').on('click', renderBoard);
+    });
+
+    function getToday() {
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+
+      return mm + '/' + dd + '/' + yyyy;
+    }
+  </script>
+  <script src="./auth.js"></script>
+  <script src="./boardConfigure.js"></script>
+  <script src="./horizontalScroll.js"></script>
+  <script src="./createBoardScript.js"></script>
+</body>
+
 </html>
