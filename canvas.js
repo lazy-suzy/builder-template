@@ -4,19 +4,19 @@ let canvas;
 let canvasMeta = {
   identifier: {
     // simple identifier
-    id: 'canvas-area',
-    containerArea: 'canvas-inner-container',
+    id: "canvas-area",
+    containerArea: "canvas-inner-container",
     // specific identifier
-    dropArea: '#canvas-droparea'
+    dropArea: "#canvas-droparea",
   },
   value: {
     canter: {},
     aspectRatio: (16 / 9).toFixed(2),
     zoomValue: 1,
     zoomFactor: 0.1,
-    borderColor: 'blue',
+    borderColor: "blue",
     cornerSize: 10,
-    cornerColor: 'red',
+    cornerColor: "red",
     transparentCorners: false,
     cloneOffset: 20,
     textControl: {
@@ -42,11 +42,11 @@ let canvasMeta = {
       mtr: true
     },
     propertiesToInclude: [
-      'transparentCorners',
-      'borderColor',
-      'cornerSize',
-      'cornerColor',
-      'referenceObject'
+      "transparentCorners",
+      "borderColor",
+      "cornerSize",
+      "cornerColor",
+      "referenceObject"
     ],
     crop: {
       control: {
@@ -62,7 +62,7 @@ let canvasMeta = {
       },
       active: false,
       copy: false,
-      box: false
+      box: false,
     }
   },
 
@@ -76,13 +76,15 @@ let canvasMeta = {
     panningEnabled: false,
     cropEnabled: false,
     isZoomed: false,
+    isCurrentSelectionEmpty: true,
     isCurrentObjectText: false,
     isCurrentObjectImage: false,
     isCurrentObjectTransparentable: false,
-    isCurrentObjectTransparentSelected: false
+    isCurrentObjectTransparentSelected: false,
   }
 };
 let appMeta = {
+
   asset: [],
   board: {
     data: [],
@@ -102,70 +104,72 @@ let appMeta = {
     isPreviewEnabled: false
   },
   value: {
-    fontFamily: 'Arial',
-    fontSize: '14',
+    fontFamily: "Arial",
+    fontSize: "14",
+    fontColor: "#000000",
     userID: 1,
     currentSelectedItem: 0,
-    lastVisitedTab: ''
+    lastVisitedTab: ""
   },
   identifier: {
     customProduct: '.product-image[type="custom"]',
 
-    boardTitle: '.board-title',
+    boardTitle: ".board-title",
     tab: '.nav-link',
-    currentDragableObject: '.dragging',
+    currentDragableObject: ".dragging",
 
-    fontFamily: '.js-font-select',
-    fontSize: '.js-font-select-size',
+    fontFamily: ".js-font-select",
+    fontSize: ".js-font-select-size",
+    fontColor: ".js-font-select-color",
 
-    completeToolbarElement: '.top-panel',
-    completeTitleElement: '.d-flex:has(.canvas-title-bar)',
+    completeToolbarElement: ".top-panel",
+    completeTitleElement: ".d-flex:has(.canvas-title-bar)",
 
-    fontToolbarElement: '.editor-icons',
-    imageToolbarElement: '.image-icons',
-    cropToolbarElement: '.crop-toolbar',
-    transparentToolbarElement: '.do-transparent',
-    undoTransparentToolbarElement: '.undo-transparent',
+    fontToolbarElement: ".editor-icons",
+    imageToolbarElement: ".image-icons",
+    cropToolbarElement: ".crop-toolbar",
+    transparentToolbarElement: ".do-transparent",
+    undoTransparentToolbarElement: ".undo-transparent",
 
-    dropzoneElement: '.add-new',
+    dropzoneElement: ".add-new",
 
     uploadByURL: "input[name='url']",
     uploadByURLName: "input[name='name']",
     uploadByURLPrice: "input[name='price']",
     uploadByURLIsPrivate: "input[name='is_private']",
-    uploadByURLSubmit: '#step3 .red-button',
+    uploadByURLSubmit: "#step3 .red-button",
 
-    backgroundColorElement: '.canvas-pallete-color',
-    floorPatternElement: '.canvas-pallete-wood-patterns',
+    backgroundColorElement: ".canvas-pallete-color",
+    floorPatternElement: ".canvas-pallete-wood-patterns",
 
-    manualDrop: '.manual-drop'
+    manualDrop: ".manual-drop",
   },
   template: {
     privateProduct: {
-      template: '#products',
-      container: '#myItems > .flex-grid',
-      renderer: () => {}
+      template: "#products",
+      container: "#myItems > .flex-grid",
+      renderer: () => { }
     },
     publicProduct: {
-      template: '#products',
-      container: '#allUploads > .flex-grid',
-      renderer: () => {}
+      template: "#products",
+      container: "#allUploads > .flex-grid",
+      renderer: () => { }
     },
     productPanel: {
-      template: '#bottom-panel',
-      container: '.bottom-panel-custom',
-      renderer: () => {}
+      template: "#bottom-panel",
+      container: ".bottom-panel-custom",
+      renderer: () => { }
     },
     boardItem: {
-      template: '#board-items-template',
-      container: '#board',
-      renderer: () => {}
+      template: "#board-items-template",
+      container: "#board",
+      renderer: () => { }
     }
   },
   endpoint: {
-    api: 'server.php',
-    configuration: './configurations.json',
-    boardView: 'myboards.html'
+    api: "server.php",
+    configuration: "./configurations.json",
+    boardView: "myboards.html"
   }
 };
 
@@ -188,107 +192,88 @@ $(() => {
   initializeTemplates();
 });
 
-let getConfig = callback => {
-  $.getJSON(appMeta.endpoint.configuration, response => {
+let getConfig = (callback) => {
+  $.getJSON(appMeta.endpoint.configuration, (response) => {
     canvasMeta.configuration = response;
-    if (callback) callback();
+    if (callback)
+      callback();
   });
 };
 let getBoards = () => {
-  $.post(
-    appMeta.endpoint.api,
-    {
-      operation: 'select',
-      entity: 'board',
-      data: {
-        user_id: appMeta.value.userID
+  $.post(appMeta.endpoint.api, {
+    operation: "select",
+    entity: "board",
+    data: {
+      "user_id": appMeta.value.userID
+    }
+  }, (response) => {
+    let boardFound = false;
+    appMeta.board.data = response;
+    appMeta.board.data.forEach((boardObject, objectIndex) => {
+      // convert state back to json
+      appMeta.board.data[objectIndex].state = JSON.parse(boardObject.state);
+      if (boardObject.board_id == Cookies.get('board_id')) {
+        boardFound = true;
+        appMeta.board.currentIndex = objectIndex;
+        $(appMeta.identifier.boardTitle).val(boardObject.title);
+        canvasMeta.currentHistory.push(boardObject.state);
+        canvasMeta.currentHistoryIndex++;
+        updateStateFromHistory();
       }
-    },
-    response => {
-      let boardFound = false;
-      appMeta.board.data = response;
-      appMeta.board.data.forEach((boardObject, objectIndex) => {
-        // convert state back to json
-        appMeta.board.data[objectIndex].state = JSON.parse(boardObject.state);
-        if (boardObject.board_id == Cookies.get('board_id')) {
-          boardFound = true;
-          appMeta.board.currentIndex = objectIndex;
-          $(appMeta.identifier.boardTitle).val(boardObject.title);
-          canvasMeta.currentHistory.push(boardObject.state);
-          canvasMeta.currentHistoryIndex++;
-          updateStateFromHistory();
-        }
-      });
+    });
 
-      // if board does not exist redirect user to board list
-      if (boardFound == false)
-        window.location.replace(appMeta.endpoint.boardView);
-      else {
-        if (Cookies.get('backgroundColor').length > 0) {
-          canvas.setBackgroundColor(Cookies.get('backgroundColor'), function() {
-            canvas.renderAll();
-            saveHistory();
-          });
-          Cookies.set('backgroundColor', '');
-        }
-        if (Cookies.get('backgroundImage').length > 0) {
-          fb.Image.fromURL(Cookies.get('backgroundImage'), function(img) {
-            img.set({
-              originX: 'left',
-              originY: 'top',
-              scaleX: canvas.width / img.width,
-              scaleY: canvas.height / img.height
-            });
-            canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
-            saveHistory();
-          });
-          Cookies.set('backgroundImage', '');
-        }
+    // if board does not exist redirect user to board list
+    if (boardFound == false)
+      window.location.replace(appMeta.endpoint.boardView);
+    else {
+      if (Cookies.get('backgroundColor') && Cookies.get('backgroundColor').length > 0) {
+        canvas.setBackgroundColor(Cookies.get('backgroundColor'), function () {
+          canvas.renderAll();
+          saveHistory();
+        });
+        Cookies.set('backgroundColor', "");
+      }
+      if (Cookies.get('backgroundImage') && Cookies.get('backgroundImage').length > 0) {
+        fb.Image.fromURL(Cookies.get('backgroundImage'), function (img) {
+          img.set({ originX: 'left', originY: 'top', scaleX: canvas.width / img.width, scaleY: canvas.height / img.height });
+          canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+          saveHistory();
+        });
+        Cookies.set('backgroundImage', "");
       }
     }
-  );
+  });
 };
 let getAssets = () => {
-  $.post(
-    appMeta.endpoint.api,
-    {
-      operation: 'select',
-      entity: 'asset',
-      data: {
-        user_id: appMeta.value.userID
-      },
-      order: 'modified_at desc'
+  $.post(appMeta.endpoint.api, {
+    operation: "select",
+    entity: "asset",
+    data: {
+      "user_id": appMeta.value.userID
     },
-    function(response) {
-      if (response.length > 0) {
-        appMeta.asset = response;
-        appMeta.flag.isAssetDirty = true;
-        appMeta.flag.isProductPanelDirty = true;
-        renderAppMeta();
-      }
+    order: "modified_at desc"
+  }, function (response) {
+    if (response.length > 0) {
+      appMeta.asset = response;
+      appMeta.flag.isAssetDirty = true;
+      appMeta.flag.isProductPanelDirty = true;
+      renderAppMeta();
     }
-  );
+  });
 };
 
-let initializeCanvas = callback => {
+let initializeCanvas = (callback) => {
   canvas = new fb.Canvas(canvasMeta.identifier.id, {
     containerClass: canvasMeta.identifier.containerArea,
     preserveObjectStacking: true,
-    width: $(canvasMeta.identifier.dropArea)
-      .parent()
-      .width(),
-    height:
-      $(canvasMeta.identifier.dropArea)
-        .parent()
-        .width() / canvasMeta.value.aspectRatio,
+    width: $(canvasMeta.identifier.dropArea).parent().width(),
+    height: $(canvasMeta.identifier.dropArea).parent().width() / canvasMeta.value.aspectRatio,
     selection: true
   });
 
   // add class for detection
-  $(this).on('dragstart dragend', e => {
-    $(e.target).toggleClass(
-      appMeta.identifier.currentDragableObject.replace('.', '')
-    );
+  $(this).on('dragstart dragend', (e) => {
+    $(e.target).toggleClass(appMeta.identifier.currentDragableObject.replace(".", ""));
   });
 
   // setup of responsive handlers
@@ -298,29 +283,26 @@ let initializeCanvas = callback => {
   updateCanvasCenter();
 
   // bind drop area events
-  $(canvasMeta.identifier.dropArea).bind('drop', e => {
+  $(canvasMeta.identifier.dropArea).bind("drop", (e) => {
     let draggedObject = $(appMeta.identifier.currentDragableObject);
-    let dropType = draggedObject.attr('drop-type');
+    let dropType = draggedObject.attr("drop-type");
     let referenceID = draggedObject.parent().attr('data-product');
-    let referenceType = draggedObject.parent().attr('type');
+    let referenceType = draggedObject.parent().attr("type");
     handleDrop(e, draggedObject, dropType, referenceID, referenceType);
   });
 
   // handle canvas events
-  canvas.on('selection:created', handleSelection);
-  canvas.on('selection:updated', handleSelection);
+  canvas.on("selection:created", handleSelection);
+  canvas.on("selection:updated", handleSelection);
+  canvas.on("selection:cleared", handleSelection);
 
   // stop objects from going out of canvas area
-  canvas.on('object:moving', e => {
+  canvas.on("object:moving", (e) => {
     return;
     var obj = e.target;
     var boundingRect = obj.getBoundingRect();
     // if object is too big ignore
-    if (
-      obj.currentHeight > obj.canvas.height ||
-      obj.currentWidth > obj.canvas.width ||
-      obj.clipPath
-    )
+    if (obj.currentHeight > obj.canvas.height || obj.currentWidth > obj.canvas.width || obj.clipPath)
       return;
 
     obj.setCoords();
@@ -331,125 +313,113 @@ let initializeCanvas = callback => {
         obj.left = Math.max(obj.left, obj.left - boundingRect.left);
       }
 
-      if (
-        boundingRect.top + boundingRect.height > obj.canvas.height ||
-        boundingRect.left + boundingRect.width > obj.canvas.width
-      ) {
-        obj.top = Math.min(
-          obj.top,
-          obj.canvas.height - boundingRect.height + obj.top - boundingRect.top
-        );
-        obj.left = Math.min(
-          obj.left,
-          obj.canvas.width - boundingRect.width + obj.left - boundingRect.left
-        );
+      if (boundingRect.top + boundingRect.height > obj.canvas.height || boundingRect.left + boundingRect.width > obj.canvas.width) {
+        obj.top = Math.min(obj.top, obj.canvas.height - boundingRect.height + obj.top - boundingRect.top);
+        obj.left = Math.min(obj.left, obj.canvas.width - boundingRect.width + obj.left - boundingRect.left);
       }
     }
-  });
-  canvas.on('object:modified', saveHistory);
 
-  canvas.on('mouse:down', e => {
+  });
+  canvas.on("object:modified", saveHistory);
+
+  canvas.on("mouse:down", (e) => {
     if (canvasMeta.flag.isZoomed && !canvas.getActiveObject()) {
       canvasMeta.flag.panningEnabled = true;
-      canvas.defaultCursor = 'move';
+      canvas.defaultCursor = "move";
       canvas.selection = false;
-    } else if (canvasMeta.flag.cropEnabled)
+    }
+    else if (canvasMeta.flag.cropEnabled)
+      // if cropbox exist and empty area was clicked
       if (canvasMeta.value.crop.box && e.target == null) {
-        // if cropbox exist and empty area was clicked
         canvas.setActiveObject(canvasMeta.value.crop.box);
         handleCrop(true);
       }
   });
-  canvas.on('mouse:up', e => {
+  canvas.on("mouse:up", (e) => {
+
     canvasMeta.flag.panningEnabled = false;
-    canvas.defaultCursor = 'default';
+    canvas.defaultCursor = "default";
     canvas.selection = true;
+
   });
-  canvas.on('mouse:move', e => {
+  canvas.on("mouse:move", (e) => {
     if (canvasMeta.flag.panningEnabled && e && e.e) {
       let delta = new fb.Point(e.e.movementX, e.e.movementY);
       canvas.relativePan(delta);
-      if (canvasMeta.value.zoomValue > 1) keepPositionInBounds(canvas);
+      if (canvasMeta.value.zoomValue > 1)
+        keepPositionInBounds(canvas);
     }
+
   });
 
-  if (callback) callback();
+  if (callback)
+    callback();
 };
 let initializeAppMeta = () => {
   // Initialize font values
-  $(appMeta.identifier.fontFamily).change(e => {
-    appMeta.value.fontFamily = $(e.currentTarget)
-      .val()
-      .replace('+', ' ');
+  $(appMeta.identifier.fontFamily).change((e) => {
+    appMeta.value.fontFamily = $(e.currentTarget).val().replace("+", " ");
     appMeta.flag.isFontToolbarDirty = true;
-    updateCurrentObject();
+    updateCurrentObject(true);
   });
-  $(appMeta.identifier.fontSize).change(e => {
+  $(appMeta.identifier.fontSize).change((e) => {
     appMeta.value.fontSize = $(e.currentTarget).val();
     appMeta.flag.isFontToolbarDirty = true;
-    updateCurrentObject();
+    updateCurrentObject(true);
   });
-  $(appMeta.identifier.backgroundColorElement).click(e => {
-    let backgroundColor = $(e.currentTarget).css('background-color');
-    canvas.setBackgroundColor(backgroundColor, function() {
+  $(appMeta.identifier.fontColor).on("input", (e) => {
+    appMeta.value.fontColor = $(e.currentTarget).val();
+    appMeta.flag.isFontToolbarDirty = true;
+    updateCurrentObject(true);
+  });
+  $(appMeta.identifier.backgroundColorElement).click((e) => {
+    let backgroundColor = $(e.currentTarget).css("background-color");
+    canvas.setBackgroundColor(backgroundColor, function () {
       canvas.renderAll();
       saveHistory();
     });
   });
-  $(appMeta.identifier.floorPatternElement).click(e => {
-    let src = $(e.currentTarget).attr('src');
-    fb.Image.fromURL(src, function(img) {
-      img.set({
-        originX: 'left',
-        originY: 'top',
-        scaleX: canvas.width / img.width,
-        scaleY: canvas.height / img.height
-      });
+  $(appMeta.identifier.floorPatternElement).click((e) => {
+    let src = $(e.currentTarget).attr("src");
+    fb.Image.fromURL(src, function (img) {
+      img.set({ originX: 'left', originY: 'top', scaleX: canvas.width / img.width, scaleY: canvas.height / img.height });
       canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
     });
   });
 
-  $(appMeta.identifier.boardTitle).change(e => {
-    appMeta.board.data[appMeta.board.currentIndex].title = $(
-      appMeta.identifier.boardTitle
-    ).val();
+  $(appMeta.identifier.boardTitle).change((e) => {
+    appMeta.board.data[appMeta.board.currentIndex].title = $(appMeta.identifier.boardTitle).val();
 
     if (appMeta.board.update.method == false)
-      appMeta.board.update.method = debounce(
-        updateBoard,
-        appMeta.board.update.delay
-      );
+      appMeta.board.update.method = debounce(updateBoard, appMeta.board.update.delay);
 
     appMeta.board.update.method();
   });
 
   // handle custom product click for bottom sheet render
-  $(document).on('click', appMeta.identifier.customProduct, e => {
+  $(document).on('click', appMeta.identifier.customProduct, (e) => {
     appMeta.flag.isProductPanelDirty = true;
     appMeta.value.currentSelectedItem = $(e.currentTarget).attr('data-product');
     renderAppMeta();
   });
 
   // handle board tab or preview mode
-  $(appMeta.identifier.tab).click(e => togglePreviewMode(e));
+  $(appMeta.identifier.tab).click((e) => togglePreviewMode(e));
 
   // handle manual add
-  $(document).on('click', appMeta.identifier.manualDrop, e => {
+  $(document).on('click', appMeta.identifier.manualDrop, (e) => {
     let dropType = $(e.currentTarget).attr('drop-type');
-    if (dropType == 'image') {
+    if (dropType == "image") {
       let referenceID = $(e.currentTarget).attr('data-product');
       let referenceType = $(e.currentTarget).attr('type');
-      let draggedObject = $(
-        '.product-image[type="' +
-          referenceType +
-          '"][data-product="' +
-          referenceID +
-          '"] img'
-      );
+      let draggedObject = $('.product-image[type="' + referenceType + '"][data-product="' + referenceID + '"] img');
       // console.log(draggedObject, dropType, referenceID, referenceType);
       handleDrop(false, draggedObject, dropType, referenceID, referenceType);
-    } else if (dropType == 'text') handleDrop(false, $(e.target), dropType);
+    }
+    else if (dropType == "text")
+      handleDrop(false, $(e.target), dropType);
   });
+
 
   // Render first updates
   updateToolbar();
@@ -461,13 +431,12 @@ let initializeUploadMethods = () => {
     url: appMeta.endpoint.api,
     autoProcessQueue: true,
     maxFilesize: 20,
-    acceptedFiles:
-      'image/bmp, image/x-bmp, image/x-bitmap, image/x-xbitmap, image/x-win-bitmap, image/x-windows-bmp, image/ms-bmp, image/x-ms-bmp, image/gif, image/x-icon, image/x-ico, image/vnd.microsoft.icon, image/jpx, image/jpm, image/jpeg, image/pjpeg, image/png,image/x-png, image/tiff',
+    acceptedFiles: "image/bmp, image/x-bmp, image/x-bitmap, image/x-xbitmap, image/x-win-bitmap, image/x-windows-bmp, image/ms-bmp, image/x-ms-bmp, image/gif, image/x-icon, image/x-ico, image/vnd.microsoft.icon, image/jpx, image/jpm, image/jpeg, image/pjpeg, image/png,image/x-png, image/tiff",
     sending: (file, xhr, formData) => {
-      formData.append('operation', 'file');
-      formData.append('user_id', appMeta.value.userID);
-      formData.append('data[name]', 'custom');
-      formData.append('data[brand]', 'custom');
+      formData.append("operation", "file");
+      formData.append("user_id", appMeta.value.userID);
+      formData.append("data[name]", "custom");
+      formData.append("data[brand]", "custom");
     },
     success: (file, response) => {
       // remove preview
@@ -482,50 +451,34 @@ let initializeUploadMethods = () => {
   });
 
   // #2 Upload by URL
-  $(appMeta.identifier.uploadByURLSubmit).click(function() {
+  $(appMeta.identifier.uploadByURLSubmit).click(function () {
     // Not empty
     if ($(appMeta.identifier.uploadByURL).val().length > 0) {
-      $.post(
-        appMeta.endpoint.api,
-        {
-          operation: 'fetch',
-          url: $(appMeta.identifier.uploadByURL).val(),
-          user_id: appMeta.value.userID,
-          data: {
-            name: $(appMeta.identifier.uploadByURLName).val(),
-            price: $(appMeta.identifier.uploadByURLPrice).val(),
-            is_private: $(appMeta.identifier.uploadByURLIsPrivate).is(
-              ':checked'
-            )
-              ? 1
-              : 0
-          }
-        },
-        response => {
-          $(appMeta.identifier.uploadByURL).val('');
-          $(appMeta.identifier.uploadByURLName).val('');
-          $(appMeta.identifier.uploadByURLPrice).val('');
-          appMeta.asset.unshift(response);
-          appMeta.flag.isAssetDirty = true;
-          renderAppMeta();
+      $.post(appMeta.endpoint.api, {
+        operation: "fetch",
+        url: $(appMeta.identifier.uploadByURL).val(),
+        user_id: appMeta.value.userID,
+        data: {
+          name: $(appMeta.identifier.uploadByURLName).val(),
+          price: $(appMeta.identifier.uploadByURLPrice).val(),
+          is_private: $(appMeta.identifier.uploadByURLIsPrivate).is(":checked") ? 1 : 0,
         }
-      );
+      }, (response) => {
+        $(appMeta.identifier.uploadByURL).val('');
+        $(appMeta.identifier.uploadByURLName).val('');
+        $(appMeta.identifier.uploadByURLPrice).val('');
+        appMeta.asset.unshift(response);
+        appMeta.flag.isAssetDirty = true;
+        renderAppMeta();
+      });
     }
   });
-};
+}
 let initializeTemplates = () => {
-  appMeta.template.privateProduct.renderer = Handlebars.compile(
-    $(appMeta.template.privateProduct.template).html()
-  );
-  appMeta.template.publicProduct.renderer = Handlebars.compile(
-    $(appMeta.template.publicProduct.template).html()
-  );
-  appMeta.template.productPanel.renderer = Handlebars.compile(
-    $(appMeta.template.productPanel.template).html()
-  );
-  appMeta.template.boardItem.renderer = Handlebars.compile(
-    $(appMeta.template.boardItem.template).html()
-  );
+  appMeta.template.privateProduct.renderer = Handlebars.compile($(appMeta.template.privateProduct.template).html());
+  appMeta.template.publicProduct.renderer = Handlebars.compile($(appMeta.template.publicProduct.template).html());
+  appMeta.template.productPanel.renderer = Handlebars.compile($(appMeta.template.productPanel.template).html());
+  appMeta.template.boardItem.renderer = Handlebars.compile($(appMeta.template.boardItem.template).html());
 };
 
 let updateCanvasCenter = () => {
@@ -535,55 +488,60 @@ let updateCanvasCenter = () => {
     y: center.top
   };
 };
-let updateCurrentObject = () => {
+let updateCurrentObject = (forceUpdate = false) => {
   let activeObject = canvas.getActiveObject();
   if (activeObject) {
-    if (activeObject.type == 'textbox') {
-      if (appMeta.flag.isFontToolbarDirty)
-        activeObject.set('fontFamily', appMeta.value.fontFamily);
-      activeObject.set('fontSize', appMeta.value.fontSize);
-    } else if (activeObject.type == 'image') {
+    if (activeObject.type == "textbox") {
+      if (appMeta.flag.isFontToolbarDirty){
+        activeObject.set("fontFamily", appMeta.value.fontFamily);
+        activeObject.set("fontSize", appMeta.value.fontSize);
+        activeObject.set("fill", appMeta.value.fontColor);
+      }
+    } else if (activeObject.type == "image") {
+
     }
   }
 
   // request render at the end
   canvas.requestRenderAll();
   // mark all actions completed
-  Object.keys(appMeta.flag).map(flag => (appMeta.flag[flag] = false));
+  Object.keys(appMeta.flag).map((flag) => appMeta.flag[flag] = false);
+
+  if(forceUpdate)
+    saveHistory();
 };
 let updateStateFromHistory = () => {
-  return canvas.loadFromJSON(
-    canvasMeta.currentHistory[canvasMeta.currentHistoryIndex],
-    () => {
-      if (appMeta.flag.isBoot) {
-        appMeta.flag.isBoot = false;
-        handleResize(false, true);
-      }
+  return canvas.loadFromJSON(canvasMeta.currentHistory[canvasMeta.currentHistoryIndex], () => {
+    if (appMeta.flag.isBoot) {
+      appMeta.flag.isBoot = false;
+      handleResize(false, true);
     }
-  );
+  });
 };
 
 let handleSelection = () => {
   let activeObject = canvas.getActiveObject();
   // reset selection
-  canvasMeta.flag.isCurrentObjectText = canvasMeta.flag.isCurrentObjectImage = canvasMeta.flag.isCurrentObjectTransparentSelected = false;
+  canvasMeta.flag.isCurrentObjectText = canvasMeta.flag.isCurrentObjectImage = canvasMeta.flag.isCurrentObjectTransparentSelected = canvasMeta.flag.isCurrentObjectTransparentable = canvasMeta.flag.isCurrentSelectionEmpty = false;
 
   if (activeObject) {
-    if (activeObject.type == 'textbox') {
+    if (activeObject.type == "textbox") {
       appMeta.value.fontFamily = activeObject.fontFamily;
       appMeta.value.fontSize = activeObject.fontSize;
+      appMeta.value.fontColor = activeObject.fill;
       appMeta.flag.isFontToolbarDirty = true;
       canvasMeta.flag.isCurrentObjectText = true;
-    } else if (activeObject.type == 'image') {
-      canvasMeta.flag.isCurrentObjectImage = true;
-      canvasMeta.flag.isCurrentObjectTransparentable =
-        activeObject.referenceObject.type == 'custom';
-      canvasMeta.flag.isCurrentObjectTransparentSelected = activeObject
-        .getSrc()
-        .includes(activeObject.referenceObject.transparentPath);
     }
-    updateToolbar();
+    else if (activeObject.type == "image") {
+      canvasMeta.flag.isCurrentObjectImage = true;
+      canvasMeta.flag.isCurrentObjectTransparentable = activeObject.referenceObject.type == "custom";
+      canvasMeta.flag.isCurrentObjectTransparentSelected = activeObject.getSrc().includes(activeObject.referenceObject.transparentPath);
+    }
   }
+  else
+    canvasMeta.flag.isCurrentSelectionEmpty = true;
+
+  updateToolbar();
 };
 let handleDrop = (e, draggedObject, dropType, referenceID, referenceType) => {
   if (dropType == 'image') {
@@ -629,7 +587,8 @@ let handleDrop = (e, draggedObject, dropType, referenceID, referenceType) => {
   } else if (dropType == 'text') {
     let textToInsert = new fb.Textbox(draggedObject.text(), {
       fontFamily: draggedObject.text(),
-      fontSize: 24
+      fontSize: 24,
+      fill: "#000000"
     });
     textToInsert.setControlsVisibility(canvasMeta.value.textControl);
     applyDrop(e, textToInsert);
@@ -702,7 +661,7 @@ let handleResize = (event, forceUpdate = false) => {
   }
 
   // scale objects
-  canvas.getObjects().map(function(o) {
+  canvas.getObjects().map(function (o) {
     o.scaleX *= appMeta.value.scaleFactor;
     o.scaleY *= appMeta.value.scaleFactor;
     o.top *= appMeta.value.scaleFactor;
@@ -786,6 +745,8 @@ let updateToolbar = () => {
     $(appMeta.identifier.fontSize)
       .val(appMeta.value.fontSize)
       .attr('selected', true);
+    $(appMeta.identifier.fontColor)
+      .val(appMeta.value.fontColor)
   }
 
   // toggle visibility of toolbar elements based on flag
@@ -797,14 +758,14 @@ let updateToolbar = () => {
   );
   $(appMeta.identifier.transparentToolbarElement).toggle(
     canvasMeta.flag.isCurrentObjectTransparentable &&
-      !canvasMeta.flag.isCurrentObjectTransparentSelected
+    !canvasMeta.flag.isCurrentObjectTransparentSelected
   );
   $(appMeta.identifier.undoTransparentToolbarElement).toggle(
     canvasMeta.flag.isCurrentObjectTransparentable &&
-      canvasMeta.flag.isCurrentObjectTransparentSelected
+    canvasMeta.flag.isCurrentObjectTransparentSelected
   );
   $(appMeta.identifier.completeToolbarElement).toggle(
-    !appMeta.flag.isPreviewEnabled
+    !appMeta.flag.isPreviewEnabled || !canvasMeta.flag.isCurrentSelectionEmpty
   );
   // had to do it this way because of css important on flex
   $(appMeta.identifier.completeTitleElement).css(
@@ -909,14 +870,14 @@ let renderAppMeta = () => {
 let debounce = (func, wait, immediate) => {
   var timeout;
 
-  return function() {
+  return function () {
     var context = this,
       args = arguments;
     var callNow = immediate && !timeout;
     clearTimeout(timeout);
 
     // Set the new timeout
-    timeout = setTimeout(function() {
+    timeout = setTimeout(function () {
       timeout = null;
       if (!immediate) {
         func.apply(context, args);
@@ -1092,9 +1053,9 @@ let applyCrop = e => {
 
   if (
     rect.top + rect.height * rect.scaleY >
-      image.top + image.height * image.scaleY ||
+    image.top + image.height * image.scaleY ||
     rect.left + rect.width * rect.scaleX >
-      image.left + image.width * image.scaleX
+    image.left + image.width * image.scaleX
   ) {
     rect.top = Math.min(
       rect.top,
