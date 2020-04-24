@@ -76,6 +76,7 @@ let canvasMeta = {
     panningEnabled: false,
     cropEnabled: false,
     isZoomed: false,
+    isCurrentSelectionEmpty: true,
     isCurrentObjectText: false,
     isCurrentObjectImage: false,
     isCurrentObjectTransparentable: false,
@@ -105,6 +106,7 @@ let appMeta = {
   value: {
     fontFamily: "Arial",
     fontSize: "14",
+    fontColor: "#000000",
     userID: 1,
     currentSelectedItem: 0,
     lastVisitedTab: ""
@@ -118,6 +120,7 @@ let appMeta = {
 
     fontFamily: ".js-font-select",
     fontSize: ".js-font-select-size",
+    fontColor: ".js-font-select-color",
 
     completeToolbarElement: ".top-panel",
     completeTitleElement: ".d-flex:has(.canvas-title-bar)",
@@ -357,12 +360,17 @@ let initializeAppMeta = () => {
   $(appMeta.identifier.fontFamily).change((e) => {
     appMeta.value.fontFamily = $(e.currentTarget).val().replace("+", " ");
     appMeta.flag.isFontToolbarDirty = true;
-    updateCurrentObject();
+    updateCurrentObject(true);
   });
   $(appMeta.identifier.fontSize).change((e) => {
     appMeta.value.fontSize = $(e.currentTarget).val();
     appMeta.flag.isFontToolbarDirty = true;
-    updateCurrentObject();
+    updateCurrentObject(true);
+  });
+  $(appMeta.identifier.fontColor).on("input", (e) => {
+    appMeta.value.fontColor = $(e.currentTarget).val();
+    appMeta.flag.isFontToolbarDirty = true;
+    updateCurrentObject(true);
   });
   $(appMeta.identifier.backgroundColorElement).click((e) => {
     let backgroundColor = $(e.currentTarget).css("background-color");
@@ -480,13 +488,15 @@ let updateCanvasCenter = () => {
     y: center.top
   };
 };
-let updateCurrentObject = () => {
+let updateCurrentObject = (forceUpdate = false) => {
   let activeObject = canvas.getActiveObject();
   if (activeObject) {
     if (activeObject.type == "textbox") {
-      if (appMeta.flag.isFontToolbarDirty)
+      if (appMeta.flag.isFontToolbarDirty){
         activeObject.set("fontFamily", appMeta.value.fontFamily);
-      activeObject.set("fontSize", appMeta.value.fontSize);
+        activeObject.set("fontSize", appMeta.value.fontSize);
+        activeObject.set("fill", appMeta.value.fontColor);
+      }
     } else if (activeObject.type == "image") {
 
     }
@@ -496,6 +506,9 @@ let updateCurrentObject = () => {
   canvas.requestRenderAll();
   // mark all actions completed
   Object.keys(appMeta.flag).map((flag) => appMeta.flag[flag] = false);
+
+  if(forceUpdate)
+    saveHistory();
 };
 let updateStateFromHistory = () => {
   return canvas.loadFromJSON(canvasMeta.currentHistory[canvasMeta.currentHistoryIndex], () => {
@@ -509,12 +522,13 @@ let updateStateFromHistory = () => {
 let handleSelection = () => {
   let activeObject = canvas.getActiveObject();
   // reset selection
-  canvasMeta.flag.isCurrentObjectText = canvasMeta.flag.isCurrentObjectImage = canvasMeta.flag.isCurrentObjectTransparentSelected = false;
+  canvasMeta.flag.isCurrentObjectText = canvasMeta.flag.isCurrentObjectImage = canvasMeta.flag.isCurrentObjectTransparentSelected = canvasMeta.flag.isCurrentObjectTransparentable = canvasMeta.flag.isCurrentSelectionEmpty = false;
 
   if (activeObject) {
     if (activeObject.type == "textbox") {
       appMeta.value.fontFamily = activeObject.fontFamily;
       appMeta.value.fontSize = activeObject.fontSize;
+      appMeta.value.fontColor = activeObject.fill;
       appMeta.flag.isFontToolbarDirty = true;
       canvasMeta.flag.isCurrentObjectText = true;
     }
@@ -524,6 +538,8 @@ let handleSelection = () => {
       canvasMeta.flag.isCurrentObjectTransparentSelected = activeObject.getSrc().includes(activeObject.referenceObject.transparentPath);
     }
   }
+  else
+    canvasMeta.flag.isCurrentSelectionEmpty = true;
 
   updateToolbar();
 };
@@ -571,7 +587,8 @@ let handleDrop = (e, draggedObject, dropType, referenceID, referenceType) => {
   } else if (dropType == 'text') {
     let textToInsert = new fb.Textbox(draggedObject.text(), {
       fontFamily: draggedObject.text(),
-      fontSize: 24
+      fontSize: 24,
+      fill: "#000000"
     });
     textToInsert.setControlsVisibility(canvasMeta.value.textControl);
     applyDrop(e, textToInsert);
@@ -728,6 +745,8 @@ let updateToolbar = () => {
     $(appMeta.identifier.fontSize)
       .val(appMeta.value.fontSize)
       .attr('selected', true);
+    $(appMeta.identifier.fontColor)
+      .val(appMeta.value.fontColor)
   }
 
   // toggle visibility of toolbar elements based on flag
@@ -746,7 +765,7 @@ let updateToolbar = () => {
     canvasMeta.flag.isCurrentObjectTransparentSelected
   );
   $(appMeta.identifier.completeToolbarElement).toggle(
-    !appMeta.flag.isPreviewEnabled
+    !appMeta.flag.isPreviewEnabled || !canvasMeta.flag.isCurrentSelectionEmpty
   );
   // had to do it this way because of css important on flex
   $(appMeta.identifier.completeTitleElement).css(

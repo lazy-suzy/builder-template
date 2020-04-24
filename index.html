@@ -305,7 +305,7 @@
                   <option value="72">72</option>
                   <option value="96">96</option>
                 </select>
-                <input type="color" class="font-color-picker" />
+                <input type="color" class="js-font-select-color" />
               </div>
             </div>
             <div class="col-sm-4 order-sm-3">
@@ -435,12 +435,12 @@
             <div class="d-flex">
               <div class="canvas-title-bar">
                 <div class="canvas-icons">
-                  <!-- <a data-title="Edit Board Settings">
-                      <i
-                        class="mdi mdi-settings js-open-config"
-                        aria-hidden="true"
-                      ></i>
-                    </a> -->
+                  <a data-title="Edit Board Settings">
+                    <i
+                      class="mdi mdi-settings js-open-config"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
                 </div>
               </div>
               <div class="w-38">
@@ -963,12 +963,6 @@
   <script src="./boardConfigure.js"></script>
   <script src="./createBoardScript.js"></script>
   <script src="./horizontalScroll.js"></script>
-  <script type="text/javascript">
-    $(document).on("input", ".font-color-picker", function (v) {
-      canvas.getActiveObject().setColor(v.target.value);
-      canvas.renderAll();
-    });
-  </script>
 </body>
 
 </html>
