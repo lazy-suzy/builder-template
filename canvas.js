@@ -528,24 +528,24 @@ let handleSelection = () => {
   updateToolbar();
 };
 let handleDrop = (e, draggedObject, dropType, referenceID, referenceType) => {
-  if (dropType == "image") {
-
+  if (dropType == 'image') {
     let referenceObjectValue = {
       type: referenceType
     };
 
-    if (referenceType == "custom") {
+    if (referenceType == 'custom') {
       referenceObjectValue.id = appMeta.asset[referenceID].asset_id;
       referenceObjectValue.path = appMeta.asset[referenceID].path;
-      referenceObjectValue.transparentPath = appMeta.asset[referenceID].transparent_path;
+      referenceObjectValue.transparentPath =
+        appMeta.asset[referenceID].transparent_path;
       referenceObjectValue.name = appMeta.asset[referenceID].name;
       referenceObjectValue.price = appMeta.asset[referenceID].price;
       referenceObjectValue.brand = appMeta.asset[referenceID].brand;
-    } else if (referenceType == "default") {
+    } else if (referenceType == 'default') {
       referenceObjectValue.id = remoteProducts[referenceID].id;
       referenceObjectValue.isTransparent = 1;
       referenceObjectValue.path = remoteProducts[referenceID].main_image;
-      referenceObjectValue.transparentPath = "";
+      referenceObjectValue.transparentPath = '';
       referenceObjectValue.name = remoteProducts[referenceID].name;
       referenceObjectValue.price = remoteProducts[referenceID].is_price;
       referenceObjectValue.brand = remoteProducts[referenceID].site;
@@ -568,36 +568,36 @@ let handleDrop = (e, draggedObject, dropType, referenceID, referenceType) => {
     //     // crossOrigin: 'anonymous'
     //   }
     // );
-  } else if (dropType == "text") {
-      let textToInsert = new fb.Textbox(draggedObject.text(), {
-        fontFamily: draggedObject.text(),
-        fontSize: 24
-      });
-      textToInsert.setControlsVisibility(canvasMeta.value.textControl);
-      applyDrop(e, textToInsert);
+  } else if (dropType == 'text') {
+    let textToInsert = new fb.Textbox(draggedObject.text(), {
+      fontFamily: draggedObject.text(),
+      fontSize: 24
+    });
+    textToInsert.setControlsVisibility(canvasMeta.value.textControl);
+    applyDrop(e, textToInsert);
   }
-
 };
 let applyDrop = (e, objectToInsert) => {
   if (objectToInsert) {
-    
-    let x = y = 0;
-    
+    let x = (y = 0);
+
     // if object is more then 30% size on canvas then make it 30%
-    if ((objectToInsert.width / canvas.getWidth()) >= 0.3)
+    if (objectToInsert.width / canvas.getWidth() >= 0.3)
       objectToInsert.scale((canvas.getWidth() * 0.3) / objectToInsert.width);
-    else if ((objectToInsert.height / canvas.getHeight()) >= 0.3)
+    else if (objectToInsert.height / canvas.getHeight() >= 0.3)
       objectToInsert.scale((canvas.getHeight() * 0.3) / objectToInsert.height);
-    
-      
-    if(e){
-      let offset = $("#" + canvasMeta.identifier.id).offset();
+
+    if (e) {
+      let offset = $('#' + canvasMeta.identifier.id).offset();
       x = e.clientX - offset.left;
       y = e.clientY - offset.top;
-    }
-    else{
-      x = canvasMeta.value.center.x - ((objectToInsert.width * objectToInsert.scaleX) / 2);
-      y = canvasMeta.value.center.y - ((objectToInsert.height * objectToInsert.scaleY) / 2);
+    } else {
+      x =
+        canvasMeta.value.center.x -
+        (objectToInsert.width * objectToInsert.scaleX) / 2;
+      y =
+        canvasMeta.value.center.y -
+        (objectToInsert.height * objectToInsert.scaleY) / 2;
     }
 
     objectToInsert.set({
@@ -606,7 +606,7 @@ let applyDrop = (e, objectToInsert) => {
       transparentCorners: canvasMeta.value.transparentCorners,
       borderColor: canvasMeta.value.borderColor,
       cornerSize: canvasMeta.value.cornerSize,
-      cornerColor: canvasMeta.value.cornerColor,
+      cornerColor: canvasMeta.value.cornerColor
     });
     canvas.add(objectToInsert);
     canvas.setActiveObject(objectToInsert);
@@ -616,7 +616,9 @@ let applyDrop = (e, objectToInsert) => {
 };
 
 let updateCanvasState = () => {
-  appMeta.board.data[appMeta.board.currentIndex].state = canvas.toJSON(canvasMeta.value.propertiesToInclude);
+  appMeta.board.data[appMeta.board.currentIndex].state = canvas.toJSON(
+    canvasMeta.value.propertiesToInclude
+  );
   appMeta.board.data[appMeta.board.currentIndex].state.canvas = {
     width: canvas.width,
     height: canvas.height
@@ -624,9 +626,12 @@ let updateCanvasState = () => {
   return appMeta.board.data[appMeta.board.currentIndex].state;
 };
 let handleResize = (event, forceUpdate = false) => {
-
-  let previousWidth = forceUpdate ? appMeta.board.data[appMeta.board.currentIndex].state.canvas.width : canvas.width;
-  let currentWidth = $(canvasMeta.identifier.dropArea).parent().width();
+  let previousWidth = forceUpdate
+    ? appMeta.board.data[appMeta.board.currentIndex].state.canvas.width
+    : canvas.width;
+  let currentWidth = $(canvasMeta.identifier.dropArea)
+    .parent()
+    .width();
 
   appMeta.value.scaleFactor = currentWidth / previousWidth;
 
@@ -652,19 +657,20 @@ let handleResize = (event, forceUpdate = false) => {
 };
 
 let saveHistory = () => {
+  if (canvasMeta.flag.cropEnabled) return;
 
-  if(canvasMeta.flag.cropEnabled)
-    return;
-  
   let currentState = canvas.toJSON(canvasMeta.value.propertiesToInclude);
 
   canvasMeta.flag.isDirty = true;
 
   if (appMeta.board.update.method == false)
-    appMeta.board.update.method = debounce(updateBoard, appMeta.board.update.delay);
+    appMeta.board.update.method = debounce(
+      updateBoard,
+      appMeta.board.update.delay
+    );
 
   // If a modification took place while under undo/redo state
-  if (canvasMeta.currentHistoryIndex !== (canvasMeta.currentHistory.length - 1))
+  if (canvasMeta.currentHistoryIndex !== canvasMeta.currentHistory.length - 1)
     canvasMeta.currentHistory.splice(canvasMeta.currentHistoryIndex + 1);
 
   canvasMeta.currentHistory.push(currentState);
@@ -675,81 +681,105 @@ let saveHistory = () => {
   appMeta.board.update.method();
 };
 let updateBoard = () => {
-  
-  if(canvasMeta.flag.cropEnabled)
-    return;
-    
-  let previewObject = "";
+  if (canvasMeta.flag.cropEnabled) return;
+
+  let previewObject = '';
   try {
     previewObject = canvas.toDataURL({
       format: 'image/jpeg',
-      quality: 0.2,
+      quality: 0.2
       // multiplier: 0.2
     });
   } catch (err) {
-    previewObject = "data:image/png;base64,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";
+    previewObject =
+      'data:image/png;base64,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';
     console.log(err);
   }
 
-  $.post(appMeta.endpoint.api, {
-    operation: "update",
-    entity: "board",
-    data: {
-      title: appMeta.board.data[appMeta.board.currentIndex].title,
-      state: JSON.stringify(updateCanvasState()),
-      // state: JSON.stringify(canvas.toJSON(canvasMeta.value.propertiesToInclude)),
-      preview: previewObject
+  $.post(
+    appMeta.endpoint.api,
+    {
+      operation: 'update',
+      entity: 'board',
+      data: {
+        title: appMeta.board.data[appMeta.board.currentIndex].title,
+        state: JSON.stringify(updateCanvasState()),
+        // state: JSON.stringify(canvas.toJSON(canvasMeta.value.propertiesToInclude)),
+        preview: previewObject
+      },
+      where: {
+        board_id: appMeta.board.data[appMeta.board.currentIndex].board_id
+      }
     },
-    where: {
-      board_id: appMeta.board.data[appMeta.board.currentIndex].board_id
+    data => {
+      // canvas_boards.unshift(JSON.parse(data));
+      // console.log(canvas_boards);
+      // $('#board .catalog-content').prepend( userBoardTemplate( { boards: canvas_boards[0] } ) );
+      canvasMeta.flag.isDirty = false;
     }
-  }, (data) => {
-    // canvas_boards.unshift(JSON.parse(data));
-    // console.log(canvas_boards);
-    // $('#board .catalog-content').prepend( userBoardTemplate( { boards: canvas_boards[0] } ) );
-    canvasMeta.flag.isDirty = false;
-  });
+  );
 };
 
 let updateToolbar = () => {
   if (appMeta.flag.isFontToolbarDirty) {
-    $(appMeta.identifier.fontFamily).val(appMeta.value.fontFamily).attr("selected", true);
-    $(appMeta.identifier.fontSize).val(appMeta.value.fontSize).attr("selected", true);
+    $(appMeta.identifier.fontFamily)
+      .val(appMeta.value.fontFamily)
+      .attr('selected', true);
+    $(appMeta.identifier.fontSize)
+      .val(appMeta.value.fontSize)
+      .attr('selected', true);
   }
 
   // toggle visibility of toolbar elements based on flag
-  $(appMeta.identifier.fontToolbarElement).toggle(canvasMeta.flag.isCurrentObjectText);
-  $(appMeta.identifier.imageToolbarElement).toggle(canvasMeta.flag.isCurrentObjectImage);
-  $(appMeta.identifier.transparentToolbarElement).toggle(canvasMeta.flag.isCurrentObjectTransparentable && !canvasMeta.flag.isCurrentObjectTransparentSelected);
-  $(appMeta.identifier.undoTransparentToolbarElement).toggle(canvasMeta.flag.isCurrentObjectTransparentable && canvasMeta.flag.isCurrentObjectTransparentSelected);
-  $(appMeta.identifier.completeToolbarElement).toggle(!appMeta.flag.isPreviewEnabled);
+  $(appMeta.identifier.fontToolbarElement).toggle(
+    canvasMeta.flag.isCurrentObjectText
+  );
+  $(appMeta.identifier.imageToolbarElement).toggle(
+    canvasMeta.flag.isCurrentObjectImage
+  );
+  $(appMeta.identifier.transparentToolbarElement).toggle(
+    canvasMeta.flag.isCurrentObjectTransparentable &&
+      !canvasMeta.flag.isCurrentObjectTransparentSelected
+  );
+  $(appMeta.identifier.undoTransparentToolbarElement).toggle(
+    canvasMeta.flag.isCurrentObjectTransparentable &&
+      canvasMeta.flag.isCurrentObjectTransparentSelected
+  );
+  $(appMeta.identifier.completeToolbarElement).toggle(
+    !appMeta.flag.isPreviewEnabled
+  );
   // had to do it this way because of css important on flex
-  $(appMeta.identifier.completeTitleElement).css("visibility", appMeta.flag.isPreviewEnabled ? 'hidden' : 'visible');
+  $(appMeta.identifier.completeTitleElement).css(
+    'visibility',
+    appMeta.flag.isPreviewEnabled ? 'hidden' : 'visible'
+  );
   $(appMeta.identifier.cropToolbarElement).toggle(canvasMeta.flag.cropEnabled);
-
 };
 let renderAppMeta = () => {
-
   if (appMeta.flag.isAssetDirty) {
     appMeta.flag.isAssetDirty = false;
     $(appMeta.template.privateProduct.container).html(
       appMeta.template.privateProduct.renderer({
-        products: appMeta.asset.filter(x => x.user_id == appMeta.value.userID).map((x) => {
-          return {
-            main_image: x.transparent_path ? x.transparent_path : x.path,
-            type: "custom",
-          }
-        })
+        products: appMeta.asset
+          .filter(x => x.user_id == appMeta.value.userID)
+          .map(x => {
+            return {
+              main_image: x.transparent_path ? x.transparent_path : x.path,
+              type: 'custom'
+            };
+          })
       })
     );
     $(appMeta.template.publicProduct.container).html(
       appMeta.template.publicProduct.renderer({
-        products: appMeta.asset.filter(x => !x.is_private).map((x) => {
-          return {
-            main_image: x.transparent_path ? x.transparent_path : x.path,
-            type: "custom",
-          }
-        })
+        products: appMeta.asset
+          .filter(x => !x.is_private)
+          .map(x => {
+            return {
+              main_image: x.transparent_path ? x.transparent_path : x.path,
+              type: 'custom'
+            };
+          })
       })
     );
   }
@@ -759,11 +789,14 @@ let renderAppMeta = () => {
     $(appMeta.template.productPanel.container).html(
       appMeta.template.productPanel.renderer({
         index: appMeta.value.currentSelectedItem,
-        main_image: appMeta.asset[appMeta.value.currentSelectedItem].transparent_path ? appMeta.asset[appMeta.value.currentSelectedItem].transparent_path : appMeta.asset[appMeta.value.currentSelectedItem].path,
-        type: "custom",
+        main_image: appMeta.asset[appMeta.value.currentSelectedItem]
+          .transparent_path
+          ? appMeta.asset[appMeta.value.currentSelectedItem].transparent_path
+          : appMeta.asset[appMeta.value.currentSelectedItem].path,
+        type: 'custom',
         name: appMeta.asset[appMeta.value.currentSelectedItem].name,
-        site: "custom",
-        is_price: appMeta.asset[appMeta.value.currentSelectedItem].price,
+        site: 'custom',
+        is_price: appMeta.asset[appMeta.value.currentSelectedItem].price
       })
     );
   }
@@ -775,14 +808,14 @@ let renderAppMeta = () => {
 
     imageObjects.forEach((object, index) => {
       let objectCenter = object.getCenterPoint();
-      let textToInsert = new fb.Text(` ${index+1} `, {
+      let textToInsert = new fb.Text(` ${index + 1} `, {
         left: objectCenter.x,
         top: objectCenter.y,
         fontSize: 20,
-        fill: "#fff",
-        backgroundColor: "#b76e79",
+        fill: '#fff',
+        backgroundColor: '#b76e79',
         controlVisible: false,
-        selectable: false,
+        selectable: false
       });
 
       canvas.add(textToInsert);
@@ -790,14 +823,18 @@ let renderAppMeta = () => {
 
     if (imageObjects.length > 0) {
       $(appMeta.template.boardItem.container).html(
-        appMeta.template.boardItem.renderer(imageObjects.map((x, y) => {
-          return {
-            index: y + 1,
-            name: x.referenceObject.name,
-            brand: x.referenceObject.brand,
-            price: x.referenceObject.price ? "$" + x.referenceObject.price : ""
-          };
-        }))
+        appMeta.template.boardItem.renderer(
+          imageObjects.map((x, y) => {
+            return {
+              index: y + 1,
+              name: x.referenceObject.name,
+              brand: x.referenceObject.brand,
+              price: x.referenceObject.price
+                ? '$' + x.referenceObject.price
+                : ''
+            };
+          })
+        )
       );
     }
   }
@@ -857,26 +894,19 @@ let clamp = (value, min, max) => {
 let zoomIn = () => {
   canvasMeta.flag.isZoomed = true;
   canvasMeta.value.zoomValue += canvasMeta.value.zoomFactor;
-  canvas.zoomToPoint(
-    canvasMeta.value.center,
-    canvasMeta.value.zoomValue
-  );
+  canvas.zoomToPoint(canvasMeta.value.center, canvasMeta.value.zoomValue);
   handleResize();
 };
 let zoomOut = () => {
   if (canvasMeta.value.zoomValue > 0.5) {
     // set default color
-    canvas.setBackgroundColor("#f2f3f4");
+    canvas.setBackgroundColor('#f2f3f4');
     canvasMeta.value.zoomValue -= canvasMeta.value.zoomFactor;
-    canvas.zoomToPoint(
-      canvasMeta.value.center,
-      canvasMeta.value.zoomValue
-    );
+    canvas.zoomToPoint(canvasMeta.value.center, canvasMeta.value.zoomValue);
     // handling a glitch in zooming out with background
     // keepPositionInBounds();
-  } else
-    canvasMeta.flag.isZoomed = false;
-  
+  } else canvasMeta.flag.isZoomed = false;
+
   handleResize();
 };
 
@@ -889,25 +919,23 @@ let undo = () => {
 };
 let redo = () => {
   // Redo is possible
-  if (canvasMeta.currentHistoryIndex < (canvasMeta.currentHistory.length - 1)) {
+  if (canvasMeta.currentHistoryIndex < canvasMeta.currentHistory.length - 1) {
     canvasMeta.currentHistoryIndex++;
     updateStateFromHistory();
   }
 };
 
 let handleCrop = (action, secondaryAction) => {
-  
   let activeObject = canvas.getActiveObject();
-  if(activeObject){
-    
+  if (activeObject) {
     canvas.selection = true;
-    
-    if(canvasMeta.value.crop.box){
+
+    if (canvasMeta.value.crop.box) {
       canvas.remove(canvasMeta.value.crop.box);
       canvasMeta.value.crop.box = false;
     }
-    
-    switch(action) {
+
+    switch (action) {
       case true:
         canvasMeta.flag.cropEnabled = false;
         appMeta.flag.isPreviewEnabled = false;
@@ -916,31 +944,31 @@ let handleCrop = (action, secondaryAction) => {
         canvasMeta.value.crop.active.top = canvasMeta.value.crop.copy.top;
         canvasMeta.value.crop.active.left = canvasMeta.value.crop.copy.left;
         saveHistory();
-      break;
+        break;
       case false:
-        if(secondaryAction)
-          canvasMeta.value.crop.active.clipPath = false;
+        if (secondaryAction) canvasMeta.value.crop.active.clipPath = false;
         else
-          canvasMeta.value.crop.active.clipPath = canvasMeta.value.crop.copy.clipPath;
-          
+          canvasMeta.value.crop.active.clipPath =
+            canvasMeta.value.crop.copy.clipPath;
+
         canvasMeta.value.crop.active.dirty = true;
         canvasMeta.flag.cropEnabled = false;
         appMeta.flag.isPreviewEnabled = false;
-      break;
+        break;
       case undefined:
         canvas.selection = false;
-        
+
         canvasMeta.flag.cropEnabled = true;
         appMeta.flag.isPreviewEnabled = true;
-        
+
         canvasMeta.value.crop.copy = Object.assign({}, activeObject);
-        
+
         activeObject.angle = 0;
         activeObject.flipX = false;
         // activeObject.referenceObject.isCropped = true;
         // activeObject.referenceObject.originalSrc = canvasMeta.value.crop.copy.src;
         canvasMeta.value.crop.active = activeObject;
-        
+
         canvasMeta.value.crop.box = new fb.Rect({
           width: activeObject.width,
           height: activeObject.height,
@@ -951,57 +979,73 @@ let handleCrop = (action, secondaryAction) => {
           fill: '',
           transparentCorners: false
         });
-        
-        if(canvasMeta.value.crop.active.clipPath){
-          
+
+        if (canvasMeta.value.crop.active.clipPath) {
           let center = activeObject.getCenterPoint();
-          canvasMeta.value.crop.box.width = canvasMeta.value.crop.active.clipPath.width;
-          canvasMeta.value.crop.box.height = canvasMeta.value.crop.active.clipPath.height;
-          canvasMeta.value.crop.box.left = center.x + canvasMeta.value.crop.active.clipPath.left * activeObject.scaleX;
-          canvasMeta.value.crop.box.top = center.y + canvasMeta.value.crop.active.clipPath.top * activeObject.scaleY;
-          
+          canvasMeta.value.crop.box.width =
+            canvasMeta.value.crop.active.clipPath.width;
+          canvasMeta.value.crop.box.height =
+            canvasMeta.value.crop.active.clipPath.height;
+          canvasMeta.value.crop.box.left =
+            center.x +
+            canvasMeta.value.crop.active.clipPath.left * activeObject.scaleX;
+          canvasMeta.value.crop.box.top =
+            center.y +
+            canvasMeta.value.crop.active.clipPath.top * activeObject.scaleY;
         }
-        
+
         canvasMeta.value.crop.box.on('scaling', applyCrop);
         canvasMeta.value.crop.box.on('mouseup', applyCrop);
         canvasMeta.value.crop.box.on('moving', applyCrop);
-        
-        canvasMeta.value.crop.box.setControlsVisibility(canvasMeta.value.crop.control);
-        
+
+        canvasMeta.value.crop.box.setControlsVisibility(
+          canvasMeta.value.crop.control
+        );
+
         canvas.add(canvasMeta.value.crop.box);
         canvas.setActiveObject(canvasMeta.value.crop.box);
-        
-      break;
-    };
-    
-    canvas.getObjects().forEach((object) => object.selectable = canvas.selection);
+
+        break;
+    }
+
+    canvas
+      .getObjects()
+      .forEach(object => (object.selectable = canvas.selection));
     canvas.renderAll();
-    updateToolbar();  
-    
+    updateToolbar();
   }
-    
 };
-let applyCrop = (e) => {
-  
+let applyCrop = e => {
   let rect = canvasMeta.value.crop.box;
   let image = canvasMeta.value.crop.active;
-  
+
   let maxScaleX = (image.width * image.scaleX) / rect.width;
   let maxScaleY = (image.height * image.scaleY) / rect.height;
-  
-  if(rect.scaleX > maxScaleX || rect.scaleY > maxScaleY) {
+
+  if (rect.scaleX > maxScaleX || rect.scaleY > maxScaleY) {
     rect.scaleX = Math.min(rect.scaleX, maxScaleX);
     rect.scaleY = Math.min(rect.scaleY, maxScaleY);
   }
-  
+
   if (rect.top < image.top || rect.left < image.left) {
     rect.top = Math.max(rect.top, image.top);
     rect.left = Math.max(rect.left, image.left);
   }
-  
-  if (rect.top + (rect.height * rect.scaleY) > image.top + (image.height * image.scaleY) || rect.left + (rect.width * rect.scaleX) > image.left + (image.width * image.scaleX)) {
-    rect.top = Math.min(rect.top, image.top + (image.height * image.scaleY) - (rect.height * rect.scaleY));
-    rect.left = Math.min(rect.left, image.left + (image.width * image.scaleY) - (rect.width * rect.scaleX));
+
+  if (
+    rect.top + rect.height * rect.scaleY >
+      image.top + image.height * image.scaleY ||
+    rect.left + rect.width * rect.scaleX >
+      image.left + image.width * image.scaleX
+  ) {
+    rect.top = Math.min(
+      rect.top,
+      image.top + image.height * image.scaleY - rect.height * rect.scaleY
+    );
+    rect.left = Math.min(
+      rect.left,
+      image.left + image.width * image.scaleY - rect.width * rect.scaleX
+    );
   }
 
   offsetX = (rect.left - image.left) / image.scaleX;
@@ -1013,109 +1057,117 @@ let applyCrop = (e) => {
   mask = new fb.Rect({
     width: (rect.width * rect.scaleX) / image.scaleX,
     height: (rect.height * rect.scaleY) / image.scaleY,
-    left: ((image.width / 2) * -1) + offsetX,
-    top: ((image.height / 2) * -1) + offsetY
+    left: (image.width / 2) * -1 + offsetX,
+    top: (image.height / 2) * -1 + offsetY
   });
-  
+
   image.clipPath = mask;
   image.dirty = true;
-
 };
 
-let action = (type) => {
+let action = type => {
   let activeObject = canvas.getActiveObject();
 
   switch (type) {
-    case "flip":
-      activeObject.set("flipX", !activeObject.flipX);
+    case 'flip':
+      activeObject.set('flipX', !activeObject.flipX);
       break;
-    case "bringForward":
+    case 'bringForward':
       activeObject.bringForward();
       break;
-    case "sendBackward":
+    case 'sendBackward':
       activeObject.sendBackwards();
       break;
-    case "delete":
+    case 'delete':
       canvas.remove(activeObject);
       break;
-    case "duplicate":
-      activeObject.clone((clone) => {
-
+    case 'duplicate':
+      activeObject.clone(clone => {
         clone.set({
           left: clone.left + canvasMeta.value.cloneOffset,
-          top: clone.top + canvasMeta.value.cloneOffset,
+          top: clone.top + canvasMeta.value.cloneOffset
         });
 
         canvas.add(clone);
         clone.setControlsVisibility(canvasMeta.value.hideControls);
         canvas.setActiveObject(clone);
-
       }, canvasMeta.value.propertiesToInclude);
 
       break;
-    case "transparent":
-      if (activeObject.referenceObject.type == "custom") {
+    case 'transparent':
+      if (activeObject.referenceObject.type == 'custom') {
         var dimentionBefore = {
           width: activeObject.width,
           height: activeObject.height,
           scaleX: activeObject.scaleX,
-          scaleY: activeObject.scaleY,
+          scaleY: activeObject.scaleY
         };
         canvasMeta.flag.isCurrentObjectTransparentable = false;
         canvasMeta.flag.isCurrentObjectTransparentSelected = false;
         updateToolbar();
-        $.post(appMeta.endpoint.api, {
-          operation: "transparent",
-          asset_id: activeObject.referenceObject.id,
-          user_id: appMeta.value.userID
-        }, (response) => {
-          activeObject.referenceObject.transparentPath = response.transparent_path;
-          activeObject.setSrc(response.transparent_path, () => {
-            activeObject.scaleX = (dimentionBefore.width * dimentionBefore.scaleX) / activeObject.width;
-            activeObject.scaleY = (dimentionBefore.height * dimentionBefore.scaleY) / activeObject.height;
-            canvasMeta.flag.isCurrentObjectTransparentSelected = true;
-            canvas.discardActiveObject();
-            updateToolbar();
-            canvas.renderAll();
-          });
+        $.post(
+          appMeta.endpoint.api,
+          {
+            operation: 'transparent',
+            asset_id: activeObject.referenceObject.id,
+            user_id: appMeta.value.userID
+          },
+          response => {
+            activeObject.referenceObject.transparentPath =
+              response.transparent_path;
+            activeObject.setSrc(response.transparent_path, () => {
+              activeObject.scaleX =
+                (dimentionBefore.width * dimentionBefore.scaleX) /
+                activeObject.width;
+              activeObject.scaleY =
+                (dimentionBefore.height * dimentionBefore.scaleY) /
+                activeObject.height;
+              canvasMeta.flag.isCurrentObjectTransparentSelected = true;
+              canvas.discardActiveObject();
+              updateToolbar();
+              canvas.renderAll();
+            });
+          }
+        );
+      }
+      break;
+    case 'undoTransparent':
+      if (activeObject.referenceObject.type == 'custom') {
+        var dimentionBefore = {
+          width: activeObject.width,
+          height: activeObject.height,
+          scaleX: activeObject.scaleX,
+          scaleY: activeObject.scaleY
+        };
+        canvasMeta.flag.isCurrentObjectTransparentable = false;
+        canvasMeta.flag.isCurrentObjectTransparentSelected = false;
+        updateToolbar();
+        activeObject.setSrc(activeObject.referenceObject.path, () => {
+          activeObject.scaleX =
+            (dimentionBefore.width * dimentionBefore.scaleX) /
+            activeObject.width;
+          activeObject.scaleY =
+            (dimentionBefore.height * dimentionBefore.scaleY) /
+            activeObject.height;
+          canvasMeta.flag.isCurrentObjectTransparentSelected = false;
+          canvas.discardActiveObject();
+          updateToolbar();
+          canvas.renderAll();
         });
       }
       break;
-      case "undoTransparent":
-        if (activeObject.referenceObject.type == "custom") {
-          var dimentionBefore = {
-            width: activeObject.width,
-            height: activeObject.height,
-            scaleX: activeObject.scaleX,
-            scaleY: activeObject.scaleY,
-          };
-          canvasMeta.flag.isCurrentObjectTransparentable = false;
-          canvasMeta.flag.isCurrentObjectTransparentSelected = false;
-          updateToolbar();
-          activeObject.setSrc(activeObject.referenceObject.path, () => {
-            activeObject.scaleX = (dimentionBefore.width * dimentionBefore.scaleX) / activeObject.width;
-            activeObject.scaleY = (dimentionBefore.height * dimentionBefore.scaleY) / activeObject.height;
-            canvasMeta.flag.isCurrentObjectTransparentSelected = false;
-            canvas.discardActiveObject();
-            updateToolbar();
-            canvas.renderAll();
-          })
-        }
-        break;
-  };
+  }
 
   canvas.requestRenderAll();
   saveHistory();
 };
 
-let togglePreviewMode = (e) => {
-
+let togglePreviewMode = e => {
   let targetLink = $(e.currentTarget).attr('href');
-  let toggle = targetLink == "#board";
+  let toggle = targetLink == '#board';
 
   // if a different tab was clicked and preview was enabled or disabled
-  if (targetLink == "#board" || appMeta.value.lastVisitedTab == "#board") {
-    
+  if (targetLink == '#board' || appMeta.value.lastVisitedTab == '#board') {
     appMeta.value.lastVisitedTab = targetLink;
 
     // check if state has changed
@@ -1126,10 +1178,9 @@ let togglePreviewMode = (e) => {
     canvas.selection = !toggle;
     canvas.discardActiveObject();
 
-    canvas.getObjects().forEach((object) => {
+    canvas.getObjects().forEach(object => {
       object.selectable = !toggle;
-      if (object.type == "text" && !toggle)
-        canvas.remove(object);
+      if (object.type == 'text' && !toggle) canvas.remove(object);
     });
 
     if (toggle) {
@@ -1138,7 +1189,6 @@ let togglePreviewMode = (e) => {
     }
 
     canvas.renderAll();
-
   }
 };
 
